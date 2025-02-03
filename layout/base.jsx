@@ -11,8 +11,10 @@ import ScrollTop from "@/components/scrollTop";
 export default function ({ children }) {
   useEffect(() => {
     AOS.init({
-      duration: 1000,
+      duration: 600,
+      easing: "ease-in-out",
       once: true,
+      mirror: false,
     });
   }, []);
   return (
