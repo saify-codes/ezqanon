@@ -927,7 +927,7 @@ section,
   font-weight: 600;
 }
 
-.hero .btn-watch-video i {
+.hero .btn-watch-video svg {
   color: var(--accent-color);
   font-size: 32px;
   transition: 0.3s;

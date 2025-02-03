@@ -1,45 +1,57 @@
-import { RiMenu3Line } from "react-icons/ri";
-export default function () {
-    return <header id="header" className="header d-flex align-items-center sticky-top">
-        <div className="container-fluid container-xl position-relative d-flex align-items-center">
+'use client'
 
-            <a href="index.html" className="logo d-flex align-items-center me-auto">
-                {/* Uncomment the line below if you also wish to use an image logo */}
-                {/* <img src="assets/img/logo.png" alt=""> */}
-                <h1 className="sitename">EzQanon</h1>
-            </a>
+import { useState } from "react";
+import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 
-            <nav id="navmenu" className="navmenu">
-                <ul>
-                    <li><a href="#hero" className="active">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#team">Team</a></li>
-                    {/* <li className="dropdown"><a href="#"><span>Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li className="dropdown"><a href="#"><span>Deep Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
-                        </ul>
-                    </li> */}
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <RiMenu3Line className="mobile-nav-toggle d-xl-none bi bi-list" />
-            </nav>
+export default function Navbar() {
+    const [isNavOpen, setIsNavOpen] = useState(false);
 
-            <a className="btn-getstarted" href="index.html#about">Get Started</a>
+    // Function to toggle menu
+    const handleNavToggle = () => {
+        setIsNavOpen(prevState => !prevState);
+        document.querySelector("body").classList.toggle("mobile-nav-active");
+    };
 
-        </div>
-    </header>
+    // Function to close menu when an item is clicked
+    const handleMenuItemClick = () => {
+        setIsNavOpen(false);
+        document.querySelector("body").classList.remove("mobile-nav-active");
+    };
+
+    return (
+        <header id="header" className="header d-flex align-items-center sticky-top">
+            <div className="container-fluid container-xl position-relative d-flex align-items-center">
+
+                {/* Logo */}
+                <a href="index.html" className="logo d-flex align-items-center me-auto">
+                    <h1 className="sitename">EzQanon</h1>
+                </a>
+
+                {/* Navigation */}
+                <nav id="navmenu" className={`navmenu ${isNavOpen ? 'open' : ''}`}>
+                    <ul>
+                        <li><a href="#hero" className="active" onClick={handleMenuItemClick}>Home</a></li>
+                        <li><a href="#about" onClick={handleMenuItemClick}>About</a></li>
+                        <li><a href="#services" onClick={handleMenuItemClick}>Services</a></li>
+                        <li><a href="#portfolio" onClick={handleMenuItemClick}>Portfolio</a></li>
+                        <li><a href="#team" onClick={handleMenuItemClick}>Team</a></li>
+                        <li><a href="#contact" onClick={handleMenuItemClick}>Contact</a></li>
+                    </ul>
+
+                    {/* Mobile Navigation Toggle */}
+                    <button className="btn mobile-nav-toggle d-xl-none " onClick={handleNavToggle}>
+                        {isNavOpen ? (
+                            <RiCloseLine/>
+                        ) : (
+                            <RiMenu3Line/>
+                        )}
+                    </button>
+                </nav>
+
+                {/* Get Started Button */}
+                <a className="btn-getstarted" href="index.html#about">Get Started</a>
+
+            </div>
+        </header>
+    );
 }
