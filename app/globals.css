@@ -571,8 +571,7 @@ h6 {
 .footer .footer-newsletter .newsletter-form input[type="submit"] {
   border: 0;
   font-size: 16px;
-  padding: 0 20px;
-  margin: -7px -8px -7px 0;
+  padding: 0.5rem 20px;
   background: var(--accent-color);
   color: var(--contrast-color);
   transition: 0.3s;

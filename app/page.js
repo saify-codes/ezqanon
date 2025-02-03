@@ -227,8 +227,8 @@ export default function () {
       {/* Stats */}
 
       {/* Services */}
-      <section id="services" class="services section light-background">
-        <div class="container section-title" data-aos="fade-up">
+      <section id="services" className="services section light-background">
+        <div className="container section-title" data-aos="fade-up">
           <span>Services</span>
           <h2>Services</h2>
           <p>
@@ -237,18 +237,18 @@ export default function () {
           </p>
         </div>
 
-        <div class="container">
-          <div class="row gy-4">
+        <div className="container">
+          <div className="row gy-4">
             <div
-              class="col-lg-4 col-md-6"
+              className="col-lg-4 col-md-6"
               data-aos="fade-up"
               data-aos-delay="100"
             >
-              <div class="service-item position-relative">
-                <div class="icon">
+              <div className="service-item position-relative">
+                <div className="icon">
                   <GiInjustice />
                 </div>
-                <a href="service-details.html" class="stretched-link">
+                <a href="service-details.html" className="stretched-link">
                   <h3>Nesciunt Mete</h3>
                 </a>
                 <p>
@@ -260,15 +260,15 @@ export default function () {
             </div>
 
             <div
-              class="col-lg-4 col-md-6"
+              className="col-lg-4 col-md-6"
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              <div class="service-item position-relative">
-                <div class="icon">
+              <div className="service-item position-relative">
+                <div className="icon">
                   <GiInjustice />
                 </div>
-                <a href="service-details.html" class="stretched-link">
+                <a href="service-details.html" className="stretched-link">
                   <h3>Eosle Commodi</h3>
                 </a>
                 <p>
@@ -279,15 +279,15 @@ export default function () {
             </div>
 
             <div
-              class="col-lg-4 col-md-6"
+              className="col-lg-4 col-md-6"
               data-aos="fade-up"
               data-aos-delay="300"
             >
-              <div class="service-item position-relative">
-                <div class="icon">
+              <div className="service-item position-relative">
+                <div className="icon">
                   <GiInjustice />
                 </div>
-                <a href="service-details.html" class="stretched-link">
+                <a href="service-details.html" className="stretched-link">
                   <h3>Ledo Markt</h3>
                 </a>
                 <p>
@@ -298,62 +298,62 @@ export default function () {
             </div>
 
             <div
-              class="col-lg-4 col-md-6"
+              className="col-lg-4 col-md-6"
               data-aos="fade-up"
               data-aos-delay="400"
             >
-              <div class="service-item position-relative">
-                <div class="icon">
+              <div className="service-item position-relative">
+                <div className="icon">
                   <GiInjustice />
                 </div>
-                <a href="service-details.html" class="stretched-link">
+                <a href="service-details.html" className="stretched-link">
                   <h3>Asperiores Commodit</h3>
                 </a>
                 <p>
                   Non et temporibus minus omnis sed dolor esse consequatur.
                   Cupiditate sed error ea fuga sit provident adipisci neque.
                 </p>
-                <a href="service-details.html" class="stretched-link"></a>
+                <a href="service-details.html" className="stretched-link"></a>
               </div>
             </div>
 
             <div
-              class="col-lg-4 col-md-6"
+              className="col-lg-4 col-md-6"
               data-aos="fade-up"
               data-aos-delay="500"
             >
-              <div class="service-item position-relative">
-                <div class="icon">
+              <div className="service-item position-relative">
+                <div className="icon">
                   <GiInjustice />
                 </div>
-                <a href="service-details.html" class="stretched-link">
+                <a href="service-details.html" className="stretched-link">
                   <h3>Velit Doloremque</h3>
                 </a>
                 <p>
                   Cumque et suscipit saepe. Est maiores autem enim facilis ut
                   aut ipsam corporis aut. Sed animi at autem alias eius labore.
                 </p>
-                <a href="service-details.html" class="stretched-link"></a>
+                <a href="service-details.html" className="stretched-link"></a>
               </div>
             </div>
 
             <div
-              class="col-lg-4 col-md-6"
+              className="col-lg-4 col-md-6"
               data-aos="fade-up"
               data-aos-delay="600"
             >
-              <div class="service-item position-relative">
-                <div class="icon">
+              <div className="service-item position-relative">
+                <div className="icon">
                   <GiInjustice />
                 </div>
-                <a href="service-details.html" class="stretched-link">
+                <a href="service-details.html" className="stretched-link">
                   <h3>Dolori Architecto</h3>
                 </a>
                 <p>
                   Hic molestias ea quibusdam eos. Fugiat enim doloremque aut
                   neque non et debitis iure. Corrupti recusandae ducimus enim.
                 </p>
-                <a href="service-details.html" class="stretched-link"></a>
+                <a href="service-details.html" className="stretched-link"></a>
               </div>
             </div>
           </div>

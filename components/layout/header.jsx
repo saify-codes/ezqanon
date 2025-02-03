@@ -1,57 +1,73 @@
-'use client'
+"use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 
 export default function Navbar() {
-    const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
-    // Function to toggle menu
-    const handleNavToggle = () => {
-        setIsNavOpen(prevState => !prevState);
-        document.querySelector("body").classList.toggle("mobile-nav-active");
-    };
+  // Define your navigation links in an array
+  const navLinks = [
+    { label: "Home", href: "#hero", active: true },
+    { label: "About", href: "#about" },
+    { label: "Services", href: "#services" },
+    { label: "Portfolio", href: "#portfolio" },
+    { label: "Team", href: "#team" },
+    { label: "Contact", href: "#contact" },
+  ];
 
-    // Function to close menu when an item is clicked
-    const handleMenuItemClick = () => {
-        setIsNavOpen(false);
-        document.querySelector("body").classList.remove("mobile-nav-active");
-    };
+  // Function to toggle the mobile menu
+  const handleNavToggle = () => {
+    setIsNavOpen((prevState) => !prevState);
+    document.querySelector("body").classList.toggle("mobile-nav-active");
+  };
 
-    return (
-        <header id="header" className="header d-flex align-items-center sticky-top">
-            <div className="container-fluid container-xl position-relative d-flex align-items-center">
+  // Function to close the menu when a link is clicked
+  const handleMenuItemClick = () => {
+    setIsNavOpen(false);
+    document.querySelector("body").classList.remove("mobile-nav-active");
+  };
 
-                {/* Logo */}
-                <a href="index.html" className="logo d-flex align-items-center me-auto">
-                    <h1 className="sitename">EzQanon</h1>
-                </a>
+  return (
+    <header id="header" className="header d-flex align-items-center sticky-top">
+      <div className="container-fluid container-xl position-relative d-flex align-items-center">
+        {/* Logo */}
+        <a href="index.html" className="logo d-flex align-items-center me-auto">
+          <h1 className="sitename">EzQanon</h1>
+        </a>
 
-                {/* Navigation */}
-                <nav id="navmenu" className={`navmenu ${isNavOpen ? 'open' : ''}`}>
-                    <ul>
-                        <li><a href="#hero" className="active" onClick={handleMenuItemClick}>Home</a></li>
-                        <li><a href="#about" onClick={handleMenuItemClick}>About</a></li>
-                        <li><a href="#services" onClick={handleMenuItemClick}>Services</a></li>
-                        <li><a href="#portfolio" onClick={handleMenuItemClick}>Portfolio</a></li>
-                        <li><a href="#team" onClick={handleMenuItemClick}>Team</a></li>
-                        <li><a href="#contact" onClick={handleMenuItemClick}>Contact</a></li>
-                    </ul>
+        {/* Navigation */}
+        <nav id="navmenu" className={`navmenu ${isNavOpen ? "open" : ""}`}>
+          <ul>
+            {navLinks.map((link, index) => (
+              <li key={index}>
+                <Link
+                  href={link.href}
+                  onClick={handleMenuItemClick}
+                  className={link.active ? "active" : ""}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-                    {/* Mobile Navigation Toggle */}
-                    <button className="btn mobile-nav-toggle d-xl-none " onClick={handleNavToggle}>
-                        {isNavOpen ? (
-                            <RiCloseLine/>
-                        ) : (
-                            <RiMenu3Line/>
-                        )}
-                    </button>
-                </nav>
+          {/* Mobile Navigation Toggle */}
+          <button
+            className="btn mobile-nav-toggle d-xl-none"
+            onClick={handleNavToggle}
+          >
+            {isNavOpen ? <RiCloseLine /> : <RiMenu3Line />}
+          </button>
+        </nav>
 
-                {/* Get Started Button */}
-                <a className="btn-getstarted" href="index.html#about">Get Started</a>
+        {/* Get Started Button */}
+        <a className="btn-getstarted" href="index.html#about">
+          Get Started
+        </a>
 
-            </div>
-        </header>
-    );
+      </div>
+    </header>
+  );
 }

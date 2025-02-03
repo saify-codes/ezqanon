@@ -3,8 +3,10 @@
 import Header from "@/components/layout/header";
 import Preloader from "@/components/preloader";
 import AOS from "aos";
+import Footer from "@/components/layout/footer";
 import { FaArrowUp } from "react-icons/fa6";
 import { useEffect } from "react";
+import ScrollTop from "@/components/scrollTop";
 
 export default function ({ children }) {
   useEffect(() => {
@@ -16,14 +18,9 @@ export default function ({ children }) {
   return (
     <>
       <Header />
-
       <main className="main">{children}</main>
-      
-
-      <a href="#" id="scroll-top" className="scroll-top d-flex align-items-center justify-content-center">
-        <FaArrowUp style={{ color: "#FFF" }} />
-      </a>
-
+      <Footer/>
+      <ScrollTop/>
       <Preloader />
     </>
   );
