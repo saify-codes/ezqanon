@@ -1,16 +1,3 @@
-/**
-* Template Name: eNno
-* Template URL: https://bootstrapmade.com/enno-free-simple-bootstrap-template/
-* Updated: Aug 07 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
-/* Fonts */
 :root {
   --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
@@ -994,7 +981,7 @@ section,
   margin-bottom: 10px;
 }
 
-.featured-services .service-item .icon i {
+.featured-services .service-item .icon svg {
   color: var(--accent-color);
   font-size: 36px;
   transition: 0.3s;
@@ -1043,11 +1030,11 @@ section,
   display: flex;
 }
 
-.about .content ul i {
+.about .content ul svg {
   color: var(--accent-color);
   margin-right: 0.5rem;
   line-height: 1.2;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .about .content p:last-child {
@@ -1094,10 +1081,11 @@ section,
 .services .service-item {
   background-color: var(--surface-color);
   text-align: center;
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
   padding: 80px 20px;
   transition: border ease-in-out 0.3s;
   height: 100%;
+  border: 1px solid transparent;
+  border-radius: 1rem;
 }
 
 .services .service-item .icon {
@@ -1113,7 +1101,7 @@ section,
   transition: 0.3s;
 }
 
-.services .service-item .icon i {
+.services .service-item .icon svg {
   color: var(--contrast-color);
   font-size: 28px;
   transition: ease-in-out 0.3s;

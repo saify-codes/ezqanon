@@ -1,5 +1,6 @@
 import Script from "next/script";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "aos/dist/aos.css";
 import "./globals.css";
 
 export const metadata = {
