@@ -6,15 +6,15 @@ export default function ({ children }) {
     return <>
         <Header />
 
-        <a
-            href="#"
-            id="scroll-top"
-            className="scroll-top d-flex align-items-center justify-content-center"
-        >
+        <main className="main">
+            {children}
+        </main>
+
+        <a href="#" id="scroll-top" className="scroll-top d-flex align-items-center justify-content-center">
             <FaArrowUp style={{ color: '#FFF' }} />
         </a>
 
-        <Preloader/>
+        <Preloader />
 
     </>
 }
