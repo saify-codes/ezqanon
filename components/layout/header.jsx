@@ -1,19 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 
 export default function Navbar() {
+
+  const path = usePathname()
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   // Define your navigation links in an array
   const navLinks = [
-    { label: "Home", href: "/#hero", active: true },
-    { label: "About", href: "/#about" },
-    { label: "Services", href: "/#services" },
+    { label: "Home", href: "/", active: path === '/'},
+    // { label: "About", href: "/#about" },
+    // { label: "Services", href: "/#services" },
     { label: "Lawyers", href: "/lawyers" },
-    { label: "Contact", href: "#contact" },
+    // { label: "Contact", href: "#contact" },
     // { label: "Portfolio", href: "#portfolio" },
   ];
 
@@ -28,6 +31,25 @@ export default function Navbar() {
     setIsNavOpen(false);
     document.querySelector("body").classList.remove("mobile-nav-active");
   };
+
+  const toggleScrolled = () => {
+    const selectBody = document.querySelector("body");
+    const selectHeader = document.querySelector("#header");
+    if (
+      !selectHeader.classList.contains("scroll-up-sticky") &&
+      !selectHeader.classList.contains("sticky-top") &&
+      !selectHeader.classList.contains("fixed-top")
+    )
+      return;
+    window.scrollY > 100
+      ? selectBody.classList.add("scrolled")
+      : selectBody.classList.remove("scrolled");
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", toggleScrolled);
+    return () => window.removeEventListener("scroll", toggleScrolled);
+  }, []);
 
   return (
     <header id="header" className="header d-flex align-items-center sticky-top">
@@ -45,7 +67,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   onClick={handleMenuItemClick}
-                  className={link.active ? "active" : ""}
+                  className={link.href === path ? "active" : ""}
                 >
                   {link.label}
                 </Link>
@@ -66,7 +88,6 @@ export default function Navbar() {
         <a className="btn-getstarted" href="index.html#about">
           Login
         </a>
-
       </div>
     </header>
   );
