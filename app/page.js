@@ -369,8 +369,8 @@ export default function () {
       {/* Services */}
 
       {/* Testimonials */}
-      <section id="testimonials" class="testimonials section light-background">
-        <div class="container section-title" data-aos="fade-up">
+      <section id="testimonials" className="testimonials section light-background">
+        <div className="container section-title" data-aos="fade-up">
           <span>Testimonials</span>
           <h2>Testimonials</h2>
           <p>
@@ -379,10 +379,10 @@ export default function () {
           </p>
         </div>
 
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div className="container" data-aos="fade-up" data-aos-delay="100">
           <Swiper spaceBetween={50} slidesPerView={3}>
             <SwiperSlide>
-              <div class="testimonial-item">
+              <div className="testimonial-item">
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
@@ -395,7 +395,7 @@ export default function () {
                 </p>
                 <img
                   src="/assets/img/testimonials/testimonials-1.jpg"
-                  class="testimonial-img"
+                  className="testimonial-img"
                   alt=""
                 />
                 <h3>Saul Goodman</h3>
@@ -403,7 +403,7 @@ export default function () {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div class="testimonial-item">
+              <div className="testimonial-item">
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
@@ -415,7 +415,7 @@ export default function () {
                 </p>
                 <img
                   src="/assets/img/testimonials/testimonials-2.jpg"
-                  class="testimonial-img"
+                  className="testimonial-img"
                   alt=""
                 />
                 <h3>Sara Wilsson</h3>
@@ -423,7 +423,7 @@ export default function () {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div class="testimonial-item">
+              <div className="testimonial-item">
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
@@ -435,7 +435,7 @@ export default function () {
                 </p>
                 <img
                   src="/assets/img/testimonials/testimonials-3.jpg"
-                  class="testimonial-img"
+                  className="testimonial-img"
                   alt=""
                 />
                 <h3>Jena Karlis</h3>
@@ -443,7 +443,7 @@ export default function () {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div class="testimonial-item">
+              <div className="testimonial-item">
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
@@ -455,7 +455,7 @@ export default function () {
                 </p>
                 <img
                   src="/assets/img/testimonials/testimonials-4.jpg"
-                  class="testimonial-img"
+                  className="testimonial-img"
                   alt=""
                 />
                 <h3>Matt Brandon</h3>
@@ -463,7 +463,7 @@ export default function () {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div class="testimonial-item">
+              <div className="testimonial-item">
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
@@ -475,7 +475,7 @@ export default function () {
                 </p>
                 <img
                   src="/assets/img/testimonials/testimonials-5.jpg"
-                  class="testimonial-img"
+                  className="testimonial-img"
                   alt=""
                 />
                 <h3>John Larson</h3>
@@ -486,6 +486,36 @@ export default function () {
         </div>
       </section>
       {/* Testimonials */}
+
+      {/* Call to action */}
+      <section
+        id="call-to-action"
+        className="call-to-action section accent-background"
+      >
+        <div className="container">
+          <div
+            className="row justify-content-center"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <div className="col-xl-10">
+              <div className="text-center">
+                <h3>Call To Action</h3>
+                <p>
+                  Duis aute irure dolor in reprehenderit in voluptate velit esse
+                  cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia
+                  deserunt mollit anim id est laborum.
+                </p>
+                <a className="cta-btn" href="#">
+                  Call To Action
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Call to action */}
     </BaseLayout>
   );
 }
