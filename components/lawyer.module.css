@@ -16,6 +16,14 @@
     overflow: hidden;
 }
 
+.title{
+    font-weight: 600;
+}
+
+.qualification{
+    color: var(--heading-color);;
+}
+
 .action{
     display: flex;
     flex-direction: column;
