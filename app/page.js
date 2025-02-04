@@ -369,7 +369,10 @@ export default function () {
       {/* Services */}
 
       {/* Testimonials */}
-      <section id="testimonials" className="testimonials section light-background">
+      <section
+        id="testimonials"
+        className="testimonials section light-background"
+      >
         <div className="container section-title" data-aos="fade-up">
           <span>Testimonials</span>
           <h2>Testimonials</h2>
@@ -380,7 +383,20 @@ export default function () {
         </div>
 
         <div className="container" data-aos="fade-up" data-aos-delay="100">
-          <Swiper spaceBetween={50} slidesPerView={3}>
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={3}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 50,
+              },
+            }}
+          >
             <SwiperSlide>
               <div className="testimonial-item">
                 <p>
