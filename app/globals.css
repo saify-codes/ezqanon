@@ -1447,7 +1447,6 @@ section,
 --------------------------------------------------------------*/
 .contact .info-wrap {
   background-color: var(--surface-color);
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   padding: 30px;
 }
 
@@ -1461,12 +1460,13 @@ section,
   margin-bottom: 40px;
 }
 
-.contact .info-item i {
-  font-size: 20px;
+.contact .info-item svg {
   color: var(--accent-color);
   background: color-mix(in srgb, var(--accent-color), transparent 92%);
-  width: 44px;
-  height: 44px;
+  width: 20px;
+  height: 20px;
+  padding: 15px;
+  box-sizing: content-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1497,7 +1497,7 @@ section,
   background-color: var(--surface-color);
   height: 100%;
   padding: 30px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
 }
 
 @media (max-width: 575px) {
