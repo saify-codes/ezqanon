@@ -546,7 +546,7 @@ h6 {
   border-radius: 4px;
   background-color: var(--surface-color);
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-  box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1); */
   display: flex;
   transition: 0.3s;
   border-radius: 50px;
@@ -1277,7 +1277,6 @@ section,
   right: -5px;
   position: relative;
   top: 10px;
-  transform: scale(-1, -1);
 }
 
 .testimonials .testimonial-item p {
@@ -1749,9 +1748,22 @@ section,
   color: var(--accent-color);
 }
 
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
+.not-found{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.not-found h1{
+  font-size: calc(1rem + 8vmax);
+}
+.not-found a{
+  background: var(--accent-color);
+  color: #FFF;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
 }

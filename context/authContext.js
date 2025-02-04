@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
 
   // Render a loading indicator while checking auth status
   if (status === "loading") {
-    return <h1>loading...</h1>;
+    // return <h1>loading...</h1>;
   }
 
   const value = {

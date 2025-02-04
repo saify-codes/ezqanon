@@ -9,12 +9,12 @@ export default function Navbar() {
 
   // Define your navigation links in an array
   const navLinks = [
-    { label: "Home", href: "#hero", active: true },
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Team", href: "#team" },
+    { label: "Home", href: "/#hero", active: true },
+    { label: "About", href: "/#about" },
+    { label: "Services", href: "/#services" },
+    { label: "Lawyers", href: "/lawyers" },
     { label: "Contact", href: "#contact" },
+    // { label: "Portfolio", href: "#portfolio" },
   ];
 
   // Function to toggle the mobile menu
@@ -64,7 +64,7 @@ export default function Navbar() {
 
         {/* Get Started Button */}
         <a className="btn-getstarted" href="index.html#about">
-          Get Started
+          Login
         </a>
 
       </div>

@@ -2,6 +2,7 @@ import { AuthProvider } from "@/context/authContext";
 import Script from "next/script";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
+// import 'swiper/css';
 import "./globals.css";
 
 export const metadata = {
