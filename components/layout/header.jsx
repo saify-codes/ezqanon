@@ -2,92 +2,84 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 
 export default function Navbar() {
-
-  const path = usePathname()
+  const path = usePathname();
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  // Define your navigation links in an array
   const navLinks = [
-    { label: "Home", href: "/", active: path === '/'},
-    // { label: "About", href: "/#about" },
-    // { label: "Services", href: "/#services" },
+    { label: "Home", href: "/" },
     { label: "Lawyers", href: "/lawyers" },
-    // { label: "Contact", href: "#contact" },
-    // { label: "Portfolio", href: "#portfolio" },
   ];
 
-  // Function to toggle the mobile menu
-  const handleNavToggle = () => {
-    setIsNavOpen((prevState) => !prevState);
-    document.querySelector("body").classList.toggle("mobile-nav-active");
-  };
+  // Toggle Mobile Menu
+  const handleNavToggle = useCallback(() => {
+    setIsNavOpen((prev) => !prev);
+    document.body.classList.toggle("mobile-nav-active");
+  }, []);
 
-  // Function to close the menu when a link is clicked
-  const handleMenuItemClick = () => {
+  // Close Menu on Link Click
+  const handleMenuItemClick = useCallback(() => {
     setIsNavOpen(false);
-    document.querySelector("body").classList.remove("mobile-nav-active");
-  };
+    document.body.classList.remove("mobile-nav-active");
+  }, []);
 
-  const toggleScrolled = () => {
-    const selectBody = document.querySelector("body");
-    const selectHeader = document.querySelector("#header");
-    if (
-      !selectHeader.classList.contains("scroll-up-sticky") &&
-      !selectHeader.classList.contains("sticky-top") &&
-      !selectHeader.classList.contains("fixed-top")
-    )
-      return;
-    window.scrollY > 100
-      ? selectBody.classList.add("scrolled")
-      : selectBody.classList.remove("scrolled");
-  };
-
+  // Handle Scroll Effects
   useEffect(() => {
+    const toggleScrolled = () => {
+      const header = document.querySelector("#header");
+      if (!header?.classList.contains("sticky-top")) return;
+      document.body.classList.toggle("scrolled", window.scrollY > 100);
+    };
+
     window.addEventListener("scroll", toggleScrolled);
     return () => window.removeEventListener("scroll", toggleScrolled);
   }, []);
 
   return (
     <header id="header" className="header d-flex align-items-center sticky-top">
-      <div className="container-fluid container-xl position-relative d-flex align-items-center">
+      <div className="container-fluid container-xl d-flex align-items-center">
         {/* Logo */}
-        <a href="index.html" className="logo d-flex align-items-center me-auto">
+        <Link href="/" className="logo d-flex align-items-center me-auto">
           <h1 className="sitename">EzQanon</h1>
-        </a>
+        </Link>
 
         {/* Navigation */}
         <nav id="navmenu" className={`navmenu ${isNavOpen ? "open" : ""}`}>
           <ul>
-            {navLinks.map((link, index) => (
+            {navLinks.map(({ label, href }, index) => (
               <li key={index}>
                 <Link
-                  href={link.href}
+                  href={href}
                   onClick={handleMenuItemClick}
-                  className={link.href === path ? "active" : ""}
+                  className={path === href ? "active" : ""}
                 >
-                  {link.label}
+                  {label}
                 </Link>
               </li>
             ))}
+            {/* Mobile Login Link */}
+            <li className="d-xl-none">
+              <Link href="/signin">Login</Link>
+            </li>
           </ul>
 
           {/* Mobile Navigation Toggle */}
           <button
             className="btn mobile-nav-toggle d-xl-none"
             onClick={handleNavToggle}
+            aria-label="Toggle navigation"
           >
             {isNavOpen ? <RiCloseLine /> : <RiMenu3Line />}
           </button>
         </nav>
 
-        {/* Get Started Button */}
-        <a className="btn-getstarted" href="index.html#about">
+        {/* Desktop Login Button */}
+        <Link href="/signin" className="btn-getstarted d-none d-xl-block">
           Login
-        </a>
+        </Link>
       </div>
     </header>
   );

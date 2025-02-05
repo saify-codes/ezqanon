@@ -43,6 +43,14 @@
   gap: 0.5rem;
 }
 
+.action a {
+  flex: 1;
+  text-align: center;
+  font-size: clamp(0.8rem, 2vw, 1rem); /* Adjusts font size dynamically */
+  white-space: nowrap; /* Prevents text from wrapping */
+  padding: 0.5rem 1rem;
+}
+
 @media (max-width: 768px) {
   .lawyer {
     flex-direction: column;
@@ -57,5 +65,6 @@
 
   .action a {
     flex: 1;
+    min-width: 120px; /* Prevents button from shrinking too much */
   }
 }
