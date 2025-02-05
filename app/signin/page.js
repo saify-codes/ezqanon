@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function () {
   return (
     <div className="container d-flex align-items-center justify-content-center vh-100">
@@ -39,20 +41,22 @@ export default function () {
               required
             />
           </div>
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="rememberMe" />
-            <label class="form-check-label" for="rememberMe">
-              Remember Me
-            </label>
+          <div class="mb-3 text-end">
+            <Link href="/">forgot password?</Link>
           </div>
           <button type="submit" className="btn btn-primary w-100 py-2">
             Sign In
           </button>
         </form>
         <div className="text-center mt-3">
-          <a href="#" className="text-decoration-none text-secondary">
-            Forgot Password?
-          </a>
+          Don't have an account register{" "}
+          <Link
+            href="/signup"
+            className="text-decoration"
+            style={{ textDecoration: "1px solid underline" }}
+          >
+            here
+          </Link>
         </div>
       </div>
     </div>
