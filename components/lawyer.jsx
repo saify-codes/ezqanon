@@ -111,7 +111,7 @@ const ButtonOutline = styled.a`
   text-decoration: none;
 
   &:hover {
-    background: #17a2b8;
+    background: var(--primary);
     color: white;
   }
 `;
@@ -129,6 +129,6 @@ const ButtonPrimary = styled.a`
   text-decoration: none;
 
   &:hover {
-    background: #e0a800;
+    background: var(--secondary-hover   );
   }
 `;

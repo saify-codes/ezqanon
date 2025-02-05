@@ -6,8 +6,9 @@
   --nav-font: "Ubuntu", sans-serif;
 
   --primary: #0A0662;
-  --primary-hover: color-mix(in srgb, var(--primary), transparent 15%);;
   --secondary: #F99C25;
+  --primary-hover: color-mix(in srgb, var(--primary), transparent 15%);;
+  --secondary-hover: color-mix(in srgb, var(--secondary), transparent 15%);;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
