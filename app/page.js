@@ -39,7 +39,7 @@ export default function () {
                   href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
                   className="glightbox btn-watch-video d-flex align-items-center"
                 >
-                  <FaRegCirclePlay />
+                  <FaRegCirclePlay color="var(--secondary)"/>
                   <span>Watch Video</span>
                 </a>
               </div>

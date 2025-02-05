@@ -3,6 +3,7 @@ import { BsFacebook, BsInstagram, BsTwitterX } from "react-icons/bs";
 export default function () {
   return (
     <footer id="footer" className="footer">
+      
       <div className="footer-newsletter">
         <div className="container">
           <div className="row justify-content-center text-center">
