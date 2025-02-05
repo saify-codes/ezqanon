@@ -272,9 +272,6 @@ h6 {
 }
 
 @media (max-width: 1200px) {
-  .header .logo {
-    order: 1;
-  }
 
   .header .btn-getstarted {
     order: 2;
@@ -282,9 +279,6 @@ h6 {
     padding: 6px 15px;
   }
 
-  .header .navmenu {
-    order: 3;
-  }
 }
 
 .scrolled .header {
