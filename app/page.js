@@ -207,7 +207,7 @@ export default function () {
           <div className="row gy-4">
             <div className="col-lg-3 col-md-6">
               <div className="stats-item text-center w-100 h-100">
-                <Counter value="100" />
+                <Counter value="100"/>
                 <p>Clients</p>
               </div>
             </div>
