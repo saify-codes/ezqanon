@@ -104,8 +104,8 @@ const ButtonOutline = styled.a`
   font-size: clamp(0.8rem, 2vw, 1rem);
   white-space: nowrap;
   padding: 0.5rem 1rem;
-  border: 1px solid #17a2b8;
-  color: #17a2b8;
+  border: 1px solid var(--primary);
+  color: var(--primary);
   background: transparent;
   border-radius: 5px;
   text-decoration: none;
@@ -122,7 +122,7 @@ const ButtonPrimary = styled.a`
   font-size: clamp(0.8rem, 2vw, 1rem);
   white-space: nowrap;
   padding: 0.5rem 1rem;
-  background: #ffc107;
+  background: var(--secondary);
   color: #fff;
   border: none;
   border-radius: 5px;
