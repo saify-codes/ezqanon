@@ -20,7 +20,16 @@ const PaginationWrapper = styled.nav`
   }
 `;
 
-const Container = styled.div`
+const Skeleton = styled.div`
+  position: absolute;
+  background: #0003;
+  border-radius: 1rem;
+  margin: 0 12px;
+  inset: 0;
+`;
+
+const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -82,21 +91,21 @@ export default function Lawyers() {
   return (
     <Base>
       <section className="lawyers section">
-        <Container className="container">
+        <Wrapper className="container">
+          {loading && <Skeleton />}
           {error && <p className="text-danger">{error}</p>}
-          {!error &&
-            lawyers.map((lawyer) => (
-              <Lawyer
-                key={lawyer.id}
-                name={lawyer.name}
-                qualification={lawyer.qualification}
-                avatar={lawyer.avatar}
-                rating={lawyer.rating}
-                className="mb-3"
-              />
-            ))}
+          {lawyers.map((lawyer) => (
+            <Lawyer
+              key={lawyer.id}
+              name={lawyer.name}
+              qualification={lawyer.qualification}
+              avatar={lawyer.avatar}
+              rating={lawyer.rating}
+            />
+          ))}
+        </Wrapper>
 
-          {/* Pagination */}
+        <div className="container mt-3">
           <PaginationWrapper>
             <ul className="pagination justify-content-end">
               {/* Previous Button */}
@@ -133,7 +142,7 @@ export default function Lawyers() {
               </li>
             </ul>
           </PaginationWrapper>
-        </Container>
+        </div>
       </section>
     </Base>
   );
