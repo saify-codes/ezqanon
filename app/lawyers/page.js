@@ -40,7 +40,7 @@ export default function Lawyers() {
 
   // Generate Pagination Links Dynamically
   const generatePaginationLinks = () => {
-    const range = 2; // Number of pages shown before and after the current page
+    const range = 1; // Number of pages shown before and after the current page
     const pageLinks = [];
     let start = Math.max(1, currentPage - range);
     let end = Math.min(totalPages, currentPage + range);
@@ -78,7 +78,7 @@ export default function Lawyers() {
 
         <div className="container mt-3">
           <PaginationWrapper>
-            <ul className="pagination justify-content-end">
+            <ul className="pagination justify-content-end flex-wrap">
               {/* Previous Button */}
               <li
                 className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
