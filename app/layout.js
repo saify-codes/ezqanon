@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
 import 'swiper/css';
 import "./globals.css";
+import "./overrides.css";
 
 export const metadata = {
   title: "EZQanon",

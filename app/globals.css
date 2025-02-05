@@ -6,6 +6,7 @@
   --nav-font: "Ubuntu", sans-serif;
 
   --primary: #0A0662;
+  --primary-hover: color-mix(in srgb, var(--primary), transparent 15%);;
   --secondary: #F99C25;
 }
 
@@ -30,6 +31,12 @@
   --nav-dropdown-color: #5f687b; /* Used for navigation links of the dropdown items in the navigation menu. */
   --nav-dropdown-hover-color: #F99C25; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
+
+/* Bootstrap overrides */
+:root{
+  --bs-btn-bg: var(--primary) !important;
+}
+/* Bootstrap overrides */
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
@@ -238,10 +245,6 @@ h6 {
   line-height: 1;
 }
 
-.header .logo img {
-  max-height: 36px;
-  margin-right: 8px;
-}
 
 .header .logo h1 {
   font-size: 30px;
