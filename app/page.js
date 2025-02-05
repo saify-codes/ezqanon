@@ -50,8 +50,8 @@ export default function () {
               data-aos-delay="100"
             >
               <img
-                src="/assets/img/hero-img.png"
-                className="img-fluid animated"
+                src="/assets/img/hero-img.webp"
+                className="img-fluid"
                 alt=""
               />
             </div>
