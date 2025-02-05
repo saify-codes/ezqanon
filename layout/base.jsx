@@ -22,7 +22,7 @@ export default function ({ children }) {
       <main className="main">{children}</main>
       <Footer/>
       <ScrollTop/>
-      {/* <Preloader /> */}
+      <Preloader />
     </>
   );
 }
