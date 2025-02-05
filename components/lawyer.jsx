@@ -1,35 +1,134 @@
 import { BsStar, BsStarFill } from "react-icons/bs";
-import styles from "./lawyer.module.css";
+import styled from "styled-components";
 
-export default function LawyerCard({ avatar, name, qualification, rating, className }) {
+export default function LawyerCard({
+  avatar,
+  name,
+  qualification,
+  rating,
+  className,
+}) {
   return (
-    <div className={`${styles.lawyer} ${className}`}>
-      <div className={styles.avatar}>
-        <img className="img-fluid" src={avatar} alt={`${name}'s profile`} />
-      </div>
-      <div className={styles.content}>
-        <h3 className={styles.title}>{name}</h3>
-        <small className={styles.qualification}>{qualification}</small>
-        <div className="d-flex gap-1 mt-2">
+    <Card className={className}>
+      <Avatar>
+        <img src={avatar} alt={`${name}'s profile`} />
+      </Avatar>
+      <Content>
+        <Title>{name}</Title>
+        <Qualification>{qualification}</Qualification>
+        <Rating>
           {Array(5)
             .fill()
             .map((_, index) =>
               index < rating ? (
-                <BsStarFill key={index} className={styles.star} />
+                <BsStarFill key={index} />
               ) : (
-                <BsStar key={index} className={styles.star} />
+                <BsStar key={index} />
               )
             )}
-        </div>
-      </div>
-      <div className={styles.action}>
-        <a href="#" className="btn btn-outline-info">
-          View Profile
-        </a>
-        <a href="#" className="btn btn-warning text-light">
-          Book Appointment
-        </a>
-      </div>
-    </div>
+        </Rating>
+      </Content>
+      <Action>
+        <ButtonOutline href="#">View Profile</ButtonOutline>
+        <ButtonPrimary href="#">Book Appointment</ButtonPrimary>
+      </Action>
+    </Card>
   );
 }
+
+const Card = styled.div`
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
+`;
+
+const Avatar = styled.div`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const Content = styled.div`
+  flex: 1;
+`;
+
+const Title = styled.h3`
+  font-weight: 600;
+  margin: 0;
+`;
+
+const Qualification = styled.small`
+  color: var(--heading-color);
+`;
+
+const Rating = styled.div`
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+
+  svg {
+    color: #ffd700;
+  }
+`;
+
+const Action = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+`;
+
+const ButtonOutline = styled.a`
+  flex: 1;
+  text-align: center;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  border: 1px solid #17a2b8;
+  color: #17a2b8;
+  background: transparent;
+  border-radius: 5px;
+  text-decoration: none;
+
+  &:hover {
+    background: #17a2b8;
+    color: white;
+  }
+`;
+
+const ButtonPrimary = styled.a`
+  flex: 1;
+  text-align: center;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  background: #ffc107;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+
+  &:hover {
+    background: #e0a800;
+  }
+`;

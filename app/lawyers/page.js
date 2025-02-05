@@ -6,35 +6,6 @@ import styled from "styled-components";
 import Base from "@/layout/base";
 import Lawyer from "@/components/lawyer";
 
-// Styled Components
-const PaginationWrapper = styled.nav`
-  .page-item.active .page-link {
-    background-color: var(--accent-color) !important;
-    border-color: var(--accent-color) !important;
-    color: white !important;
-  }
-
-  .page-item .page-link {
-    color: #555;
-    cursor: pointer;
-  }
-`;
-
-const Skeleton = styled.div`
-  position: absolute;
-  background: #0003;
-  border-radius: 1rem;
-  margin: 0 12px;
-  inset: 0;
-`;
-
-const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
 export default function Lawyers() {
   const [lawyers, setLawyers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -147,3 +118,32 @@ export default function Lawyers() {
     </Base>
   );
 }
+
+// Styled Components
+const PaginationWrapper = styled.nav`
+  .page-item.active .page-link {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: white !important;
+  }
+
+  .page-item .page-link {
+    color: #555;
+    cursor: pointer;
+  }
+`;
+
+const Skeleton = styled.div`
+  position: absolute;
+  background: #0003;
+  border-radius: 1rem;
+  margin: 0 12px;
+  inset: 0;
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
