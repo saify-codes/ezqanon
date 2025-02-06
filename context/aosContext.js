@@ -13,8 +13,6 @@ export function AosProvider({ children }) {
       once: true,
       mirror: false,
     });
-
-    console.log("=======>");
   }, []);
 
   return <AosContext.Provider value={null}>{children}</AosContext.Provider>;
