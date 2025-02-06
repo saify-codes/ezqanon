@@ -1,6 +1,5 @@
 import { AuthProvider } from "@/context/authContext";
 import { AosProvider } from "@/context/aosContext";
-import Script from "next/script";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
 import "swiper/css";
@@ -29,15 +28,11 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <AuthProvider>
+        {/* <AuthProvider> */}
           <AosProvider>
             {children}
           </AosProvider>
-        </AuthProvider>
-        {/* <Script
-          src="/assets/js/main.js"
-          strategy="afterInteractive" // Loads script only after page hydration
-        /> */}
+        {/* </AuthProvider> */}
       </body>
     </html>
   );

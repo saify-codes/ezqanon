@@ -1,19 +1,21 @@
 "use client";
 
+import { createContext, useLayoutEffect } from "react";
 import AOS from "aos";
-import { createContext, useEffect } from "react";
 
-const AosContext = createContext();
+const AosContext = createContext(null);
 
 export function AosProvider({ children }) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     AOS.init({
       duration: 600,
       easing: "ease-in-out",
       once: true,
       mirror: false,
     });
+
+    console.log("=======>");
   }, []);
 
-  return <AosContext.Provider>{children}</AosContext.Provider>;
+  return <AosContext.Provider value={null}>{children}</AosContext.Provider>;
 }
