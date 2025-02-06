@@ -76,44 +76,46 @@ export default function Lawyers() {
           ))}
         </Wrapper>
 
-        <div className="container mt-3">
-          <PaginationWrapper>
-            <ul className="pagination justify-content-end flex-wrap">
-              {/* Previous Button */}
-              <li
-                className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
-                onClick={() => handlePageChange(currentPage - 1)}
-              >
-                <a className="page-link">Previous</a>
-              </li>
-
-              {/* Dynamic Page Links */}
-              {generatePaginationLinks().map((page, index) => (
+        {lawyers.length > 0 && (
+          <div className="container mt-3">
+            <PaginationWrapper>
+              <ul className="pagination justify-content-end flex-wrap">
+                {/* Previous Button */}
                 <li
-                  key={index}
-                  className={`page-item ${
-                    currentPage === page ? "active" : ""
-                  } ${page === "..." ? "disabled" : ""}`}
-                  onClick={() =>
-                    typeof page === "number" && handlePageChange(page)
-                  }
+                  className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
+                  onClick={() => handlePageChange(currentPage - 1)}
                 >
-                  <a className="page-link">{page}</a>
+                  <a className="page-link">Previous</a>
                 </li>
-              ))}
 
-              {/* Next Button */}
-              <li
-                className={`page-item ${
-                  currentPage === totalPages ? "disabled" : ""
-                }`}
-                onClick={() => handlePageChange(currentPage + 1)}
-              >
-                <a className="page-link">Next</a>
-              </li>
-            </ul>
-          </PaginationWrapper>
-        </div>
+                {/* Dynamic Page Links */}
+                {generatePaginationLinks().map((page, index) => (
+                  <li
+                    key={index}
+                    className={`page-item ${
+                      currentPage === page ? "active" : ""
+                    } ${page === "..." ? "disabled" : ""}`}
+                    onClick={() =>
+                      typeof page === "number" && handlePageChange(page)
+                    }
+                  >
+                    <a className="page-link">{page}</a>
+                  </li>
+                ))}
+
+                {/* Next Button */}
+                <li
+                  className={`page-item ${
+                    currentPage === totalPages ? "disabled" : ""
+                  }`}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                >
+                  <a className="page-link">Next</a>
+                </li>
+              </ul>
+            </PaginationWrapper>
+          </div>
+        )}
       </section>
     </Base>
   );
