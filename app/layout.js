@@ -28,11 +28,11 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        {/* <AuthProvider> */}
+        <AuthProvider>
           <AosProvider>
             {children}
           </AosProvider>
-        {/* </AuthProvider> */}
+        </AuthProvider>
       </body>
     </html>
   );
