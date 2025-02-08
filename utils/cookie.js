@@ -17,8 +17,6 @@ export function getCookie(name) {
   return null;
 }
 export function setCookie(name, value, expiry){
-  console.log(`[${name}=${value}; ${expiry? "expires=" + new Date(expiry).toUTCString() : ''}]`);
-  
   document.cookie = `${name}=${value}; ${expiry? "expires=" + new Date(expiry).toUTCString() : ''}`
 }
 export function deleteCookie(name){

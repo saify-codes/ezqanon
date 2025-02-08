@@ -1,4 +1,5 @@
 import ReactQuery from "@/providers/reactQuery";
+import Toastify from "@/providers/tostify";
 import { AuthProvider } from "@/context/authContext";
 import { AosProvider } from "@/context/aosContext";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -6,6 +7,7 @@ import "aos/dist/aos.css";
 import "swiper/css";
 import "./globals.css";
 import "./overrides.css";
+import "./config";
 
 export const metadata = {
   title: "EZQanon",
@@ -32,7 +34,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <AosProvider>
             <ReactQuery>
-              {children}
+              <Toastify>{children}</Toastify>
             </ReactQuery>
           </AosProvider>
         </AuthProvider>

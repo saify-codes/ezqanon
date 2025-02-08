@@ -1,9 +1,8 @@
 "use client";
 
-import api from "@/app/services/api";
+import api from "@/services/api";
 import { deleteCookie, getCookie, setCookie } from "@/utils";
-import { useRouter } from "next/navigation";
-import { createContext, useEffect, useLayoutEffect, useState } from "react";
+import { createContext, useLayoutEffect, useState } from "react";
 
 export const AuthContext = createContext({
   status: "loading",
@@ -13,6 +12,7 @@ export const AuthContext = createContext({
   signup: () => {},
   signin: () => {},
   signout: () => {},
+  updateUserSessionData: () => {},
 });
 
 export function AuthProvider({ children }) {
@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
   const signin = async (email, password, remember = false) => {
     try {
       const { data } = await api.post("/signin", { email, password, remember });
-      setCookie('user', JSON.stringify(data.user), data.expiresAt);
+      // setCookie('user', JSON.stringify(data.user), data.expiresAt);
       setCookie('auth_token', data.token, data.expiresAt);
       setStatus('authenticated');
       setUser(data.user);
@@ -38,32 +38,56 @@ export function AuthProvider({ children }) {
   };
 
   const signout = () => {
-
+    
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
 
-    deleteCookie('user');
+    // deleteCookie('user');
     deleteCookie('auth_token');
     setStatus('unauthenticated');
     setUser(null);
     api.post('/signout', null, config)
   };
 
-  const init = () => {
-    try {
-      const user  = JSON.parse(getCookie("user"));
-      const token = getCookie("auth_token");
-      setStatus(user ? "authenticated" : "unauthenticated");
-      setUser(user);
-      setToken(token)
-      console.log(user, token);
-      
-    } catch {
-      setStatus("unauthenticated");
+  const updateUserSessionData = (updatedFields) => {
+    setUser((prevUser) => {
+      if (!prevUser) return null;
+      return { ...prevUser, ...updatedFields };
+    }); 
+
+  };
+
+  const init = async () => {
+    const token = getCookie("auth_token");
+    
+    if (token) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      try {
+
+        const {data} = await api.get('/profile', config)
+        setUser(data.data);
+        setToken(token)
+        setStatus("authenticated");        
+        
+      } catch (error) {
+
+        const { status } = error.response;
+        if (status === 401) { // delete token because its invalid
+          deleteCookie('auth_token')
+        }
+        setStatus("unauthenticated");
+        alert('something went wrong')
+      }
     }
+    
   };
 
   // Initialize on component mount
@@ -79,6 +103,7 @@ export function AuthProvider({ children }) {
     signin,
     signup,
     signout,
+    updateUserSessionData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

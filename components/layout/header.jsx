@@ -29,6 +29,7 @@ export default function Navbar() {
     document.body.classList.remove("mobile-nav-active");
   }, []);
 
+ 
   // Handle Scroll Effects
   useEffect(() => {
     const toggleScrolled = () => {
@@ -80,7 +81,7 @@ export default function Navbar() {
         </nav>
 
         {auth.user ? (
-          <UserMenu/>
+          <UserMenu />
         ) : (
           <Link href="/signin" className="btn-getstarted d-none d-xl-block">
             Login

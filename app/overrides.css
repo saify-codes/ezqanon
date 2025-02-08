@@ -7,3 +7,12 @@
   --bs-btn-disabled-bg: var(--primary);
   --bs-btn-disabled-border-color: var(--primary);
 }
+.btn-secondary {
+  --bs-btn-bg: var(--secondary);
+  --bs-btn-border-color: var(--secondary);
+  --bs-btn-hover-bg: var(--secondary-hover);
+  --bs-btn-hover-border-color: var(--secondary-hover);
+  --bs-btn-active-bg: var(--secondary-hover);
+  --bs-btn-disabled-bg: var(--secondary);
+  --bs-btn-disabled-border-color: var(--secondary);
+}

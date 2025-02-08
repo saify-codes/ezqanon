@@ -2,13 +2,19 @@
 
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
 
 export default function () {
-
-  const {user, signout} = useAuth()
+  const { user, signout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const handleSignout = () => {
+    signout();
+    router.push("/");
+  };
 
   return (
     <div className="position-relative ms-2 ms-xl-5">
@@ -21,18 +27,20 @@ export default function () {
       {isMenuOpen && (
         <Dropdown>
           <div className="px-4 py-3">
-            <strong className="d-block">{user.name}</strong>
-            <small className="">{user.email}</small>
+            <strong className="d-block">{user?.name}</strong>
+            <small className="">{user?.email}</small>
           </div>
           <ul className="py-2">
             <li className="py-2">
-              <Link href="/">Profile</Link>
+              <Link href="/profile">Profile</Link>
             </li>
             <li className="py-2">
-              <Link href="/">Appointments</Link>
+              <Link href="/appointments">Appointments</Link>
             </li>
             <li className="py-2">
-              <a href="#" onClick={signout}>Sign out</a>
+              <a href="#" onClick={handleSignout}>
+                Sign out
+              </a>
             </li>
           </ul>
         </Dropdown>
