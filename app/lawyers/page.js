@@ -1,39 +1,28 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import styled from "styled-components";
 import Base from "@/layout/base";
 import Lawyer from "@/components/lawyer";
 
+
 export default function Lawyers() {
-  const [lawyers, setLawyers] = useState([]);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data, isLoading, isError, error } = useQuery({
+    queryFn: async ()=> (await axios.get(`/api/mock?page=${currentPage}`)).data,
+    queryKey: ['lawyers'], 
+  });
+  
 
-  // Fetch Lawyers
-  const fetchLawyers = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const { data } = await axios.get(`/api/mock?page=${currentPage}`);
-      setLawyers(data.data);
-      setTotalPages(data.last_page);
-    } catch (err) {
-      setError("Failed to fetch lawyers. Please try again.");
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchLawyers();
-  }, [currentPage]);
+  console.log(data);
+  
 
   // Handle page change
   const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
+    if (page >= 1 && page <= data?.last_page) {
       setCurrentPage(page);
     }
   };
@@ -43,7 +32,7 @@ export default function Lawyers() {
     const range = 1; // Number of pages shown before and after the current page
     const pageLinks = [];
     let start = Math.max(1, currentPage - range);
-    let end = Math.min(totalPages, currentPage + range);
+    let end = Math.min(data?.last_page, currentPage + range);
 
     // Show the middle range
     for (let i = start; i <= end; i++) {
@@ -51,9 +40,9 @@ export default function Lawyers() {
     }
 
     // Always show the last page
-    if (end < totalPages) {
+    if (end < data?.last_page) {
       pageLinks.push("...");
-      pageLinks.push(totalPages);
+      pageLinks.push(data?.last_page);
     }
 
     return pageLinks;
@@ -63,9 +52,9 @@ export default function Lawyers() {
     <Base>
       <section className="lawyers section">
         <Wrapper className="container">
-          {loading && <Skeleton />}
-          {error && <p className="text-danger">{error}</p>}
-          {lawyers.map((lawyer) => (
+          {isLoading && <Skeleton />}
+          {isError && <p className="text-danger">{error.message}</p>}
+          {data?.map((lawyer) => (
             <Lawyer
               key={lawyer.id}
               name={lawyer.name}
@@ -76,7 +65,7 @@ export default function Lawyers() {
           ))}
         </Wrapper>
 
-        {lawyers.length > 0 && (
+        {data?.length > 0 && (
           <div className="container mt-3">
             <PaginationWrapper>
               <ul className="pagination justify-content-end flex-wrap">
@@ -106,7 +95,7 @@ export default function Lawyers() {
                 {/* Next Button */}
                 <li
                   className={`page-item ${
-                    currentPage === totalPages ? "disabled" : ""
+                    currentPage === data?.last_page ? "disabled" : ""
                   }`}
                   onClick={() => handlePageChange(currentPage + 1)}
                 >

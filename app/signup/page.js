@@ -3,27 +3,30 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
-import { getFlashMessage, withLoader } from "@/utils";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { flashMessage, withLoader } from "@/utils";
 
 export default function SignUp() {
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState();
+
   const auth = useAuth();
-  const message = getFlashMessage('auth')
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      const {email, password, remember} = data
-      await withLoader(()=>auth.signin(email, password, remember), setIsLoading)
+      await withLoader(() => auth.signup(data), setIsLoading);
+      flashMessage('auth', 'Account created')
+      router.push("/signin");
     } catch (error) {
-      console.log(error);
       setError(error.response?.data.message || "something went wrong");
     }
   };
@@ -41,20 +44,30 @@ export default function SignUp() {
           <h3 className="fw-bold">Client Portal</h3>
           <p className="text-muted">Secure access for legal professionals</p>
         </div>
-
-        {message && (
-          <div className="alert alert-success" role="alert">
-            {message}
-          </div>
-        )}
-
+        
         {error && (
-          <div className="alert alert-danger" role="alert">
+          <div class="alert alert-danger" role="alert">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Name Field */}
+          <div className="mb-3">
+            <label className="form-label">Full Name</label>
+            <input
+              type="text"
+              className="form-control"
+              {...register("name", { required: "Name is required" })}
+              placeholder="e.g. john Doe"
+            />
+            {errors.name && (
+              <small className="text-danger d-block mt-2">
+                {errors.name.message}
+              </small>
+            )}
+          </div>
+
           {/* Email Field */}
           <div className="mb-3">
             <label className="form-label">Email</label>
@@ -77,6 +90,29 @@ export default function SignUp() {
             )}
           </div>
 
+          {/* Phone Number Field */}
+          <div className="mb-3">
+            <label className="form-label">Phone Number</label>
+            <input
+              type="tel"
+              className="form-control"
+              {...register("phone", {
+                required: "Phone number is required",
+                pattern: {
+                  value: /^\+?\d{10,15}$/,
+                  message: "Enter a valid phone number",
+                },
+              })}
+              placeholder="e.g. 03123456789"
+              value="03122030440"
+            />
+            {errors.phone && (
+              <small className="text-danger d-block mt-2">
+                {errors.phone.message}
+              </small>
+            )}
+          </div>
+
           {/* Password Field */}
           <div className="mb-3">
             <label className="form-label">Password</label>
@@ -90,6 +126,7 @@ export default function SignUp() {
                   message: "Password must be at least 6 characters",
                 },
               })}
+              value="password"
             />
             {errors.password && (
               <small className="text-danger d-block mt-2">
@@ -98,29 +135,33 @@ export default function SignUp() {
             )}
           </div>
 
-          <div className="mb-3 d-flex justify-content-between">
-            <div className="text-end">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                {...register("remember", { required: false })}
-              />{" "}
-              remember
-            </div>
-
-            <div className="text-end">
-              <Link href="/">forgot password?</Link>
-            </div>
+          {/* Confirm Password Field */}
+          <div className="mb-4">
+            <label className="form-label">Confirm Password</label>
+            <input
+              type="password"
+              className="form-control"
+              {...register("password_confirmation", {
+                required: "Please confirm your password",
+                validate: (value) =>
+                  value === watch("password") || "Passwords do not match",
+              })}
+              value="password"
+            />
+            {errors.password_confirmation && (
+              <small className="text-danger d-block mt-2">
+                {errors.password_confirmation.message}
+              </small>
+            )}
           </div>
 
-          {/* Submit Button */}
           <SubmitBtn loading={isLoading} />
         </form>
 
         {/* Sign In Link */}
         <div className="text-center mt-3">
-          don't have an account? register{" "}
-          <Link href="/signup" className="text-decoration-underline">
+          Already have an account? Login{" "}
+          <Link href="/signin" className="text-decoration-underline">
             here
           </Link>
         </div>
@@ -137,11 +178,9 @@ function SubmitBtn({ loading = false }) {
       disabled={loading}
     >
       {loading ? (
-        <span
-          className="spinner-border spinner-border-sm"
-        ></span>
+        <span className="spinner-border spinner-border-sm"></span>
       ) : (
-        "Sign in"
+        "Create account"
       )}
     </button>
   );

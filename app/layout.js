@@ -1,3 +1,4 @@
+import ReactQuery from "@/providers/reactQuery";
 import { AuthProvider } from "@/context/authContext";
 import { AosProvider } from "@/context/aosContext";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -30,7 +31,9 @@ export default function RootLayout({ children }) {
       <body>
         <AuthProvider>
           <AosProvider>
-            {children}
+            <ReactQuery>
+              {children}
+            </ReactQuery>
           </AosProvider>
         </AuthProvider>
       </body>

@@ -1,10 +1,13 @@
 "use client";
 
+import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
 
 export default function () {
+
+  const {user, signout} = useAuth()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -17,11 +20,11 @@ export default function () {
 
       {isMenuOpen && (
         <Dropdown>
-          <div class="px-4 py-3">
-            <strong className="d-block">Bonnie Green</strong>
-            <small class="">name@flowbite.com</small>
+          <div className="px-4 py-3">
+            <strong className="d-block">{user.name}</strong>
+            <small className="">{user.email}</small>
           </div>
-          <ul class="py-2">
+          <ul className="py-2">
             <li className="py-2">
               <Link href="/">Profile</Link>
             </li>
@@ -29,7 +32,7 @@ export default function () {
               <Link href="/">Appointments</Link>
             </li>
             <li className="py-2">
-              <a href="#">Sign out</a>
+              <a href="#" onClick={signout}>Sign out</a>
             </li>
           </ul>
         </Dropdown>
