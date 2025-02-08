@@ -3,7 +3,7 @@
 import api from "@/app/services/api";
 import { deleteCookie, getCookie, setCookie } from "@/utils";
 import { useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useLayoutEffect, useState } from "react";
 
 export const AuthContext = createContext({
   status: "loading",
@@ -16,7 +16,6 @@ export const AuthContext = createContext({
 });
 
 export function AuthProvider({ children }) {
-  const router = useRouter();
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [status, setStatus] = useState("loading");
@@ -68,16 +67,9 @@ export function AuthProvider({ children }) {
   };
 
   // Initialize on component mount
-  useEffect(() => {
+  useLayoutEffect(() => {
     init();
   }, []);
-
-  // Redirect to home page when authenticated
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push('/');
-    }
-  }, [status, router]);
 
   const value = {
     status,

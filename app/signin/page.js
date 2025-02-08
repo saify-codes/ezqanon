@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { getFlashMessage, withLoader } from "@/utils";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function SignUp() {
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState();
   const auth = useAuth();
+  const router = useRouter();
   const message = getFlashMessage('auth')
 
   const {
@@ -22,6 +24,8 @@ export default function SignUp() {
     try {
       const {email, password, remember} = data
       await withLoader(()=>auth.signin(email, password, remember), setIsLoading)
+      router.push('/');
+      
     } catch (error) {
       console.log(error);
       setError(error.response?.data.message || "something went wrong");
