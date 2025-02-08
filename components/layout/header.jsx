@@ -47,7 +47,7 @@ export default function Navbar() {
       <div className="container-fluid container-xl d-flex align-items-center">
         {/* Logo */}
         <Link href="/" className="logo d-flex align-items-center me-auto">
-          <img src="/assets/img/logo.png" alt="" width="50" />
+          <img src="{/assets/img/logo.png}" alt="" width="50" />
         </Link>
 
         {/* Navigation */}

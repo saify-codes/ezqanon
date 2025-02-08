@@ -1,10 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { flashMessage, withLoader } from "@/utils";
 
 export default function SignUp() {

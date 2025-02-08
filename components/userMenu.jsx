@@ -19,7 +19,7 @@ export default function () {
   return (
     <div className="position-relative ms-2 ms-xl-5">
       <Avatar
-        src="https://www.shutterstock.com/image-vector/young-smiling-man-avatar-brown-600nw-2261401207.jpg"
+        src={user?.avatar} 
         alt="user photo"
         onClick={() => setIsMenuOpen((prev) => !prev)}
       />
