@@ -12,6 +12,7 @@ export const AuthContext = createContext({
   signup: () => {},
   signin: () => {},
   signout: () => {},
+  forgot: () => {},
   updateUserSessionData: () => {},
 });
 
@@ -25,16 +26,12 @@ export function AuthProvider({ children }) {
   };
 
   const signin = async (email, password, remember = false) => {
-    try {
-      const { data } = await api.post("/signin", { email, password, remember });
-      // setCookie('user', JSON.stringify(data.user), data.expiresAt);
-      setCookie('auth_token', data.token, data.expiresAt);
-      setStatus('authenticated');
-      setUser(data.user);
-      setToken(data.token);
-    } catch (error) {
-      throw error;
-    }
+    const { data } = await api.post("/signin", { email, password, remember });
+    // setCookie('user', JSON.stringify(data.user), data.expiresAt);
+    setCookie('auth_token', data.token, data.expiresAt);
+    setStatus('authenticated');
+    setUser(data.user);
+    setToken(data.token);
   };
 
   const signout = () => {
@@ -50,6 +47,11 @@ export function AuthProvider({ children }) {
     setStatus('unauthenticated');
     setUser(null);
     api.post('/signout', null, config)
+  };
+  
+  const forgot = async (email) => {
+    const {data} = await api.post('/forgot', {email})
+    return data.message
   };
 
   const updateUserSessionData = (updatedFields) => {
@@ -103,6 +105,7 @@ export function AuthProvider({ children }) {
     signin,
     signup,
     signout,
+    forgot,
     updateUserSessionData,
   };
 

@@ -2,17 +2,16 @@
 
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks/useAuth";
-import { useState } from "react";
-import { getFlashMessage, withLoader } from "@/utils";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { withLoader } from "@/utils";
 import Link from "next/link";
 
-export default function SignUp() {
+export default function Forgot() {
   const [error, setError] = useState();
+  const [success, setSuccess] = useState();
   const [isLoading, setIsLoading] = useState();
+  const [countdown, setCountdown] = useState(0);
   const auth = useAuth();
-  const router = useRouter();
-  const message = getFlashMessage('auth')
 
   const {
     register,
@@ -20,15 +19,34 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
 
+  // Effect to start countdown when email is successfully sent
+  useEffect(() => {
+    let timer;
+    if (countdown > 0) {
+      timer = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+    }
+
+    // Cleanup the interval on component unmount or when countdown reaches 0
+    if (countdown === 0) {
+      clearInterval(timer);
+    }
+
+    return () => clearInterval(timer);
+  }, [countdown]);
+
   const onSubmit = async (data) => {
     try {
-      const {email, password, remember} = data
-      await withLoader(()=>auth.signin(email, password, remember), setIsLoading)
-      router.push('/');
-      
+      const response = await withLoader(
+        () => auth.forgot(data.email),
+        setIsLoading
+      );
+      setSuccess(response);
+      setCountdown(30);
     } catch (error) {
-      console.log(error);
-      setError(error.response?.data.message || "something went wrong");
+      const { response } = error;
+      setError(response.data.message || "Something went wrong");
     }
   };
 
@@ -46,10 +64,12 @@ export default function SignUp() {
           <p className="text-muted">Secure access for legal professionals</p>
         </div>
 
-        {message && (
-          <div className="alert alert-success" role="alert">
-            {message}
-          </div>
+        {success && (
+          <div
+            className="alert alert-success"
+            role="alert"
+            dangerouslySetInnerHTML={{ __html: success }}
+          ></div>
         )}
 
         {error && (
@@ -81,50 +101,13 @@ export default function SignUp() {
             )}
           </div>
 
-          {/* Password Field */}
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
-                },
-              })}
-            />
-            {errors.password && (
-              <small className="text-danger d-block mt-2">
-                {errors.password.message}
-              </small>
-            )}
-          </div>
-
-          <div className="mb-3 d-flex justify-content-between">
-            <div className="text-end">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                {...register("remember", { required: false })}
-              />{" "}
-              remember
-            </div>
-
-            <div className="text-end">
-              <Link href="/forgot">forgot password?</Link>
-            </div>
-          </div>
-
           {/* Submit Button */}
-          <SubmitBtn loading={isLoading} />
+          <SubmitBtn loading={isLoading} countdown={countdown} />
         </form>
-
         {/* Sign In Link */}
         <div className="text-center mt-3">
-          don't have an account? register{" "}
-          <Link href="/signup" className="text-decoration-underline">
+          back to login{" "}
+          <Link href="/signin" className="text-decoration-underline">
             here
           </Link>
         </div>
@@ -133,19 +116,19 @@ export default function SignUp() {
   );
 }
 
-function SubmitBtn({ loading = false }) {
+function SubmitBtn({ loading = false, countdown = 0 }) {
   return (
     <button
       type="submit"
       className="btn btn-primary w-100 py-2"
-      disabled={loading}
+      disabled={loading || countdown > 0}
     >
       {loading ? (
-        <span
-          className="spinner-border spinner-border-sm"
-        ></span>
+        <span className="spinner-border spinner-border-sm"></span>
+      ) : countdown > 0 ? (
+        `Resend in ${countdown}s` // Display countdown time
       ) : (
-        "Sign in"
+        "Reset"
       )}
     </button>
   );

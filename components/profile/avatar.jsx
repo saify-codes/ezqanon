@@ -31,7 +31,7 @@ export default function Avatar() {
       toast.success(data.message);
       updateUserSessionData({ avatar: data.url });
     } catch (error) {
-      toast.error(error.response.data.message || "something went wrong");
+      toast.error(error.response?.data.message || "something went wrong");
     }
   };
 
