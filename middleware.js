@@ -1,39 +1,34 @@
 import { NextResponse } from "next/server";
 
 const routes = {
-  auth: ["/dashboard"],
-  redirectIfAuth: ["/login"],
+  protected: ["/profile", "/dashboard", "/settings"], // Pages that require authentication
+  guest: ["/signin", "/signup"], // Pages for unauthenticated users
 };
 
 export function middleware(request) {
-  const { pathname } = request.nextUrl;
-  // Get the authentication token from cookies (adjust the cookie name as needed)
-  const token = request.cookies.get("token")?.value;
+  const token = request.cookies.get("auth_token")?.value;
+  const url = request.nextUrl.clone();
 
-  // --- Redirect authenticated users away from public routes (like /login) ---
-  if (
-    routes.redirectIfAuth.some((publicRoute) => pathname.startsWith(publicRoute)) &&
-    token
-  ) {
-    const url = request.nextUrl.clone();
-    // Redirect to the default authenticated route, e.g., the first element in routes.auth
-    url.pathname = routes.auth[0];
+  const isProtectedRoute = routes.protected.includes(url.pathname);
+  const isGuestRoute = routes.guest.includes(url.pathname);
+
+  // If user is not authenticated and trying to access a protected route, redirect to sign-in page
+  if (!token && isProtectedRoute) {
+    url.pathname = "/signin";
     return NextResponse.redirect(url);
   }
 
-  // --- Protect routes that require authentication ---
-  if (
-    routes.auth.some((authRoute) => pathname.startsWith(authRoute)) &&
-    !token
-  ) {
-    const url = request.nextUrl.clone();
-    // Redirect to the default public route, e.g., the first element in routes.public
-    url.pathname = routes.public[0];
-    // Optionally, attach a message query parameter
-    url.searchParams.set("message", "You have been logged out");
+  // If user is authenticated and trying to access a guest-only route, redirect to dashboard
+  if (token && isGuestRoute) {
+    url.pathname = "/";
     return NextResponse.redirect(url);
   }
 
   // Allow the request to proceed if no redirection is needed
   return NextResponse.next();
 }
+
+// Apply middleware only to these paths for better performance
+export const config = {
+  matcher: ["/profile", "/dashboard", "/settings", "/signin", "/signup"],
+};

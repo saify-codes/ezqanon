@@ -1,35 +1,46 @@
 "use client";
 
+import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
 
 export default function () {
+  const { user, signout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const handleSignout = () => {
+    signout();
+    router.push("/");
+  };
 
   return (
     <div className="position-relative ms-2 ms-xl-5">
       <Avatar
-        src="https://www.shutterstock.com/image-vector/young-smiling-man-avatar-brown-600nw-2261401207.jpg"
+        src={user?.avatar} 
         alt="user photo"
         onClick={() => setIsMenuOpen((prev) => !prev)}
       />
 
       {isMenuOpen && (
         <Dropdown>
-          <div class="px-4 py-3">
-            <strong className="d-block">Bonnie Green</strong>
-            <small class="">name@flowbite.com</small>
+          <div className="px-4 py-3">
+            <strong className="d-block">{user?.name}</strong>
+            <small className="">{user?.email}</small>
           </div>
-          <ul class="py-2">
+          <ul className="py-2">
             <li className="py-2">
-              <Link href="/">Profile</Link>
+              <Link href="/profile">Profile</Link>
             </li>
             <li className="py-2">
-              <Link href="/">Appointments</Link>
+              <Link href="/appointments">Appointments</Link>
             </li>
             <li className="py-2">
-              <a href="#">Sign out</a>
+              <a href="#" onClick={handleSignout}>
+                Sign out
+              </a>
             </li>
           </ul>
         </Dropdown>

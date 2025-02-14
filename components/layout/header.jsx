@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import UserMenu from "../userMenu";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
-import UserMenu from "../user-menu";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Navbar() {
+  const auth = useAuth();
   const path = usePathname();
   const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -27,6 +29,7 @@ export default function Navbar() {
     document.body.classList.remove("mobile-nav-active");
   }, []);
 
+ 
   // Handle Scroll Effects
   useEffect(() => {
     const toggleScrolled = () => {
@@ -44,7 +47,7 @@ export default function Navbar() {
       <div className="container-fluid container-xl d-flex align-items-center">
         {/* Logo */}
         <Link href="/" className="logo d-flex align-items-center me-auto">
-          <img src="/assets/img/logo.png" alt="" width="50" />
+          <img src="{/assets/img/logo.png}" alt="" width="50" />
         </Link>
 
         {/* Navigation */}
@@ -77,12 +80,13 @@ export default function Navbar() {
           </button>
         </nav>
 
-        {/* Desktop Login Button */}
-        {/* <Link href="/signin" className="btn-getstarted d-none d-xl-block">
-          Login
-        </Link> */}
-
-        <UserMenu/>
+        {auth.user ? (
+          <UserMenu />
+        ) : (
+          <Link href="/signin" className="btn-getstarted d-none d-xl-block">
+            Login
+          </Link>
+        )}
       </div>
     </header>
   );
