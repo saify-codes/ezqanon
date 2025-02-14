@@ -8,11 +8,17 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function SignUp() {
-  const [error, setError] = useState();
-  const [isLoading, setIsLoading] = useState();
+  const [alert, setAlert] = useState({ type: "", message: "" });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isResendingVerification, setIsResendingVerification] = useState(false);
+  const [showResendVerification, setShowResendVerification] = useState(false);
+  const [unverifiedEmail, setUnverifiedEmail] = useState("");
+  const [countdown, setCountdown] = useState(0);
+
   const auth = useAuth();
   const router = useRouter();
-  const message = getFlashMessage('auth')
+  const successMessage = getFlashMessage("success");
+  const errorMessage = getFlashMessage("error");
 
   const {
     register,
@@ -21,14 +27,63 @@ export default function SignUp() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    const { email, password, remember } = data;
+
     try {
-      const {email, password, remember} = data
-      await withLoader(()=>auth.signin(email, password, remember), setIsLoading)
-      router.push('/');
-      
+      await withLoader(
+        () => auth.signin(email, password, remember),
+        setIsLoading
+      );
+      router.push("/");
     } catch (error) {
       console.log(error);
-      setError(error.response?.data.message || "something went wrong");
+
+      // If user is unverified (401), show the resend verification option
+      if (error.response?.status === 401) {
+        setUnverifiedEmail(email);
+        setShowResendVerification(true);
+      } else {
+        setShowResendVerification(false);
+      }
+
+      setAlert({
+        type: "danger",
+        message: error.response?.data.message || "Something went wrong",
+      });
+    }
+  };
+
+  const sendVerificationLinkToEmail = async () => {
+    // If countdown is already running, do nothing
+    if (countdown > 0) return;
+
+    try {
+      await withLoader(
+        () => auth.sendVerificationLink(unverifiedEmail),
+        setIsResendingVerification
+      );
+
+      setCountdown(30);
+      const intervalId = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(intervalId);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      setAlert({
+        type: "success",
+        message: "Verification link sent",
+      });
+    } catch (error) {
+      console.log(error);
+      setAlert({
+        type: "danger",
+        message: "Error sending verification link",
+      });
     }
   };
 
@@ -46,16 +101,28 @@ export default function SignUp() {
           <p className="text-muted">Secure access for legal professionals</p>
         </div>
 
-        {message && (
-          <div className="alert alert-success" role="alert">
-            {message}
-          </div>
+        {errorMessage && (
+          <div
+            className="alert alert-danger"
+            role="alert"
+            dangerouslySetInnerHTML={{ __html: errorMessage }}
+          />
         )}
 
-        {error && (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
+        {successMessage && (
+          <div
+            className="alert alert-success"
+            role="alert"
+            dangerouslySetInnerHTML={{ __html: successMessage }}
+          />
+        )}
+
+        {alert.message && (
+          <div
+            className={`alert alert-${alert.type}`}
+            role="alert"
+            dangerouslySetInnerHTML={{ __html: alert.message }}
+          />
         )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,6 +132,7 @@ export default function SignUp() {
             <input
               type="email"
               className="form-control"
+              placeholder="enter your email"
               {...register("email", {
                 required: "Email is required",
                 pattern: {
@@ -72,7 +140,6 @@ export default function SignUp() {
                   message: "Enter a valid email",
                 },
               })}
-              placeholder="e.g. johndoe@gmail.com"
             />
             {errors.email && (
               <small className="text-danger d-block mt-2">
@@ -81,12 +148,35 @@ export default function SignUp() {
             )}
           </div>
 
+          {/* Show resend verification link or countdown message */}
+          {showResendVerification && (
+            <div className="text-end">
+              {countdown > 0 ? (
+                <span className="text-muted">
+                  Resend Verification Email in {countdown}s
+                </span>
+              ) : (
+                <button
+                  className="btn p-0"
+                  onClick={sendVerificationLinkToEmail}
+                  disabled={isResendingVerification}
+                  style={{ color: "var(--primary)" }}
+                >
+                  {isResendingVerification
+                    ? "Sending..."
+                    : "Resend Verification Email"}
+                </button>
+              )}
+            </div>
+          )}
+
           {/* Password Field */}
           <div className="mb-3">
             <label className="form-label">Password</label>
             <input
               type="password"
               className="form-control"
+              placeholder="enter your password"
               {...register("password", {
                 required: "Password is required",
                 minLength: {
@@ -121,7 +211,7 @@ export default function SignUp() {
           <SubmitBtn loading={isLoading} />
         </form>
 
-        {/* Sign In Link */}
+        {/* Sign Up Link */}
         <div className="text-center mt-3">
           don't have an account? register{" "}
           <Link href="/signup" className="text-decoration-underline">
@@ -141,9 +231,7 @@ function SubmitBtn({ loading = false }) {
       disabled={loading}
     >
       {loading ? (
-        <span
-          className="spinner-border spinner-border-sm"
-        ></span>
+        <span className="spinner-border spinner-border-sm"></span>
       ) : (
         "Sign in"
       )}

@@ -2,14 +2,13 @@
 
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks/useAuth";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { withLoader } from "@/utils";
 import Link from "next/link";
 
 export default function Forgot() {
-  const [error, setError] = useState();
-  const [success, setSuccess] = useState();
-  const [isLoading, setIsLoading] = useState();
+  const [alert, setAlert] = useState({ type: "", message: "" });
+  const [isLoading, setIsLoading] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const auth = useAuth();
 
@@ -19,34 +18,33 @@ export default function Forgot() {
     formState: { errors },
   } = useForm();
 
-  // Effect to start countdown when email is successfully sent
-  useEffect(() => {
-    let timer;
-    if (countdown > 0) {
-      timer = setInterval(() => {
-        setCountdown((prev) => prev - 1);
-      }, 1000);
-    }
-
-    // Cleanup the interval on component unmount or when countdown reaches 0
-    if (countdown === 0) {
-      clearInterval(timer);
-    }
-
-    return () => clearInterval(timer);
-  }, [countdown]);
-
   const onSubmit = async (data) => {
+    // Clear any previous alert on new submission
+    setAlert({ type: "", message: "" });
+
     try {
+      // Using a loader for asynchronous operation
       const response = await withLoader(
         () => auth.forgot(data.email),
         setIsLoading
       );
-      setSuccess(response);
+      // If the API call is successful:
+      setAlert({ type: "success", message: response });
       setCountdown(30);
-    } catch (error) {
-      const { response } = error;
-      setError(response.data.message || "Something went wrong");
+
+      // timer
+      const interval = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev === 0) clearInterval(interval);
+          return prev - 1;
+        });
+      }, 1000);
+    } catch (err) {
+      const { response } = err;
+      setAlert({
+        type: "danger",
+        message: response?.data?.message || "Something went wrong",
+      });
     }
   };
 
@@ -64,18 +62,12 @@ export default function Forgot() {
           <p className="text-muted">Secure access for legal professionals</p>
         </div>
 
-        {success && (
+        {alert.message && (
           <div
-            className="alert alert-success"
+            className={`alert alert-${alert.type}`}
             role="alert"
-            dangerouslySetInnerHTML={{ __html: success }}
-          ></div>
-        )}
-
-        {error && (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
+            dangerouslySetInnerHTML={{ __html: alert.message }}
+          />
         )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -88,7 +80,7 @@ export default function Forgot() {
               {...register("email", {
                 required: "Email is required",
                 pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  value: /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,4}$/,
                   message: "Enter a valid email",
                 },
               })}
@@ -104,7 +96,8 @@ export default function Forgot() {
           {/* Submit Button */}
           <SubmitBtn loading={isLoading} countdown={countdown} />
         </form>
-        {/* Sign In Link */}
+
+        {/* Back to Login */}
         <div className="text-center mt-3">
           back to login{" "}
           <Link href="/signin" className="text-decoration-underline">
@@ -116,7 +109,7 @@ export default function Forgot() {
   );
 }
 
-function SubmitBtn({ loading = false, countdown = 0 }) {
+function SubmitBtn({ loading, countdown }) {
   return (
     <button
       type="submit"
@@ -124,9 +117,9 @@ function SubmitBtn({ loading = false, countdown = 0 }) {
       disabled={loading || countdown > 0}
     >
       {loading ? (
-        <span className="spinner-border spinner-border-sm"></span>
+        <span className="spinner-border spinner-border-sm" />
       ) : countdown > 0 ? (
-        `Resend in ${countdown}s` // Display countdown time
+        `Resend in ${countdown}s`
       ) : (
         "Reset"
       )}

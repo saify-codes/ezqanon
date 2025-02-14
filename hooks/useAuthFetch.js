@@ -25,7 +25,7 @@ export default function useAuthFetch() {
           const { status } = error.response;
 
           if (status === 401) {
-            flashMessage("auth","Session expired please sign in again.");
+            flashMessage("error","Session expired please sign in again.");
             signout(); // Clear auth state
             router.push("/signin"); // Redirect to login page
             return

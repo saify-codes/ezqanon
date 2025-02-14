@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { flashMessage, withLoader } from "@/utils";
 
 export default function SignUp() {
-  const [error, setError] = useState();
+  const [alert, setAlert] = useState({ type: "", message: "" });
   const [isLoading, setIsLoading] = useState();
 
   const auth = useAuth();
@@ -24,10 +24,13 @@ export default function SignUp() {
   const onSubmit = async (data) => {
     try {
       await withLoader(() => auth.signup(data), setIsLoading);
-      flashMessage('auth', 'Account created')
+      flashMessage("success", `We have sent a verification link to your email <u>${data.email}</u>`);
       router.push("/signin");
     } catch (error) {
-      setError(error.response?.data.message || "something went wrong");
+      setAlert({
+        type: "danger",
+        message: error.response?.data.message || "Something went wrong",
+      });
     }
   };
 
@@ -44,11 +47,13 @@ export default function SignUp() {
           <h3 className="fw-bold">Client Portal</h3>
           <p className="text-muted">Secure access for legal professionals</p>
         </div>
-        
-        {error && (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
+
+        {alert.message && (
+          <div
+            className={`alert alert-${alert.type}`}
+            role="alert"
+            dangerouslySetInnerHTML={{ __html: alert.message }}
+          />
         )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -58,8 +63,8 @@ export default function SignUp() {
             <input
               type="text"
               className="form-control"
+              placeholder="enter your full name"
               {...register("name", { required: "Name is required" })}
-              placeholder="e.g. john Doe"
             />
             {errors.name && (
               <small className="text-danger d-block mt-2">
@@ -74,6 +79,7 @@ export default function SignUp() {
             <input
               type="email"
               className="form-control"
+              placeholder="enter your email"
               {...register("email", {
                 required: "Email is required",
                 pattern: {
@@ -81,7 +87,6 @@ export default function SignUp() {
                   message: "Enter a valid email",
                 },
               })}
-              placeholder="e.g. johndoe@gmail.com"
             />
             {errors.email && (
               <small className="text-danger d-block mt-2">
@@ -96,6 +101,7 @@ export default function SignUp() {
             <input
               type="tel"
               className="form-control"
+              placeholder="enter your phone"
               {...register("phone", {
                 required: "Phone number is required",
                 pattern: {
@@ -103,8 +109,6 @@ export default function SignUp() {
                   message: "Enter a valid phone number",
                 },
               })}
-              placeholder="e.g. 03123456789"
-              value="03122030440"
             />
             {errors.phone && (
               <small className="text-danger d-block mt-2">
@@ -119,6 +123,7 @@ export default function SignUp() {
             <input
               type="password"
               className="form-control"
+              placeholder="enter your password"
               {...register("password", {
                 required: "Password is required",
                 minLength: {
@@ -126,7 +131,6 @@ export default function SignUp() {
                   message: "Password must be at least 6 characters",
                 },
               })}
-              value="password"
             />
             {errors.password && (
               <small className="text-danger d-block mt-2">
@@ -141,12 +145,12 @@ export default function SignUp() {
             <input
               type="password"
               className="form-control"
+              placeholder="confirm password"
               {...register("password_confirmation", {
                 required: "Please confirm your password",
                 validate: (value) =>
                   value === watch("password") || "Passwords do not match",
               })}
-              value="password"
             />
             {errors.password_confirmation && (
               <small className="text-danger d-block mt-2">
