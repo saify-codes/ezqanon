@@ -13,7 +13,7 @@ export default function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const navLinks = [
-    { label: "Home", href: "/" },
+    { label: "Home", href: "/", exact: true},
     { label: "Lawyers", href: "/lawyers" },
   ];
 
@@ -53,12 +53,12 @@ export default function Navbar() {
         {/* Navigation */}
         <nav id="navmenu" className={`navmenu ${isNavOpen ? "open" : ""}`}>
           <ul>
-            {navLinks.map(({ label, href }, index) => (
+            {navLinks.map(({ label, href, exact }, index) => (
               <li key={index}>
                 <Link
                   href={href}
                   onClick={handleMenuItemClick}
-                  className={path === href ? "active" : ""}
+                  className={exact? path === href : path.startsWith(href) ? "active" : ""}
                 >
                   {label}
                 </Link>

@@ -5,6 +5,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Base from "@/layout/base";
 import Lawyer from "@/components/lawyer";
+import api from "@/services/api";
 
 export default function Lawyers() {
   const [lawyers, setLawyers] = useState([]);
@@ -18,7 +19,7 @@ export default function Lawyers() {
     setLoading(true);
     setError(null);
     try {
-      const { data } = await axios.get(`/api/mock?page=${currentPage}`);
+      const { data } = await api.get(`/lawyer?page=${currentPage}`);
       setLawyers(data.data);
       setTotalPages(data.last_page);
     } catch (err) {
@@ -67,6 +68,7 @@ export default function Lawyers() {
           {error && <p className="text-danger">{error}</p>}
           {lawyers.map((lawyer) => (
             <Lawyer
+              id={lawyer.id}
               key={lawyer.id}
               name={lawyer.name}
               qualification={lawyer.qualification}

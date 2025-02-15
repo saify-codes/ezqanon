@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { getFlashMessage, withLoader } from "@/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function SignUp() {
@@ -19,6 +19,7 @@ export default function SignUp() {
   const router = useRouter();
   const successMessage = getFlashMessage("success");
   const errorMessage = getFlashMessage("error");
+  const redirectURL = useSearchParams().get("redirect");
 
   const {
     register,
@@ -34,7 +35,8 @@ export default function SignUp() {
         () => auth.signin(email, password, remember),
         setIsLoading
       );
-      router.push("/");
+
+      router.replace(redirectURL ? redirectURL : "/");
     } catch (error) {
       console.log(error);
 

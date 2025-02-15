@@ -1,13 +1,37 @@
+import { useAuth } from "@/hooks/useAuth";
+import { flashMessage } from "@/utils";
+import { useRouter } from "next/navigation";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import styled from "styled-components";
 
 export default function LawyerCard({
+  id,
   avatar,
   name,
   qualification,
   rating,
   className,
 }) {
+
+  const router = useRouter()
+  const auth   = useAuth()
+
+  const viewProfile = (lawyerId)=>{
+    router.push(`/lawyers/${lawyerId}`)
+  }
+
+  const book = (lawyerId)=>{
+
+    if (!auth.authenticated()) {
+      flashMessage('error', 'please login to continue')
+      router.push(`/signin?redirect=/lawyers/${lawyerId}/booking`)
+      return
+    }
+    
+    router.push(`/lawyers/${lawyerId}/booking`)
+
+  }
+
   return (
     <Card className={className}>
       <Avatar>
@@ -29,8 +53,8 @@ export default function LawyerCard({
         </Rating>
       </Content>
       <Action>
-        <ButtonOutline href="#">View Profile</ButtonOutline>
-        <ButtonPrimary href="#">Book Appointment</ButtonPrimary>
+        <ButtonOutline onClick={()=> viewProfile(id)}>View Profile</ButtonOutline>
+        <ButtonPrimary onClick={()=> book(id)}>Book Appointment</ButtonPrimary>
       </Action>
     </Card>
   );
@@ -109,6 +133,7 @@ const ButtonOutline = styled.a`
   background: transparent;
   border-radius: 5px;
   text-decoration: none;
+  cursor:pointer;
 
   &:hover {
     background: var(--primary);
@@ -127,6 +152,7 @@ const ButtonPrimary = styled.a`
   border: none;
   border-radius: 5px;
   text-decoration: none;
+  cursor:pointer;
 
   &:hover {
     background: var(--secondary-hover   );

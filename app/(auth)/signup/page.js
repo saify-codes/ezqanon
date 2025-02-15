@@ -25,7 +25,7 @@ export default function SignUp() {
     try {
       await withLoader(() => auth.signup(data), setIsLoading);
       flashMessage("success", `We have sent a verification link to your email <u>${data.email}</u>`);
-      router.push("/signin");
+      router.replace("/signin");
     } catch (error) {
       setAlert({
         type: "danger",

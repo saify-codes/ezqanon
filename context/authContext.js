@@ -9,6 +9,7 @@ export const AuthContext = createContext({
   user: null,
   token: null,
   init: () => {},
+  authenticated: () => {},
   signup: (formData) => {},
   signin: (email, password, remember = false) => {},
   signout: () => {},
@@ -78,6 +79,10 @@ export function AuthProvider({ children }) {
     });
   };
 
+  const authenticated = () => {
+    return status === 'authenticated'
+  };
+
   const init = async () => {
     const token = getCookie("auth_token");
 
@@ -114,6 +119,7 @@ export function AuthProvider({ children }) {
     user,
     token,
     init,
+    authenticated,
     signin,
     signup,
     signout,
