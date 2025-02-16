@@ -10,13 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 export default function Lawyers() {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const {
-    data,
-    isLoading,
-    isError,
-    error,
-    isFetching
-  } = useQuery({
+  const { data, isLoading, isError, error, isFetching } = useQuery({
     queryKey: ["lawyers", currentPage],
     queryFn: async () => {
       const res = await api.get(`/lawyer?page=${currentPage}`);
@@ -24,10 +18,11 @@ export default function Lawyers() {
     },
     keepPreviousData: true,
   });
-  
 
   // If there's an error from the server or network
-  const errorMessage = isError ? (error?.message ?? "Failed to fetch lawyers.") : null;
+  const errorMessage = isError
+    ? error?.message ?? "Failed to fetch lawyers."
+    : null;
 
   // Helpers
   const lawyers = data?.data ?? [];
@@ -125,11 +120,9 @@ export default function Lawyers() {
 }
 
 function Spinner() {
-  return (
-    <SpinnerWrapper>
-      <div className="spinner" />
-    </SpinnerWrapper>
-  );
+  return <div className="mx-auto">
+    <div className="spinner-border" role="status"></div>;
+  </div>
 }
 
 // Styled Components
@@ -149,25 +142,5 @@ const PaginationWrapper = styled.nav`
   .page-item .page-link {
     color: #555;
     cursor: pointer;
-  }
-`;
-
-// Example Spinner Styles
-const SpinnerWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .spinner {
-    width: 2rem;
-    height: 2rem;
-    border: 4px solid #ccc;
-    border-top: 4px solid var(--accent-color);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
   }
 `;
