@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+import useAuthFetch from "@/hooks/useAuthFetch";
 import Base from "@/layout/base";
 import Avatar from "@/components/profile/avatar";
 import { useAuth } from "@/hooks/useAuth";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 export default function Profile() {
   const { user } = useAuth();
+  const api = useAuthFetch()
 
   // -------------------------------
   // Personal Information Form
@@ -21,12 +24,15 @@ export default function Profile() {
 
   // Check if any personal info field is dirty (edited)
   const isPersonalInfoDirty = !!dirtyFieldsPersonal.name || !!dirtyFieldsPersonal.phone;
-    // Note: email is read-only
 
   // Personal info submission handler
-  const onSubmitPersonalInfo = (data) => {
-    console.log("Personal info update:", data);
-    // Call your update API here
+  const onSubmitPersonalInfo = async (data) => {
+    try {
+      await api.put('/profile', data)
+      toast.success('profile updated')
+    } catch (error) {
+      toast.error(error.response?.message || "Something went wrong")
+    }
     resetPersonal(data)
   };
 
@@ -42,16 +48,19 @@ export default function Profile() {
   } = useForm();
 
   // Watch newPassword to validate confirmPassword
-  const newPasswordValue = watchPassword("newPassword");
+  const newPasswordValue = watchPassword("password");
 
   // Check if any password field is dirty
-  const isPasswordDirty =!!dirtyFieldsPassword.newPassword || !!dirtyFieldsPassword.confirmPassword;
+  const isPasswordDirty =!!dirtyFieldsPassword.password || !!dirtyFieldsPassword.password_confirmation;
 
   // Password submission handler
-  const onSubmitPassword = (data) => {
-    console.log("Password change:", data);
-    // Call your change password API here
-    // Optionally reset the password fields on success:
+  const onSubmitPassword = async (data) => {
+    try {
+      await api.put('/password', data)
+      toast.success('password changed')
+    } catch (error) {
+      toast.error(error.response?.message || "Something went wrong")
+    }
     resetPassword();
   };
 
@@ -105,7 +114,7 @@ export default function Profile() {
                       })}
                     />
                     {errorsPersonal.name && (
-                      <small className="text-danger">
+                      <small className="text-danger mt-2">
                         {errorsPersonal.name.message}
                       </small>
                     )}
@@ -125,7 +134,7 @@ export default function Profile() {
                       })}
                     />
                     {errorsPersonal.phone && (
-                      <small className="text-danger">
+                      <small className="text-danger mt-2">
                         {errorsPersonal.phone.message}
                       </small>
                     )}
@@ -150,7 +159,7 @@ export default function Profile() {
                     <input
                       type="password"
                       className="form-control"
-                      {...registerPassword("newPassword", {
+                      {...registerPassword("password", {
                         required: "New password is required",
                         minLength: {
                           value: 6,
@@ -159,7 +168,7 @@ export default function Profile() {
                       })}
                     />
                     {errorsPassword.newPassword && (
-                      <small className="text-danger">
+                      <small className="text-danger mt-2">
                         {errorsPassword.newPassword.message}
                       </small>
                     )}
@@ -170,14 +179,14 @@ export default function Profile() {
                     <input
                       type="password"
                       className="form-control"
-                      {...registerPassword("confirmPassword", {
+                      {...registerPassword("password_confirmation", {
                         required: "Confirm password is required",
                         validate: (value) =>
                           value === newPasswordValue || "Passwords do not match",
                       })}
                     />
                     {errorsPassword.confirmPassword && (
-                      <small className="text-danger">
+                      <small className="text-danger mt-2">
                         {errorsPassword.confirmPassword.message}
                       </small>
                     )}
