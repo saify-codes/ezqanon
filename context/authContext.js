@@ -2,7 +2,7 @@
 
 import api from "@/services/api";
 import { deleteCookie, getCookie, setCookie } from "@/utils";
-import { createContext, useLayoutEffect, useState } from "react";
+import { createContext, useEffect, useLayoutEffect, useState } from "react";
 
 export const AuthContext = createContext({
   status: "loading",
@@ -85,31 +85,21 @@ export function AuthProvider({ children }) {
 
   const init = async () => {
     const token = getCookie("auth_token");
-
-    if (token) {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-
-      try {
-        const { data } = await api.get("/profile", config);
-        setUser(data.data);
-        setToken(token);
-        setStatus("authenticated");
-      } catch (error) {
-        const { status } = error.response;
-        if (status === 401) {
-          // delete token because its invalid
-          deleteCookie("auth_token");
-        }
-        setStatus("unauthenticated");
-      }
+    if (!token) return setStatus("unauthenticated");
+  
+    try {
+      const { data } = await api.get("/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUser(data.data);
+      setToken(token);
+      setStatus("authenticated");
+    } catch (error) {
+      if (error.response.status === 401) deleteCookie("auth_token");
+      setStatus("unauthenticated");
     }
   };
-
-  // Initialize on component mount
+  
   useLayoutEffect(() => {
     init();
   }, []);
@@ -129,7 +119,7 @@ export function AuthProvider({ children }) {
     sendVerificationLink,
     updateUserSessionData,
   };
-
+  
   // wait for session to load
   if (status === 'loading') {
     return null
