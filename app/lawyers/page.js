@@ -1,36 +1,37 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import Base from "@/layout/base";
 import Lawyer from "@/components/lawyer";
 import api from "@/services/api";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Lawyers() {
-  const [lawyers, setLawyers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
-  // Fetch Lawyers
-  const fetchLawyers = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const { data } = await api.get(`/lawyer?page=${currentPage}`);
-      setLawyers(data.data);
-      setTotalPages(data.last_page);
-    } catch (err) {
-      setError("Failed to fetch lawyers. Please try again.");
-    }
-    setLoading(false);
-  };
 
-  useEffect(() => {
-    fetchLawyers();
-  }, [currentPage]);
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    isFetching
+  } = useQuery({
+    queryKey: ["lawyers", currentPage],
+    queryFn: async () => {
+      const res = await api.get(`/lawyer?page=${currentPage}`);
+      return res.data;
+    },
+    keepPreviousData: true,
+  });
+  
+
+  // If there's an error from the server or network
+  const errorMessage = isError ? (error?.message ?? "Failed to fetch lawyers.") : null;
+
+  // Helpers
+  const lawyers = data?.data ?? [];
+  const totalPages = data?.last_page ?? 1;
 
   // Handle page change
   const handlePageChange = (page) => {
@@ -51,7 +52,7 @@ export default function Lawyers() {
       pageLinks.push(i);
     }
 
-    // Always show the last page
+    // Always show the last page if not included
     if (end < totalPages) {
       pageLinks.push("...");
       pageLinks.push(totalPages);
@@ -64,15 +65,22 @@ export default function Lawyers() {
     <Base>
       <section className="lawyers section">
         <Wrapper className="container">
-          {loading && <Skeleton />}
-          {error && <p className="text-danger">{error}</p>}
-          {lawyers.length === 0 && <p>No lawyers found</p>}
-          {lawyers.map((lawyer) => (
+          {/* Spinner when data is loading or refetching */}
+          {(isLoading || isFetching) && <Spinner />}
+
+          {errorMessage && <p className="text-danger">{errorMessage}</p>}
+
+          {/* If no lawyers found (not loading and not error) */}
+          {!isLoading && lawyers?.length === 0 && <p>No lawyers found</p>}
+
+          {/* Lawyers List */}
+          {lawyers?.map((lawyer) => (
             <Lawyer key={lawyer.id} lawyer={lawyer} />
           ))}
         </Wrapper>
 
-        {lawyers.length > 0 && (
+        {/* Pagination */}
+        {lawyers?.length > 0 && (
           <div className="container mt-3">
             <PaginationWrapper>
               <ul className="pagination justify-content-end flex-wrap">
@@ -116,31 +124,50 @@ export default function Lawyers() {
   );
 }
 
+function Spinner() {
+  return (
+    <SpinnerWrapper>
+      <div className="spinner" />
+    </SpinnerWrapper>
+  );
+}
+
 // Styled Components
+const Wrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
 const PaginationWrapper = styled.nav`
   .page-item.active .page-link {
     background-color: var(--accent-color) !important;
     border-color: var(--accent-color) !important;
     color: white !important;
   }
-
   .page-item .page-link {
     color: #555;
     cursor: pointer;
   }
 `;
 
-const Skeleton = styled.div`
-  position: absolute;
-  background: #0003;
-  border-radius: 1rem;
-  margin: 0 12px;
-  inset: 0;
-`;
-
-const Wrapper = styled.div`
-  position: relative;
+// Example Spinner Styles
+const SpinnerWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  .spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 4px solid #ccc;
+    border-top: 4px solid var(--accent-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
