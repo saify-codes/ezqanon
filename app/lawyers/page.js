@@ -121,7 +121,7 @@ export default function Lawyers() {
 
 function Spinner() {
   return <div className="mx-auto">
-    <div className="spinner-border" role="status"></div>;
+    <div className="spinner-border" role="status"></div>
   </div>
 }
 
