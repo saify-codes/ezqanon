@@ -58,7 +58,7 @@ export default function Navbar() {
                 <Link
                   href={href}
                   onClick={handleMenuItemClick}
-                  className={exact? path === href : path.startsWith(href) ? "active" : ""}
+                  className={exact ? (path === href && "active") : (path.startsWith(href) && "active")}
                 >
                   {label}
                 </Link>

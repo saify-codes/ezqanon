@@ -1,65 +1,73 @@
+import styled from "styled-components";
 import { useAuth } from "@/hooks/useAuth";
 import { flashMessage } from "@/utils";
 import { useRouter } from "next/navigation";
-import { BsStar, BsStarFill } from "react-icons/bs";
-import styled from "styled-components";
+import {
+  BsCalendar2,
+  BsPinMap,
+  BsStar,
+  BsStarFill,
+} from "react-icons/bs";
+import { useCallback } from "react";
 
-export default function LawyerCard({
-  id,
-  avatar,
-  name,
-  qualification,
-  rating,
-  className,
-}) {
+export default function LawyerCard({ lawyer, className }) {
+  const router = useRouter();
+  const auth = useAuth();
 
-  const router = useRouter()
-  const auth   = useAuth()
+  const viewProfile = useCallback(() => {
+    router.push(`/lawyers/${lawyer.id}`);
+  }, [router, lawyer.id]);
 
-  const viewProfile = (lawyerId)=>{
-    router.push(`/lawyers/${lawyerId}`)
-  }
-
-  const book = (lawyerId)=>{
-
+  const book = useCallback(() => {
     if (!auth.authenticated()) {
-      flashMessage('error', 'please login to continue')
-      router.push(`/signin?redirect=/lawyers/${lawyerId}/booking`)
-      return
+      flashMessage("error", "Please login to continue");
+      router.push(`/signin?redirect=/lawyers/${lawyer.id}/appointment`);
+      return;
     }
-    
-    router.push(`/lawyers/${lawyerId}/booking`)
-
-  }
+    router.push(`/lawyers/${lawyer.id}/appointment`);
+  }, [auth, router, lawyer.id]);
 
   return (
-    <Card className={className}>
+    <Card>
       <Avatar>
-        <img src={avatar} alt={`${name}'s profile`} />
+        <img src={lawyer.avatar} alt={`${lawyer.name}'s profile`} />
       </Avatar>
       <Content>
-        <Title>{name}</Title>
-        <Qualification>{qualification}</Qualification>
-        <Rating>
+        <Title>{lawyer.name}</Title>
+        <div className="text-secondary">
+          {lawyer.specialization} | <strong style={{color: 'var(--primary)'}}>Rs.{lawyer.price}</strong>
+        </div>
+        <Rating className="justify-content-center justify-content-md-start">
           {Array(5)
             .fill()
             .map((_, index) =>
-              index < rating ? (
+              index < (lawyer.rating || 0) ? (
                 <BsStarFill key={index} />
               ) : (
                 <BsStar key={index} />
               )
             )}
         </Rating>
+        <div className="d-flex flex-wrap gap-1">
+          <Badge>{lawyer.experience} years experience</Badge>
+          <Badge>
+            <BsCalendar2 /> {lawyer.availability_from} -{" "}
+            {lawyer.availability_to}
+          </Badge>
+          <Badge>
+            <BsPinMap /> {lawyer.location}
+          </Badge>
+        </div>
       </Content>
       <Action>
-        <ButtonOutline onClick={()=> viewProfile(id)}>View Profile</ButtonOutline>
-        <ButtonPrimary onClick={()=> book(id)}>Book Appointment</ButtonPrimary>
+        <ButtonOutline onClick={viewProfile}>View Profile</ButtonOutline>
+        <ButtonPrimary onClick={book}>Book Appointment</ButtonPrimary>
       </Action>
     </Card>
   );
 }
 
+/** Styled Components **/
 const Card = styled.div`
   border: 1px solid var(--border-color);
   border-radius: 1rem;
@@ -88,6 +96,9 @@ const Avatar = styled.div`
 `;
 
 const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   flex: 1;
 `;
 
@@ -96,14 +107,16 @@ const Title = styled.h3`
   margin: 0;
 `;
 
-const Qualification = styled.small`
-  color: var(--heading-color);
+const Badge = styled.div`
+  background: #eee;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
 `;
 
 const Rating = styled.div`
   display: flex;
   gap: 0.25rem;
-  margin-top: 0.5rem;
 
   svg {
     color: #ffd700;
@@ -122,7 +135,7 @@ const Action = styled.div`
   }
 `;
 
-const ButtonOutline = styled.a`
+const ButtonOutline = styled.button`
   flex: 1;
   text-align: center;
   font-size: clamp(0.8rem, 2vw, 1rem);
@@ -132,8 +145,8 @@ const ButtonOutline = styled.a`
   color: var(--primary);
   background: transparent;
   border-radius: 5px;
-  text-decoration: none;
-  cursor:pointer;
+  cursor: pointer;
+  transition: 0.3s;
 
   &:hover {
     background: var(--primary);
@@ -141,7 +154,7 @@ const ButtonOutline = styled.a`
   }
 `;
 
-const ButtonPrimary = styled.a`
+const ButtonPrimary = styled.button`
   flex: 1;
   text-align: center;
   font-size: clamp(0.8rem, 2vw, 1rem);
@@ -151,10 +164,10 @@ const ButtonPrimary = styled.a`
   color: #fff;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
-  cursor:pointer;
+  cursor: pointer;
+  transition: 0.3s;
 
   &:hover {
-    background: var(--secondary-hover   );
+    background: var(--secondary-hover);
   }
 `;

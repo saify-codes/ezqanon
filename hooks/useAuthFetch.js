@@ -5,7 +5,7 @@ import { flashMessage } from "@/utils";
 import { useRouter } from "next/navigation";
 
 export default function useAuthFetch() {
-  const { signout, token } = useAuth();
+  const { signout, token, status } = useAuth();
   const router = useRouter();
 
   return useMemo(() => {

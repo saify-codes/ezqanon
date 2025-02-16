@@ -13,7 +13,7 @@ export default function Lawyers() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
   // Fetch Lawyers
   const fetchLawyers = async () => {
     setLoading(true);
@@ -66,15 +66,9 @@ export default function Lawyers() {
         <Wrapper className="container">
           {loading && <Skeleton />}
           {error && <p className="text-danger">{error}</p>}
+          {lawyers.length === 0 && <p>No lawyers found</p>}
           {lawyers.map((lawyer) => (
-            <Lawyer
-              id={lawyer.id}
-              key={lawyer.id}
-              name={lawyer.name}
-              qualification={lawyer.qualification}
-              avatar={lawyer.avatar}
-              rating={lawyer.rating}
-            />
+            <Lawyer key={lawyer.id} lawyer={lawyer} />
           ))}
         </Wrapper>
 
@@ -90,7 +84,6 @@ export default function Lawyers() {
                   <a className="page-link">Previous</a>
                 </li>
 
-                {/* Dynamic Page Links */}
                 {generatePaginationLinks().map((page, index) => (
                   <li
                     key={index}

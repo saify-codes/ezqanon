@@ -130,5 +130,10 @@ export function AuthProvider({ children }) {
     updateUserSessionData,
   };
 
+  // wait for session to load
+  if (status === 'loading') {
+    return null
+  }
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

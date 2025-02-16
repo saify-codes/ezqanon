@@ -1,9 +1,5 @@
 import { NextResponse } from "next/server";
-
-const routes = {
-  protected: ["/profile", "/dashboard", "/settings"], // Pages that require authentication
-  guest: ["/signin", "/signup"], // Pages for unauthenticated users
-};
+import { routes } from "./routes";
 
 export function middleware(request) {
   const token = request.cookies.get("auth_token")?.value;
@@ -28,7 +24,4 @@ export function middleware(request) {
   return NextResponse.next();
 }
 
-// Apply middleware only to these paths for better performance
-export const config = {
-  matcher: ["/profile", "/dashboard", "/settings", "/signin", "/signup"],
-};
+

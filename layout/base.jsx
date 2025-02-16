@@ -9,7 +9,7 @@ export default function ({ children }) {
   return (
     <>
       <Header />
-      <main className="main">{children}</main>
+      <main className="main my-5">{children}</main>
       <Footer/>
       <ScrollTop/>
       <Preloader />
