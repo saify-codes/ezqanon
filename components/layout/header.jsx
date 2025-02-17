@@ -58,16 +58,23 @@ export default function Navbar() {
                 <Link
                   href={href}
                   onClick={handleMenuItemClick}
-                  className={exact ? (path === href && "active") : (path.startsWith(href) && "active")}
+                  className={
+                    exact
+                      ? path === href && "active"
+                      : path.startsWith(href) && "active"
+                  }
                 >
                   {label}
                 </Link>
               </li>
             ))}
+
             {/* Mobile Login Link */}
-            <li className="d-xl-none">
-              <Link href="/signin">Login</Link>
-            </li>
+            {!auth.user && (
+              <li className="d-xl-none">
+                <Link href="/signin">Login</Link>
+              </li>
+            )}
           </ul>
 
           {/* Mobile Navigation Toggle */}
