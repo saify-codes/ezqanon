@@ -35,8 +35,8 @@ export default function SignUp() {
   };
 
   return (
-    <div className="container d-flex align-items-center justify-content-center vh-100">
-      <div className="login-card p-5 col-md-6 col-lg-4">
+    <div className="container d-flex align-items-center justify-content-center min-vh-100">
+      <div className="login-card col-12 col-md-6 col-lg-4">
         <div className="text-center mb-4">
           <img
             src="/assets/img/logo.png"
