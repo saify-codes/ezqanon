@@ -26,20 +26,22 @@ export default function AppointmentForm() {
   // Handle form submission
   const onSubmit = async (data) => {
     try {
+      await withLoader(
+        () =>
+          api.post(
+            "/appointment",
+            { ...data, lawyer_id: id },
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          ),
+        setIsLoading
+      );
 
-      await withLoader(() => {
-        api.post(
-          "/appointment",
-          { ...data, lawyer_id: id },
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-      }, setIsLoading);
       reset();
-      router.replace('/success');
+      router.replace("/success");
     } catch (error) {
       console.error(error);
       toast.error("Failed to book appointment");
@@ -114,10 +116,10 @@ export default function AppointmentForm() {
                   role="status"
                   aria-hidden="true"
                 ></span>
-                Submitting...
+                Booking...
               </>
             ) : (
-              "Submit"
+              "Book Appointment"
             )}
           </button>
         </form>
