@@ -115,7 +115,7 @@ export default function AppointmentForm() {
                   className="spinner-border spinner-border-sm"
                   role="status"
                   aria-hidden="true"
-                ></span>
+                ></span>{" "}
                 Booking...
               </>
             ) : (
