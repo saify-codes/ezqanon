@@ -22,24 +22,27 @@ export default function Navbar() {
     setIsNavOpen((prev) => !prev);
     document.body.classList.toggle("mobile-nav-active");
   }, []);
-
+  
   // Close Menu on Link Click
   const handleMenuItemClick = useCallback(() => {
     setIsNavOpen(false);
     document.body.classList.remove("mobile-nav-active");
   }, []);
-
+  
+  const toggleScrolled = () => {
+    const header = document.querySelector("#header");
+    if (!header?.classList.contains("sticky-top")) return;
+    document.body.classList.toggle("scrolled", window.scrollY > 100);
+  };
  
   // Handle Scroll Effects
   useEffect(() => {
-    const toggleScrolled = () => {
-      const header = document.querySelector("#header");
-      if (!header?.classList.contains("sticky-top")) return;
-      document.body.classList.toggle("scrolled", window.scrollY > 100);
-    };
-
     window.addEventListener("scroll", toggleScrolled);
-    return () => window.removeEventListener("scroll", toggleScrolled);
+
+    return () => {
+      window.removeEventListener("scroll", toggleScrolled)
+      document.body.classList.remove("mobile-nav-active");
+    };
   }, []);
 
   return (
