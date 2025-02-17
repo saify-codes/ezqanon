@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { getFlashMessage, withLoader } from "@/utils";
 import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 export default function SignUp() {
   const [alert, setAlert] = useState({ type: "", message: "" });
@@ -220,6 +221,10 @@ export default function SignUp() {
             here
           </Link>
         </div>
+
+        <Link className="nav-link text-center mt-3" href="/">
+          <FaArrowLeftLong /> Back to home
+        </Link>
       </div>
     </div>
   );

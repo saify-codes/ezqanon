@@ -5,6 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { withLoader } from "@/utils";
 import Link from "next/link";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 export default function Forgot() {
   const [alert, setAlert] = useState({ type: "", message: "" });
@@ -104,6 +105,10 @@ export default function Forgot() {
             here
           </Link>
         </div>
+
+        <Link className="nav-link text-center mt-3" href="/">
+          <FaArrowLeftLong /> Back to home
+        </Link>
       </div>
     </div>
   );

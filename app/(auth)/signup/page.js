@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { flashMessage, withLoader } from "@/utils";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 export default function SignUp() {
   const [alert, setAlert] = useState({ type: "", message: "" });
@@ -24,7 +25,10 @@ export default function SignUp() {
   const onSubmit = async (data) => {
     try {
       await withLoader(() => auth.signup(data), setIsLoading);
-      flashMessage("success", `We have sent a verification link to your email <u>${data.email}</u>`);
+      flashMessage(
+        "success",
+        `We have sent a verification link to your email <u>${data.email}</u>`
+      );
       router.replace("/signin");
     } catch (error) {
       setAlert({
@@ -169,6 +173,10 @@ export default function SignUp() {
             here
           </Link>
         </div>
+
+        <Link className="nav-link text-center mt-3" href="/">
+          <FaArrowLeftLong /> Back to home
+        </Link>
       </div>
     </div>
   );
