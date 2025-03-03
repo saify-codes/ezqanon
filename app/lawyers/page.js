@@ -9,9 +9,11 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function Lawyers() {
   const [currentPage, setCurrentPage] = useState(1);
+  // const [searchQuery, setSearchQuery] = useState("");
+
 
   const { data, isLoading, isError, error, isFetching } = useQuery({
-    queryKey: ["lawyers", currentPage],
+    queryKey: ["lawyers", currentPage,],
     queryFn: async () => {
       const res = await api.get(`/lawyer?page=${currentPage}`);
       return res.data;
@@ -59,6 +61,9 @@ export default function Lawyers() {
   return (
     <Base>
       <section className="lawyers section">
+        <SearchbarWrapper className="container">
+        <SearchBar   />
+        </SearchbarWrapper>
         <Wrapper className="container">
           {/* Spinner when data is loading or refetching */}
           {(isLoading || isFetching) && <Spinner />}
@@ -73,7 +78,6 @@ export default function Lawyers() {
             <Lawyer key={lawyer.id} lawyer={lawyer} />
           ))}
         </Wrapper>
-
         {/* Pagination */}
         {lawyers?.length > 0 && (
           <div className="container mt-3">
@@ -125,7 +129,31 @@ function Spinner() {
   </div>
 }
 
+
+function SearchBar({ searchQuery, setSearchQuery }) {
+  const handleSearch = () => {
+    console.log("Search Query:", searchQuery);
+  };
+  return (
+    <div className="search-bar">
+      <input
+        type="text"
+        placeholder="Search lawyers..."
+        // value={searchQuery}
+        // onChange={(e) => setSearchQuery(e.target.value)}
+        className="form-control"
+      />
+      <button onClick={handleSearch} className="btn btn-primary">
+        Search
+      </button>
+    </div>
+  );
+}
+
+
 // Styled Components
+
+
 const Wrapper = styled.div`
   position: relative;
   display: flex;
@@ -142,5 +170,43 @@ const PaginationWrapper = styled.nav`
   .page-item .page-link {
     color: #555;
     cursor: pointer;
+  }
+`;
+
+const SearchbarWrapper = styled.div`
+  margin-bottom: 2rem;
+  .search-bar {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+
+    input {
+      flex: 1;
+      width: 3rem;
+      min-width: 130px;
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
+
+    button {
+      white-space: nowrap;
+    }
+
+    /* Mobile screens (max-width: 768px) */
+    @media (max-width: 768px) {
+      flex-direction: column;
+      width: 100%;
+
+      input {
+        width: 100%;
+        min-width: auto;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
   }
 `;
