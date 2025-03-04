@@ -9,8 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function Lawyers() {
   const [currentPage, setCurrentPage] = useState(1);
-  // const [searchQuery, setSearchQuery] = useState("");
-
+  const [searchQuery, setSearchQuery] = useState("");
+  console.log(searchQuery)
 
   const { data, isLoading, isError, error, isFetching } = useQuery({
     queryKey: ["lawyers", currentPage,],
@@ -62,7 +62,7 @@ export default function Lawyers() {
     <Base>
       <section className="lawyers section">
         <SearchbarWrapper className="container">
-        <SearchBar   />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}  />
         </SearchbarWrapper>
         <Wrapper className="container">
           {/* Spinner when data is loading or refetching */}
@@ -130,20 +130,17 @@ function Spinner() {
 }
 
 
-function SearchBar({ searchQuery, setSearchQuery }) {
-  const handleSearch = () => {
-    console.log("Search Query:", searchQuery);
-  };
+function SearchBar({searchQuery,setSearchQuery}) {
   return (
     <div className="search-bar">
       <input
         type="text"
         placeholder="Search lawyers..."
-        // value={searchQuery}
-        // onChange={(e) => setSearchQuery(e.target.value)}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
         className="form-control"
       />
-      <button onClick={handleSearch} className="btn btn-primary">
+      <button  className="btn btn-primary">
         Search
       </button>
     </div>
