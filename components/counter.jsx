@@ -19,7 +19,7 @@ export default function Counter({
       const progress = Math.min((timestamp - startTime) / duration, 1);
       const newValue = Math.floor(progress * (end - start) + start);
       if (counterRef.current) {
-        counterRef.current.innerText = newValue;
+        counterRef.current.innerText = newValue + "+";
       }
       if (progress < 1) {
         requestAnimationFrame(updateCounter);
