@@ -1296,6 +1296,12 @@ section:not(.Toastify),
   z-index: 1;
 }
 
+.testimonials .testimonial-item .stars{
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
 .testimonials .swiper-wrapper {
   height: auto;
 }
@@ -1315,6 +1321,55 @@ section:not(.Toastify),
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
   background-color: var(--accent-color);
+}
+
+/*--------------------------------------------------------------
+# Lawyers by city
+--------------------------------------------------------------*/
+.lawyer-by-cities .wrapper{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+.lawyer-by-cities .wrapper .city {
+  position: relative;
+  height: 350px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.lawyer-by-cities .wrapper .city .content{
+  position: absolute;
+  inset: auto 0 25px 0;
+  width: max-content;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #FFF;
+  font-weight: bold;
+}
+
+.lawyer-by-cities .wrapper .city .content span{
+  background: #FFF;
+  color: var(--default-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+}
+
+@media (max-width: 786px) {
+
+  .lawyer-by-cities .wrapper{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lawyer-by-cities .wrapper .city {
+    height: 250px;
+  }
+  
 }
 
 /*--------------------------------------------------------------

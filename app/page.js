@@ -13,6 +13,8 @@ import {
   BsActivity,
   BsFillCheckCircleFill,
   BsCrosshair,
+  BsStar,
+  BsStarFill,
 } from "react-icons/bs";
 import BaseLayout from "@/layout/base";
 import Counter from "@/components/counter";
@@ -75,44 +77,6 @@ export default function () {
         </div>
       </section>
 
-      {/* <section id="hero" className="hero section">
-        <div className="container">
-          <div className="row gy-4">
-            <div
-              className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center"
-              data-aos="fade-up"
-            >
-              <h1>Elegant and creative solutions</h1>
-              <p>
-                We are team of talented designers making websites with Bootstrap
-              </p>
-              <div className="d-flex">
-                <a href="#about" className="btn-get-started">
-                  Get Started
-                </a>
-                <a
-                  href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
-                  className="glightbox btn-watch-video d-flex align-items-center"
-                >
-                  <FaRegCirclePlay color="var(--secondary)" />
-                  <span>Watch Video</span>
-                </a>
-              </div>
-            </div>
-            <div
-              className="col-lg-6 order-1 order-lg-2 hero-img"
-              data-aos="zoom-out"
-              data-aos-delay="100"
-            >
-              <img
-                src="/assets/img/hero-img.webp"
-                className="img-fluid"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-      </section> */}
       {/* Hero section  */}
 
       {/* Stats */}
@@ -511,7 +475,10 @@ export default function () {
               disableOnInteraction: false,
             }}
             breakpoints={{
-              320: {
+              0: {
+                slidesPerView: 1,
+              },
+              425: {
                 slidesPerView: 2,
                 spaceBetween: 20,
               },
@@ -519,50 +486,81 @@ export default function () {
                 slidesPerView: 3.5,
                 spaceBetween: 30,
               },
-             
             }}
           >
             <SwiperSlide className="p-3">
               <div className="card p-3 border-0 shadow">
                 <div className="card-image text-center px-2 py-5">
-                  <img src="https://d1t78adged64l7.cloudfront.net/frontend/assets/images/news/samaa.png" alt="Card image cap"/>
+                  <img
+                    src="https://d1t78adged64l7.cloudfront.net/frontend/assets/images/news/samaa.png"
+                    alt="Card image cap"
+                  />
                 </div>
                 <div className="card-body">
-                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" className="">READ MORE</a>
+                  <p className="card-text">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                  <a href="#" className="">
+                    READ MORE
+                  </a>
                 </div>
               </div>
             </SwiperSlide>
             <SwiperSlide className="p-3">
               <div className="card p-3 border-0 shadow">
                 <div className="card-image text-center px-2 py-5">
-                  <img src="https://d1t78adged64l7.cloudfront.net/frontend/assets/images/news/pro-pakistani.png" alt="Card image cap"/>
+                  <img
+                    src="https://d1t78adged64l7.cloudfront.net/frontend/assets/images/news/pro-pakistani.png"
+                    alt="Card image cap"
+                  />
                 </div>
                 <div className="card-body">
-                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" className="">READ MORE</a>
+                  <p className="card-text">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                  <a href="#" className="">
+                    READ MORE
+                  </a>
                 </div>
               </div>
             </SwiperSlide>
             <SwiperSlide className="p-3">
               <div className="card p-3 border-0 shadow">
                 <div className="card-image text-center px-2 py-5">
-                  <img src="https://d1t78adged64l7.cloudfront.net/frontend/assets/images/news/the-nation.png" alt="Card image cap"/>
+                  <img
+                    src="https://d1t78adged64l7.cloudfront.net/frontend/assets/images/news/the-nation.png"
+                    alt="Card image cap"
+                  />
                 </div>
                 <div className="card-body">
-                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" className="">READ MORE</a>
+                  <p className="card-text">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                  <a href="#" className="">
+                    READ MORE
+                  </a>
                 </div>
               </div>
             </SwiperSlide>
             <SwiperSlide className="p-3">
               <div className="card p-3 border-0 shadow">
                 <div className="card-image text-center px-2 py-5">
-                  <img src="https://d1t78adged64l7.cloudfront.net/frontend/assets/images/news/business-recorder.png" alt="Card image cap"/>
+                  <img
+                    src="https://d1t78adged64l7.cloudfront.net/frontend/assets/images/news/business-recorder.png"
+                    alt="Card image cap"
+                  />
                 </div>
                 <div className="card-body">
-                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" className="">READ MORE</a>
+                  <p className="card-text">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                  <a href="#" className="">
+                    READ MORE
+                  </a>
                 </div>
               </div>
             </SwiperSlide>
@@ -572,21 +570,15 @@ export default function () {
       {/* News */}
 
       {/* Testimonials */}
-      <section
-        id="testimonials"
-        className="testimonials section light-background"
-      >
-        <div className="container section-title" data-aos="fade-up">
-          <span>Testimonials</span>
-          <h2>Testimonials</h2>
-          <p>
-            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-            consectetur velit
-          </p>
-        </div>
-
+      <section id="testimonials" className="testimonials section">
         <div className="container" data-aos="fade-up" data-aos-delay="100">
+          <h1 className="text-center">Google customer reviews</h1>
+          <p className="text-center">
+            Check out the reviews from our satisfied customers
+          </p>
+
           <Swiper
+            className="mt-5"
             spaceBetween={50}
             slidesPerView={3}
             breakpoints={{
@@ -619,6 +611,15 @@ export default function () {
                 />
                 <h3>Saul Goodman</h3>
                 <h4>Ceo &amp; Founder</h4>
+                <div className="stars">
+                  {[...Array(5)].map((_, i) =>
+                    i < 3 ? (
+                      <BsStarFill key={i} color="#FFD700" fill="#FFD700" />
+                    ) : (
+                      <BsStar key={i} color="#FFD700" />
+                    )
+                  )}
+                </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -639,6 +640,15 @@ export default function () {
                 />
                 <h3>Sara Wilsson</h3>
                 <h4>Designer</h4>
+                <div className="stars">
+                  {[...Array(5)].map((_, i) =>
+                    i < 4 ? (
+                      <BsStarFill key={i} color="#FFD700" fill="#FFD700" />
+                    ) : (
+                      <BsStar key={i} color="#FFD700" />
+                    )
+                  )}
+                </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -659,6 +669,15 @@ export default function () {
                 />
                 <h3>Jena Karlis</h3>
                 <h4>Store Owner</h4>
+                <div className="stars">
+                  {[...Array(5)].map((_, i) =>
+                    i < 5 ? (
+                      <BsStarFill key={i} color="#FFD700" fill="#FFD700" />
+                    ) : (
+                      <BsStar key={i} color="#FFD700" />
+                    )
+                  )}
+                </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -679,6 +698,15 @@ export default function () {
                 />
                 <h3>Matt Brandon</h3>
                 <h4>Freelancer</h4>
+                <div className="stars">
+                  {[...Array(5)].map((_, i) =>
+                    i < 5 ? (
+                      <BsStarFill key={i} color="#FFD700" fill="#FFD700" />
+                    ) : (
+                      <BsStar key={i} color="#FFD700" />
+                    )
+                  )}
+                </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -699,183 +727,62 @@ export default function () {
                 />
                 <h3>John Larson</h3>
                 <h4>Entrepreneur</h4>
+                <div className="stars">
+                  {[...Array(5)].map((_, i) =>
+                    i < 5 ? (
+                      <BsStarFill key={i} color="#FFD700" />
+                    ) : (
+                      <BsStar key={i} color="#FFD700" />
+                    )
+                  )}
+                </div>
               </div>
             </SwiperSlide>
           </Swiper>
-          
         </div>
       </section>
       {/* Testimonials */}
 
-      {/* Call to action */}
-      <section
-        id="call-to-action"
-        className="call-to-action section accent-background"
-      >
+      {/* Lawyer by cities */}
+      <section id="lawyer-by-cities" className="lawyer-by-cities section">
         <div className="container">
-          <div
-            className="row justify-content-center"
-            data-aos="zoom-in"
-            data-aos-delay="100"
-          >
-            <div className="col-xl-10">
-              <div className="text-center">
-                <h3>Call To Action</h3>
-                <p>
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                  occaecat cupidatat non proident, sunt in culpa qui officia
-                  deserunt mollit anim id est laborum.
-                </p>
-                <a className="cta-btn" href="#">
-                  Call To Action
-                </a>
+          <h1 className="text-center">Search Lawyers by City</h1>
+          <div className="wrapper mt-5">
+            <a href="#" className="city rounded" style={{backgroundImage: "url(https://www.imusafir.pk/blog/wp-content/uploads/2025/01/Faisal-Masjid-1.jpg)"}}>
+              <div className="content">
+                <span className="count">89</span>
+                <p className="card-text text-center">Islamabad</p>
               </div>
-            </div>
+            </a>
+            <a href="#" className="city rounded" style={{backgroundImage: "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWfsr-mZYduXr-PJZ97E9PpZUcuZTGQAKAWk2b_uBQjb_dYOZ2PTQ-q9ooLDdYgem2j_Q&usqp=CAU)"}}>
+              <div className="content">
+                <span className="count">30</span>
+                <p className="card-text text-center">Lahore</p>
+              </div>
+            </a>
+            <a href="#" className="city rounded" style={{backgroundImage: "url(https://www.qatarairways.com/content/dam/images/renditions/vertical-hd/destinations/pakistan/karachi/v-hd-mazarequaid-karachi.jpg)"}}>
+              <div className="content">
+                <span className="count">14</span>
+                <p className="card-text text-center">Karachi</p>
+              </div>
+            </a>
+            <a href="#" className="city rounded" style={{backgroundImage: "url(https://norwesttours.com/wp-content/uploads/2020/11/khyber-gate.jpg)"}}>
+              <div className="content">
+                <span className="count">6</span>
+                <p className="card-text text-center">Peshawar</p>
+              </div>
+            </a>
+            <a href="#" className="city rounded" style={{backgroundImage: "url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Gulshan_Dadn_Khan_Maseet%2C_Rawalpindi.JPG/640px-Gulshan_Dadn_Khan_Maseet%2C_Rawalpindi.JPG)"}}>
+              <div className="content">
+                <span className="count">212</span>
+                <p className="card-text text-center">Rawalpindi</p>
+              </div>
+            </a>
           </div>
         </div>
       </section>
-      {/* Call to action */}
+      {/* Lawyer by cities */}
 
-      {/* Contact */}
-      <section id="contact" className="contact section">
-        <div className="container section-title" data-aos="fade-up">
-          <span>Section Title</span>
-          <h2>Contact</h2>
-          <p>
-            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-            consectetur velit
-          </p>
-        </div>
-
-        <div className="container" data-aos="fade-up" data-aos-delay="100">
-          <div className="row gy-4">
-            <div className="col-lg-5">
-              <div className="info-wrap">
-                <div
-                  className="info-item d-flex"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
-                >
-                  <FaMapMarkerAlt size="20" className="flex-shrink-0" />
-                  <div>
-                    <h3>Address</h3>
-                    <p>A108 Adam Street, New York, NY 535022</p>
-                  </div>
-                </div>
-
-                <div
-                  className="info-item d-flex"
-                  data-aos="fade-up"
-                  data-aos-delay="300"
-                >
-                  <MdOutlinePhone size="20" className="flex-shrink-0" />
-                  <div>
-                    <h3>Call Us</h3>
-                    <p>+1 5589 55488 55</p>
-                  </div>
-                </div>
-
-                <div
-                  className="info-item d-flex"
-                  data-aos="fade-up"
-                  data-aos-delay="400"
-                >
-                  <AiOutlineMail size="20" className="flex-shrink-0" />
-                  <div>
-                    <h3>Email Us</h3>
-                    <p>info@example.com</p>
-                  </div>
-                </div>
-
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
-                  frameBorder="0"
-                  style={{ border: 0, width: "100%", height: 270 }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </div>
-
-            <div className="col-lg-7">
-              <form
-                action="forms/contact.php"
-                method="post"
-                className="php-email-form"
-                data-aos="fade-up"
-                data-aos-delay="200"
-              >
-                <div className="row gy-4">
-                  <div className="col-md-6">
-                    <label htmlFor="name-field" className="pb-2">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name-field"
-                      className="form-control"
-                      required=""
-                    />
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="email-field" className="pb-2">
-                      Your Email
-                    </label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      name="email"
-                      id="email-field"
-                      required=""
-                    />
-                  </div>
-
-                  <div className="col-md-12">
-                    <label htmlFor="subject-field" className="pb-2">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="subject"
-                      id="subject-field"
-                      required=""
-                    />
-                  </div>
-
-                  <div className="col-md-12">
-                    <label htmlFor="message-field" className="pb-2">
-                      Message
-                    </label>
-                    <textarea
-                      className="form-control"
-                      name="message"
-                      rows="10"
-                      id="message-field"
-                      required=""
-                    ></textarea>
-                  </div>
-
-                  <div className="col-md-12 text-center">
-                    <div className="loading">Loading</div>
-                    <div className="error-message"></div>
-                    <div className="sent-message">
-                      Your message has been sent. Thank you!
-                    </div>
-
-                    <button type="submit">Send Message</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Contact */}
     </BaseLayout>
   );
 }

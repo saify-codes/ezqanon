@@ -38,6 +38,7 @@ export default function RootLayout({ children }) {
             </ReactQuery>
           </AosProvider>
         </AuthProvider>
+        
       </body>
     </html>
   );
