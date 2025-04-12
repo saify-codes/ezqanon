@@ -83,7 +83,7 @@ export default function () {
       <section id="stats" className="stats section">
         <div className="container" data-aos="fade-up" data-aos-delay="100">
           <h1 className="text-center">
-            Don't miss the chance to join Pakistan's
+            Don't miss the chance 
             <br />
             first and premier digital legal platform
           </h1>
