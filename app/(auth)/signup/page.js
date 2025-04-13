@@ -54,28 +54,32 @@ export default function SignUp() {
   }
 
   const startCountdown = () => {
-    setState(prev => ({ ...prev, canResend: false, countdown: 60 }));
+    let timeLeft = 60;
+    
+    refs.sendOtp.current.disabled  = true;
+    refs.sendOtp.current.innerText = `Send OTP in ${timeLeft}s`;
     
     const timer = setInterval(() => {
-      setState(prev => {
-        if (prev.countdown <= 1) {
-          clearInterval(timer);
-          return { ...prev, countdown: 60, canResend: true };
-        }
-        return { ...prev, countdown: prev.countdown - 1 };
-      });
+      if (--timeLeft <= 0) {
+        clearInterval(timer);
+        refs.sendOtp.current.disabled = false;
+        refs.sendOtp.current.innerText = 'Send OTP';
+      } else {
+        refs.sendOtp.current.innerText = `Send OTP in ${timeLeft}s`;
+      }
     }, 1000);
+
+    return timer;
   };
 
   const handleOtpOperation = async (operation, btnRef) => {
     try {
       const actions = {
-        send: ()    => auth.sendOtp(`+${watch('phone')}`, state.countryCode),
-        verify: ()  => auth.verifyOtp(state.otp, `+${watch('phone')}`),
-        resend: ()  => auth.sendOtp(`+${watch('phone')}`, state.countryCode)
+        send: ()   => auth.sendOtp(`+${watch('phone')}`, state.countryCode),
+        verify: () => auth.verifyOtp(state.otp, `+${watch('phone')}`)
       }
 
-      if (operation === 'resend' && !state.canResend) {
+      if (btnRef?.current?.disabled) {
         return;
       }
 
@@ -88,7 +92,7 @@ export default function SignUp() {
 
       setState(prev => ({
         ...prev,
-        showOtpField: operation === 'send' || operation === 'resend' ? true : prev.showOtpField,
+        showOtpField: operation === 'send' ? true : prev.showOtpField,
         isOtpVerified: operation === 'verify' ? true : prev.isOtpVerified,
         responseMessage: { 
           type: 'success', 
@@ -96,8 +100,15 @@ export default function SignUp() {
         }
       }));
 
-      if (operation === 'send' || operation === 'resend') {
+      if (operation === 'send') {
         startCountdown();
+      }
+
+      if (operation === 'verify') {
+        if (refs.sendOtp.current) {
+          refs.sendOtp.current.disabled = true;
+          refs.sendOtp.current.innerText = 'Verified ✓';
+        }
       }
     } catch (error) {
       setState(prev => ({
@@ -196,27 +207,25 @@ export default function SignUp() {
                   </div>
                 )}
               />
-              {!state.isOtpVerified && (
-                <button 
-                  ref={refs.sendOtp}
-                  type="button"
-                  className="btn btn-sm btn-primary"
-                  disabled={state.showOtpField || !state.isValidPhone}
-                  onClick={() => handleOtpOperation('send', refs.sendOtp)}
-                >
-                  send otp
-                </button>
-              )}
+              <button 
+                ref={refs.sendOtp}
+                type="button"
+                className="btn btn-sm btn-primary"
+                disabled={state.showOtpField || !state.isValidPhone}
+                onClick={() => handleOtpOperation('send', refs.sendOtp)}
+              >
+                send otp
+              </button>
             </div>
             
             {state.responseMessage.message && (
-              <div className={`alert alert-${state.responseMessage.type} mt-2 py-2 small`}>
+              <div className={`alert alert-${state.responseMessage.type} mt-3 py-2 small`}>
                 {state.responseMessage.message}
               </div>
             )}
 
             {state.showOtpField && !state.isOtpVerified && (
-              <div className="mt-2">
+              <div className="mt-3">
                 <div className="d-flex gap-2">
                   <input
                     type="text"
@@ -234,25 +243,6 @@ export default function SignUp() {
                   >
                     verify otp
                   </button>
-                </div>
-                <div className="mt-2">
-                  <small className="text-muted">
-                    Didn't receive the otp?{' '}
-                    {state.canResend ? (
-                      <a 
-                        href="#" 
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleOtpOperation('resend', null);
-                        }}
-                        className="text-primary"
-                      >
-                        Resend otp
-                      </a>
-                    ) : (
-                      <span>Resend in {state.countdown}s</span>
-                    )}
-                  </small>
                 </div>
               </div>
             )}
