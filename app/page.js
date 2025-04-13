@@ -868,7 +868,7 @@ export default function () {
                 </h5>
                 <ul className="list-unstyled">
                   {lawyers.map((lawyer, idx) => (
-                    <li className="mb-5" key={idx}>
+                    <li className="mb-4" key={idx}>
                       <a
                         href="#"
                         className="text-decoration-none"
