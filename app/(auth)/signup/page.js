@@ -10,25 +10,6 @@ import Link from "next/link"
 import PhoneInput from "react-phone-input-2"
 import "react-phone-input-2/lib/style.css"
 
-const FORM_VALIDATION = {
-  name: { required: "Name is required" },
-  email: {
-    required: "Email is required",
-    pattern: {
-      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-      message: "Enter a valid email"
-    }
-  },
-  phone: {
-    required: "Phone number is required",
-    minLength: { value: 10, message: "Phone number must be at least 10 digits" },
-    pattern: { value: /^[0-9]{10,15}$/, message: "Enter a valid phone number" }
-  },
-  password: {
-    required: "Password is required",
-    minLength: { value: 6, message: "Password must be at least 6 characters" }
-  }
-}
 
 export default function SignUp() {
   const [state, setState] = useState({
@@ -42,11 +23,32 @@ export default function SignUp() {
   })
   
   const { register, handleSubmit, control, watch, formState: { errors } } = useForm()
-  const auth = useAuth()
-  const router = useRouter()
-  const refs = {
-    sendOtp: useRef(null),
-    verifyOtp: useRef(null)
+  const auth    = useAuth()
+  const router  = useRouter()
+  const refs    = {sendOtp: useRef(null), verifyOtp: useRef(null)}
+  const FORM_VALIDATION = {
+    name: { required: "Name is required" },
+    email: {
+      required: "Email is required",
+      pattern: {
+        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        message: "Enter a valid email"
+      }
+    },
+    phone: {
+      required: "Phone number is required",
+      minLength: { value: 10, message: "Phone number must be at least 10 digits" },
+      pattern: { value: /^[0-9]{10,15}$/, message: "Enter a valid phone number" }
+    },
+    password: {
+      required: "Password is required",
+      minLength: { value: 6, message: "Password must be at least 6 characters" }
+    },
+    password_confirmation: {
+      required: "Confirm password is required",
+      validate: value => value === watch("password") || "Passwords do not match"
+    }
+    
   }
 
   const handleOtpOperation = async (operation, btnRef) => {
@@ -95,13 +97,13 @@ export default function SignUp() {
     }
   }
 
-  const renderFormField = (name, type = "text", props = {}) => (
+  const renderFormField = (title, name, type = "text", placeholder, props = {}) => (
     <div className="mb-3">
-      <label className="form-label">{name.charAt(0).toUpperCase() + name.slice(1)}</label>
+      <label className="form-label">{title}</label>
       <input
         type={type}
         className="form-control"
-        placeholder={`enter your ${name}`}
+        placeholder={placeholder || `enter ${title}`}
         {...register(name, FORM_VALIDATION[name])}
         {...props}
       />
@@ -126,8 +128,8 @@ export default function SignUp() {
         )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          {renderFormField("name")}
-          {renderFormField("email", "email")}
+          {renderFormField("Name", "name", "text", "enter name")}
+          {renderFormField("Email", "email", "email", "enter email")}
 
           <div className="mb-3">
             <label className="form-label">Phone Number</label>
@@ -175,7 +177,7 @@ export default function SignUp() {
               <div className="d-flex gap-2">
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control w-auto flex-grow-1"
                   placeholder="enter otp"
                   maxLength="6"
                   value={state.otp}
@@ -193,26 +195,9 @@ export default function SignUp() {
             </div>
           )}
 
-          {renderFormField("password", "password")}
+          {renderFormField("Password", "password", "password", "enter password")}
+          {renderFormField("Confirm password", "password_confirmation", "password", "confirm password")}
           
-          <div className="mb-4">
-            <label className="form-label">Confirm Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="confirm password"
-              {...register("password_confirmation", {
-                required: "Please confirm your password",
-                validate: value => value === watch("password") || "Passwords do not match"
-              })}
-            />
-            {errors.password_confirmation && (
-              <small className="text-danger d-block mt-2">
-                {errors.password_confirmation.message}
-              </small>
-            )}
-          </div>
-
           <button
             type="submit"
             className="btn btn-primary w-100 py-2"
