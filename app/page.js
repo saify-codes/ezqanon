@@ -21,6 +21,49 @@ import Counter from "@/components/counter";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
+
+const lawyersData = {
+  "Lawyers in Lahore": [
+    "Best Dermatologist in Lahore",
+    "Best Gynecologist in Lahore",
+    "Best Urologist in Lahore",
+    "Best Sexologist in Lahore",
+    "Best Internal Medicine Specialist in Lahore",
+    "Best Child Specialist in Lahore",
+    "Best Orthopedic Surgeon in Lahore",
+    "Best Eye Specialist in Lahore",
+  ],
+  "Lawyers in Karachi": [
+    "Best Dermatologist in Karachi",
+    "Best Gynecologist in Karachi",
+    "Best Urologist in Karachi",
+    "Best Sexologist in Karachi",
+    "Best Internal Medicine Specialist in Karachi",
+    "Best Child Specialist in Karachi",
+    "Best Orthopedic Surgeon in Karachi",
+    "Best Eye Specialist in Karachi",
+  ],
+  "Lawyers in Islamabad": [
+    "Best Dermatologist in Islamabad",
+    "Best Gynecologist in Islamabad",
+    "Best Urologist in Islamabad",
+    "Best Sexologist in Islamabad",
+    "Best Internal Medicine Specialist in Islamabad",
+    "Best Child Specialist in Islamabad",
+    "Best Orthopedic Surgeon in Islamabad",
+  ],
+  "Lawyers in Other Cities": [
+    "Best Nephrologist in Multan",
+    "Best Pulmonologist in Multan",
+    "Best Cardiologist in Multan",
+    "Best Neuro Physician in Multan",
+    "Best Gynecologist in Peshawar",
+    "Best Urologist in Faisalabad",
+    "Best Dentist in Faisalabad",
+    "Best Dermatologist in Faisalabad",
+  ],
+};
+
 export default function () {
   const [activeIndex, setActiveIndex] = useState(0);
   const stats = [
@@ -83,7 +126,7 @@ export default function () {
       <section id="stats" className="stats section">
         <div className="container" data-aos="fade-up" data-aos-delay="100">
           <h1 className="text-center">
-            Don't miss the chance 
+            Don't miss the chance
             <br />
             first and premier digital legal platform
           </h1>
@@ -748,31 +791,66 @@ export default function () {
         <div className="container">
           <h1 className="text-center">Search Lawyers by City</h1>
           <div className="wrapper mt-5">
-            <a href="#" className="city rounded" style={{backgroundImage: "url(https://www.imusafir.pk/blog/wp-content/uploads/2025/01/Faisal-Masjid-1.jpg)"}}>
+            <a
+              href="#"
+              className="city rounded"
+              style={{
+                backgroundImage:
+                  "url(https://www.imusafir.pk/blog/wp-content/uploads/2025/01/Faisal-Masjid-1.jpg)",
+              }}
+            >
               <div className="content">
                 <span className="count">89</span>
                 <p className="card-text text-center">Islamabad</p>
               </div>
             </a>
-            <a href="#" className="city rounded" style={{backgroundImage: "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWfsr-mZYduXr-PJZ97E9PpZUcuZTGQAKAWk2b_uBQjb_dYOZ2PTQ-q9ooLDdYgem2j_Q&usqp=CAU)"}}>
+            <a
+              href="#"
+              className="city rounded"
+              style={{
+                backgroundImage:
+                  "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWfsr-mZYduXr-PJZ97E9PpZUcuZTGQAKAWk2b_uBQjb_dYOZ2PTQ-q9ooLDdYgem2j_Q&usqp=CAU)",
+              }}
+            >
               <div className="content">
                 <span className="count">30</span>
                 <p className="card-text text-center">Lahore</p>
               </div>
             </a>
-            <a href="#" className="city rounded" style={{backgroundImage: "url(https://www.qatarairways.com/content/dam/images/renditions/vertical-hd/destinations/pakistan/karachi/v-hd-mazarequaid-karachi.jpg)"}}>
+            <a
+              href="#"
+              className="city rounded"
+              style={{
+                backgroundImage:
+                  "url(https://www.qatarairways.com/content/dam/images/renditions/vertical-hd/destinations/pakistan/karachi/v-hd-mazarequaid-karachi.jpg)",
+              }}
+            >
               <div className="content">
                 <span className="count">14</span>
                 <p className="card-text text-center">Karachi</p>
               </div>
             </a>
-            <a href="#" className="city rounded" style={{backgroundImage: "url(https://norwesttours.com/wp-content/uploads/2020/11/khyber-gate.jpg)"}}>
+            <a
+              href="#"
+              className="city rounded"
+              style={{
+                backgroundImage:
+                  "url(https://norwesttours.com/wp-content/uploads/2020/11/khyber-gate.jpg)",
+              }}
+            >
               <div className="content">
                 <span className="count">6</span>
                 <p className="card-text text-center">Peshawar</p>
               </div>
             </a>
-            <a href="#" className="city rounded" style={{backgroundImage: "url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Gulshan_Dadn_Khan_Maseet%2C_Rawalpindi.JPG/640px-Gulshan_Dadn_Khan_Maseet%2C_Rawalpindi.JPG)"}}>
+            <a
+              href="#"
+              className="city rounded"
+              style={{
+                backgroundImage:
+                  "url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Gulshan_Dadn_Khan_Maseet%2C_Rawalpindi.JPG/640px-Gulshan_Dadn_Khan_Maseet%2C_Rawalpindi.JPG)",
+              }}
+            >
               <div className="content">
                 <span className="count">212</span>
                 <p className="card-text text-center">Rawalpindi</p>
@@ -782,7 +860,28 @@ export default function () {
         </div>
       </section>
       {/* Lawyer by cities */}
-
+      <section>
+        <div className="container py-5">
+          <div className="row">
+            {Object.entries(lawyersData).map(([city, lawyers], index) => (
+              <div className="col-md-6 col-lg-3 mb-4" key={index}>
+                <h5 className="text-dark fw-bold mb-5">
+                  {city}
+                </h5>
+                <ul className="list-unstyled" style={{listStyle: "'➤ '"}}>
+                  {lawyers.map((lawyer, idx) => (
+                    <li className="mb-4" key={idx}>
+                      <a href="#" className="text-decoration-none text-secondary">
+                        {lawyer}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </BaseLayout>
   );
 }
