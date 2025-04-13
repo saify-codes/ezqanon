@@ -16,6 +16,8 @@ export const AuthContext = createContext({
   forgot: (email) => {},
   reset: (formData) => {},
   verify: (token) => {},
+  sendOtp: (phone, country_code) => {},
+  verifyOtp: (otp) => {},
   sendVerificationLink: (email) => {},
   updateUserSessionData: () => {},
 });
@@ -83,6 +85,18 @@ export function AuthProvider({ children }) {
     return status === 'authenticated'
   };
 
+  const sendOtp = async (phone, country_code) => {
+    const { data } = await api.post("/otp/send", { phone, country_code }, {
+      withCredentials: true
+    });
+    return data.message;
+  }
+
+  const verifyOtp = async (otp, phone) => {
+    const { data } = await api.post("/otp/verify", { otp, phone });
+    return data.message;
+  };
+
   const init = async () => {
     const token = getCookie("auth_token");
     if (!token) return setStatus("unauthenticated");
@@ -116,6 +130,8 @@ export function AuthProvider({ children }) {
     forgot,
     reset,
     verify,
+    sendOtp,
+    verifyOtp,
     sendVerificationLink,
     updateUserSessionData,
   };

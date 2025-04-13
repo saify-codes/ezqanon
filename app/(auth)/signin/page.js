@@ -8,240 +8,185 @@ import { getFlashMessage, withLoader } from "@/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-export default function SignUp() {
-  const [alert, setAlert] = useState({ type: "", message: "" });
-  const [isLoading, setIsLoading] = useState(false);
-  const [isResendingVerification, setIsResendingVerification] = useState(false);
-  const [showResendVerification, setShowResendVerification] = useState(false);
-  const [unverifiedEmail, setUnverifiedEmail] = useState("");
-  const [countdown, setCountdown] = useState(0);
+const FORM_VALIDATION = {
+  email: {
+    required: "Email is required",
+    pattern: {
+      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+      message: "Enter a valid email"
+    }
+  },
+  password: {
+    required: "Password is required",
+    minLength: { value: 6, message: "Password must be at least 6 characters" }
+  }
+};
+
+export default function SignIn() {
+  const [state, setState] = useState({
+    alert: { type: "", message: "" },
+    isLoading: false,
+    isResendingVerification: false,
+    showResendVerification: false,
+    unverifiedEmail: "",
+    countdown: 0
+  });
 
   const auth = useAuth();
   const router = useRouter();
+  const redirectURL = useSearchParams().get("redirect");
   const successMessage = getFlashMessage("success");
   const errorMessage = getFlashMessage("error");
-  const redirectURL = useSearchParams().get("redirect");
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm();
 
-  const onSubmit = async (data) => {
-    const { email, password, remember } = data;
-
+  const onSubmit = async ({ email, password, remember }) => {
     try {
       await withLoader(
         () => auth.signin(email, password, remember),
-        setIsLoading
+        isLoading => setState(prev => ({ ...prev, isLoading }))
       );
-
-      router.replace(redirectURL ? redirectURL : "/");
+      router.replace(redirectURL || "/");
     } catch (error) {
-      console.log(error);
-
-      // If user is unverified (401), show the resend verification option
-      if (error.response?.status === 401) {
-        setUnverifiedEmail(email);
-        setShowResendVerification(true);
-      } else {
-        setShowResendVerification(false);
-      }
-
-      setAlert({
-        type: "danger",
-        message: error.response?.data.message || "Something went wrong",
-      });
+      const isUnverified = error.response?.status === 401;
+      setState(prev => ({
+        ...prev,
+        unverifiedEmail: isUnverified ? email : "",
+        showResendVerification: isUnverified,
+        alert: {
+          type: "danger",
+          message: error.response?.data.message || "Something went wrong"
+        }
+      }));
     }
   };
 
-  const sendVerificationLinkToEmail = async () => {
-    // If countdown is already running, do nothing
-    if (countdown > 0) return;
+  const handleVerificationResend = async () => {
+    if (state.countdown > 0) return;
 
     try {
       await withLoader(
-        () => auth.sendVerificationLink(unverifiedEmail),
-        setIsResendingVerification
+        () => auth.sendVerificationLink(state.unverifiedEmail),
+        isResendingVerification => setState(prev => ({ ...prev, isResendingVerification }))
       );
 
-      setCountdown(30);
-      const intervalId = setInterval(() => {
-        setCountdown((prev) => {
-          if (prev <= 1) {
-            clearInterval(intervalId);
-            return 0;
-          }
-          return prev - 1;
-        });
+      setState(prev => ({ ...prev, countdown: 30 }));
+      
+      const timer = setInterval(() => {
+        setState(prev => ({
+          ...prev,
+          countdown: prev.countdown <= 1 ? (clearInterval(timer), 0) : prev.countdown - 1
+        }));
       }, 1000);
 
-      setAlert({
-        type: "success",
-        message: "Verification link sent",
-      });
+      setState(prev => ({
+        ...prev,
+        alert: { type: "success", message: "Verification link sent" }
+      }));
     } catch (error) {
-      console.log(error);
-      setAlert({
-        type: "danger",
-        message: "Error sending verification link",
-      });
+      setState(prev => ({
+        ...prev,
+        alert: { type: "danger", message: "Error sending verification link" }
+      }));
     }
   };
+
+  const renderFormField = (name, type = "text") => (
+    <div className="mb-3">
+      <label className="form-label">{name.charAt(0).toUpperCase() + name.slice(1)}</label>
+      <input
+        type={type}
+        className="form-control"
+        placeholder={`enter your ${name}`}
+        {...register(name, FORM_VALIDATION[name])}
+      />
+      {errors[name] && (
+        <small className="text-danger d-block mt-2">{errors[name].message}</small>
+      )}
+    </div>
+  );
+
+  const renderAlert = (type, message) => message && (
+    <div 
+      className={`alert alert-${type}`} 
+      role="alert"
+      dangerouslySetInnerHTML={{ __html: message }} 
+    />
+  );
 
   return (
     <div className="container d-flex align-items-center justify-content-center min-vh-100">
       <div className="login-card col-12 col-md-6 col-lg-4">
-        <div className="text-center mb-4">
-          <img
-            src="/assets/img/logo.png"
-            alt="Logo"
-            className="mb-3"
-            width="80"
-          />
+        <header className="text-center mb-4">
+          <img src="/assets/img/logo.png" alt="Logo" className="mb-3" width="80" />
           <h3 className="fw-bold">Client Portal</h3>
           <p className="text-muted">Secure access for legal professionals</p>
-        </div>
+        </header>
 
-        {errorMessage && (
-          <div
-            className="alert alert-danger"
-            role="alert"
-            dangerouslySetInnerHTML={{ __html: errorMessage }}
-          />
-        )}
-
-        {successMessage && (
-          <div
-            className="alert alert-success"
-            role="alert"
-            dangerouslySetInnerHTML={{ __html: successMessage }}
-          />
-        )}
-
-        {alert.message && (
-          <div
-            className={`alert alert-${alert.type}`}
-            role="alert"
-            dangerouslySetInnerHTML={{ __html: alert.message }}
-          />
-        )}
+        {renderAlert("danger", errorMessage)}
+        {renderAlert("success", successMessage)}
+        {renderAlert(state.alert.type, state.alert.message)}
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* Email Field */}
-          <div className="mb-3">
-            <label className="form-label">Email</label>
-            <input
-              type="email"
-              className="form-control"
-              placeholder="enter your email"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: "Enter a valid email",
-                },
-              })}
-            />
-            {errors.email && (
-              <small className="text-danger d-block mt-2">
-                {errors.email.message}
-              </small>
-            )}
-          </div>
+          {renderFormField("email", "email")}
 
-          {/* Show resend verification link or countdown message */}
-          {showResendVerification && (
+          {state.showResendVerification && (
             <div className="text-end">
-              {countdown > 0 ? (
+              {state.countdown > 0 ? (
                 <span className="text-muted">
-                  Resend Verification Email in {countdown}s
+                  Resend Verification Email in {state.countdown}s
                 </span>
               ) : (
                 <button
                   className="btn p-0"
-                  onClick={sendVerificationLinkToEmail}
-                  disabled={isResendingVerification}
+                  onClick={handleVerificationResend}
+                  disabled={state.isResendingVerification}
                   style={{ color: "var(--primary)" }}
                 >
-                  {isResendingVerification
-                    ? "Sending..."
-                    : "Resend Verification Email"}
+                  {state.isResendingVerification ? "Sending..." : "Resend Verification Email"}
                 </button>
               )}
             </div>
           )}
 
-          {/* Password Field */}
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="enter your password"
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
-                },
-              })}
-            />
-            {errors.password && (
-              <small className="text-danger d-block mt-2">
-                {errors.password.message}
-              </small>
-            )}
-          </div>
+          {renderFormField("password", "password")}
 
           <div className="mb-3 d-flex justify-content-between">
-            <div className="text-end">
+            <div>
               <input
                 className="form-check-input"
                 type="checkbox"
-                {...register("remember", { required: false })}
-              />{" "}
-              remember
+                {...register("remember")}
+              /> remember
             </div>
-
-            <div className="text-end">
-              <Link href="/forgot">forgot password?</Link>
-            </div>
+            <Link href="/forgot">forgot password?</Link>
           </div>
 
-          {/* Submit Button */}
-          <SubmitBtn loading={isLoading} />
+          <button
+            type="submit"
+            className="btn btn-primary w-100 py-2"
+            disabled={state.isLoading}
+          >
+            {state.isLoading ? (
+              <span className="spinner-border spinner-border-sm" />
+            ) : "Sign in"}
+          </button>
         </form>
 
-        {/* Sign Up Link */}
-        <div className="text-center mt-3">
-          don't have an account? register{" "}
-          <Link href="/signup" className="text-decoration-underline">
-            here
+        <footer className="text-center mt-3">
+          <div>
+            don't have an account? register{" "}
+            <Link href="/signup" className="text-decoration-underline">here</Link>
+          </div>
+          <Link className="nav-link mt-3" href="/">
+            <FaArrowLeftLong /> Back to home
           </Link>
-        </div>
-
-        <Link className="nav-link text-center mt-3" href="/">
-          <FaArrowLeftLong /> Back to home
-        </Link>
+        </footer>
       </div>
     </div>
-  );
-}
-
-function SubmitBtn({ loading = false }) {
-  return (
-    <button
-      type="submit"
-      className="btn btn-primary w-100 py-2"
-      disabled={loading}
-    >
-      {loading ? (
-        <span className="spinner-border spinner-border-sm"></span>
-      ) : (
-        "Sign in"
-      )}
-    </button>
   );
 }
