@@ -19,13 +19,15 @@ export default function SignUp() {
     isOtpVerified: false,
     showOtpField: false,
     isValidPhone: false,
-    isLoading: false
+    isLoading: false,
+    canResend: true,
+    countdown: 60,
+    responseMessage: { type: '', message: '' }
   })
-  
   const { register, handleSubmit, control, watch, formState: { errors } } = useForm()
-  const auth    = useAuth()
-  const router  = useRouter()
-  const refs    = {sendOtp: useRef(null), verifyOtp: useRef(null)}
+  const auth            = useAuth()
+  const router          = useRouter()
+  const refs            = {sendOtp: useRef(null), verifyOtp: useRef(null)}
   const FORM_VALIDATION = {
     name: { required: "Name is required" },
     email: {
@@ -51,25 +53,60 @@ export default function SignUp() {
     
   }
 
+  const startCountdown = () => {
+    setState(prev => ({ ...prev, canResend: false, countdown: 60 }));
+    
+    const timer = setInterval(() => {
+      setState(prev => {
+        if (prev.countdown <= 1) {
+          clearInterval(timer);
+          return { ...prev, countdown: 60, canResend: true };
+        }
+        return { ...prev, countdown: prev.countdown - 1 };
+      });
+    }, 1000);
+  };
+
   const handleOtpOperation = async (operation, btnRef) => {
     try {
       const actions = {
-        send: () => auth.sendOtp(`+${watch('phone')}`, state.countryCode),
-        verify: () => auth.verifyOtp(state.otp, watch('phone'))
+        send: ()    => auth.sendOtp(`+${watch('phone')}`, state.countryCode),
+        verify: ()  => auth.verifyOtp(state.otp, `+${watch('phone')}`),
+        resend: ()  => auth.sendOtp(`+${watch('phone')}`, state.countryCode)
       }
 
-      await withLoader(actions[operation], isLoading => {
-        btnRef.current.disabled = isLoading
-        btnRef.current.innerText = isLoading ? `${operation}ing...` : `${operation} otp`
-      })
+      if (operation === 'resend' && !state.canResend) {
+        return;
+      }
+
+      const response = await withLoader(actions[operation], isLoading => {
+        if (btnRef?.current) {
+          btnRef.current.disabled = isLoading;
+          btnRef.current.innerText = isLoading ? `${operation}ing...` : `${operation} otp`;
+        }
+      });
 
       setState(prev => ({
         ...prev,
-        showOtpField: operation === 'send' ? true : prev.showOtpField,
-        isOtpVerified: operation === 'verify' ? true : prev.isOtpVerified
-      }))
+        showOtpField: operation === 'send' || operation === 'resend' ? true : prev.showOtpField,
+        isOtpVerified: operation === 'verify' ? true : prev.isOtpVerified,
+        responseMessage: { 
+          type: 'success', 
+          message: response 
+        }
+      }));
+
+      if (operation === 'send' || operation === 'resend') {
+        startCountdown();
+      }
     } catch (error) {
-      console.error(error.response?.data.message || "Operation failed")
+      setState(prev => ({
+        ...prev,
+        responseMessage: {
+          type: 'danger',
+          message: error.response?.data.message || "Operation failed"
+        }
+      }));
     }
   }
 
@@ -81,7 +118,7 @@ export default function SignUp() {
 
     try {
       await withLoader(
-        () => auth.signup({ ...data, country_code: state.countryCode }), 
+        () => auth.signup({ ...data, phone: `+${data.phone}`, country_code: state.countryCode }), 
         isLoading => setState(prev => ({ ...prev, isLoading }))
       )
       flashMessage("success", `Verification link sent to ${data.email}`)
@@ -159,41 +196,67 @@ export default function SignUp() {
                   </div>
                 )}
               />
-              <button 
-                ref={refs.sendOtp}
-                type="button"
-                className="btn btn-sm btn-primary"
-                disabled={state.showOtpField || !state.isValidPhone}
-                onClick={() => handleOtpOperation('send', refs.sendOtp)}
-              >
-                send otp
-              </button>
-            </div>
-          </div>
-
-          {state.showOtpField && (
-            <div className="mb-3">
-              <label className="form-label">OTP</label>
-              <div className="d-flex gap-2">
-                <input
-                  type="text"
-                  className="form-control w-auto flex-grow-1"
-                  placeholder="enter otp"
-                  maxLength="6"
-                  value={state.otp}
-                  onChange={e => setState(prev => ({ ...prev, otp: e.target.value.replace(/\D/g, '') }))}
-                />
+              {!state.isOtpVerified && (
                 <button 
-                  ref={refs.verifyOtp}
+                  ref={refs.sendOtp}
                   type="button"
-                  className="btn btn-sm btn-success"
-                  onClick={() => handleOtpOperation('verify', refs.verifyOtp)}
+                  className="btn btn-sm btn-primary"
+                  disabled={state.showOtpField || !state.isValidPhone}
+                  onClick={() => handleOtpOperation('send', refs.sendOtp)}
                 >
-                  verify otp
+                  send otp
                 </button>
-              </div>
+              )}
             </div>
-          )}
+            
+            {state.responseMessage.message && (
+              <div className={`alert alert-${state.responseMessage.type} mt-2 py-2 small`}>
+                {state.responseMessage.message}
+              </div>
+            )}
+
+            {state.showOtpField && !state.isOtpVerified && (
+              <div className="mt-2">
+                <div className="d-flex gap-2">
+                  <input
+                    type="text"
+                    className="form-control w-auto flex-grow-1"
+                    placeholder="enter otp"
+                    maxLength="6"
+                    value={state.otp}
+                    onChange={e => setState(prev => ({ ...prev, otp: e.target.value.replace(/\D/g, '') }))}
+                  />
+                  <button 
+                    ref={refs.verifyOtp}
+                    type="button"
+                    className="btn btn-sm btn-success"
+                    onClick={() => handleOtpOperation('verify', refs.verifyOtp)}
+                  >
+                    verify otp
+                  </button>
+                </div>
+                <div className="mt-2">
+                  <small className="text-muted">
+                    Didn't receive the otp?{' '}
+                    {state.canResend ? (
+                      <a 
+                        href="#" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleOtpOperation('resend', null);
+                        }}
+                        className="text-primary"
+                      >
+                        Resend otp
+                      </a>
+                    ) : (
+                      <span>Resend in {state.countdown}s</span>
+                    )}
+                  </small>
+                </div>
+              </div>
+            )}
+          </div>
 
           {renderFormField("Password", "password", "password", "enter password")}
           {renderFormField("Confirm password", "password_confirmation", "password", "confirm password")}
