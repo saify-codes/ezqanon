@@ -21,50 +21,7 @@ import BaseLayout from "@/layout/base";
 import Counter from "@/components/counter";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-
-
-
-const lawyersData = {
-  "Lawyers in Lahore": [
-    "Best Dermatologist in Lahore",
-    "Best Gynecologist in Lahore",
-    "Best Urologist in Lahore",
-    "Best Sexologist in Lahore",
-    "Best Internal Medicine Specialist in Lahore",
-    "Best Child Specialist in Lahore",
-    "Best Orthopedic Surgeon in Lahore",
-    "Best Eye Specialist in Lahore",
-  ],
-  "Lawyers in Karachi": [
-    "Best Dermatologist in Karachi",
-    "Best Gynecologist in Karachi",
-    "Best Urologist in Karachi",
-    "Best Sexologist in Karachi",
-    "Best Internal Medicine Specialist in Karachi",
-    "Best Child Specialist in Karachi",
-    "Best Orthopedic Surgeon in Karachi",
-    "Best Eye Specialist in Karachi",
-  ],
-  "Lawyers in Islamabad": [
-    "Best Dermatologist in Islamabad",
-    "Best Gynecologist in Islamabad",
-    "Best Urologist in Islamabad",
-    "Best Sexologist in Islamabad",
-    "Best Internal Medicine Specialist in Islamabad",
-    "Best Child Specialist in Islamabad",
-    "Best Orthopedic Surgeon in Islamabad",
-  ],
-  "Lawyers in Other Cities": [
-    "Best Nephrologist in Multan",
-    "Best Pulmonologist in Multan",
-    "Best Cardiologist in Multan",
-    "Best Neuro Physician in Multan",
-    "Best Gynecologist in Peshawar",
-    "Best Urologist in Faisalabad",
-    "Best Dentist in Faisalabad",
-    "Best Dermatologist in Faisalabad",
-  ],
-};
+import { lawyersData } from "@/data/lawyersByCity"; 
 
 export default function () {
   const [activeIndex, setActiveIndex] = useState(0);
