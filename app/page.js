@@ -7,7 +7,7 @@ import { LiaCheckDoubleSolid } from "react-icons/lia";
 import { AiOutlineMail } from "react-icons/ai";
 import { GiInjustice } from "react-icons/gi";
 import { MdOutlinePhone } from "react-icons/md";
-import SearchModal from "@/components/searchModal";
+import SearchModal from "@/components/seacrhModal/SearchModal";
 import {
   BsBoundingBoxCircles,
   BsCalendar2Week,
@@ -21,12 +21,13 @@ import BaseLayout from "@/layout/base";
 import Counter from "@/components/counter";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { lawyersData } from "@/data/lawyersByCity"; 
+import { lawyersData } from "@/data/lawyersByCity";
+
 
 export default function () {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  
+ 
   const stats = [
     { icon: <BsFillCheckCircleFill color="#5AAC45" />, text: "25k+ lawyers" },
     { icon: <BsFillCheckCircleFill color="#5AAC45" />, text: "40k+ client" },
@@ -46,51 +47,42 @@ export default function () {
       {/* Hero section  */}
 
       <section id="hero">
-      <div className="container">
-        <div className="hero p-3 p-md-5">
-          <h1>
-            Find and Book the <br />
-            <span style={{ color: "var(--secondary)" }}>
-              Best Lawyers
-            </span>{" "}
-            for Your Case
-          </h1>
-
-          {/* Optional: Stats Slider */}
-          <div className="stats-slider">
-            {stats.map((stat, index) => (
-              <div key={index} className={index === activeIndex ? "active" : ""}>
-                {stat.icon} {stat.text}
+        <div className="container">
+          <div className="hero p-3 p-md-5">
+            <h1>
+              Find and Book the
+              <br />
+              <span style={{ color: "var(--secondary)" }}>
+                Best Lawyers
+              </span>{" "}
+              for Your case
+            </h1>
+            <StatsSlider className="stats-slider">
+              {stats.map((stat, index) => (
+                <StatItem
+                  key={index}
+                  className={index === activeIndex ? "active" : ""}
+                >
+                  {stat.icon} {stat.text}
+                </StatItem>
+              ))}
+            </StatsSlider>
+            <div className="searchbar" onClick={() => setShowModal(true)}>
+              <div className="city">
+                <span>Karachi</span>
+                <button className="detect-city-btn">
+                  <BsCrosshair /> Detect
+                </button>
               </div>
-            ))}
-          </div>
-
-          {/* Search Bar */}
-          <div className="searchbar">
-        <div className="city">
-          <span>Karachi</span>
-          <button className="detect-city-btn">
-            <BsCrosshair /> Detect
-          </button>
-        </div>
-
-        <div className="search" onClick={() => setShowModal(true)}>Lawyers, Law firms</div>
-        <button className="btn btn-secondary" onClick={() => setShowModal(true)}>
-          Search
-        </button>
-      </div>
-
-      <img src="/assets/img/hero-img.png" alt="hero image" />
-
-      {/* Show Modal on Button Click */}
+              <div className="search">Lawyers, Law firms</div>
+              <button className="btn btn-secondary">Search</button>
+            </div>
+              {/* Show Modal on Button Click */}
       <SearchModal show={showModal} handleClose={() => setShowModal(false)} />
-
-          <img src="/assets/img/hero-img.png" alt="hero image" />
+            <img src="/assets/img/hero-img.png" alt="hero image" />
+          </div>
         </div>
-      </div>
-
-     
-    </section>
+      </section>
 
       {/* Hero section  */}
 
