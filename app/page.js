@@ -7,6 +7,7 @@ import { LiaCheckDoubleSolid } from "react-icons/lia";
 import { AiOutlineMail } from "react-icons/ai";
 import { GiInjustice } from "react-icons/gi";
 import { MdOutlinePhone } from "react-icons/md";
+import SearchModal from "@/components/seacrhModal/SearchModal";
 import {
   BsBoundingBoxCircles,
   BsCalendar2Week,
@@ -20,52 +21,13 @@ import BaseLayout from "@/layout/base";
 import Counter from "@/components/counter";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { lawyersData } from "@/data/lawyersByCity";
 
-
-const lawyersData = {
-  "Lawyers in Lahore": [
-    "Best Dermatologist in Lahore",
-    "Best Gynecologist in Lahore",
-    "Best Urologist in Lahore",
-    "Best Sexologist in Lahore",
-    "Best Internal Medicine Specialist in Lahore",
-    "Best Child Specialist in Lahore",
-    "Best Orthopedic Surgeon in Lahore",
-    "Best Eye Specialist in Lahore",
-  ],
-  "Lawyers in Karachi": [
-    "Best Dermatologist in Karachi",
-    "Best Gynecologist in Karachi",
-    "Best Urologist in Karachi",
-    "Best Sexologist in Karachi",
-    "Best Internal Medicine Specialist in Karachi",
-    "Best Child Specialist in Karachi",
-    "Best Orthopedic Surgeon in Karachi",
-    "Best Eye Specialist in Karachi",
-  ],
-  "Lawyers in Islamabad": [
-    "Best Dermatologist in Islamabad",
-    "Best Gynecologist in Islamabad",
-    "Best Urologist in Islamabad",
-    "Best Sexologist in Islamabad",
-    "Best Internal Medicine Specialist in Islamabad",
-    "Best Child Specialist in Islamabad",
-    "Best Orthopedic Surgeon in Islamabad",
-  ],
-  "Lawyers in Other Cities": [
-    "Best Nephrologist in Multan",
-    "Best Pulmonologist in Multan",
-    "Best Cardiologist in Multan",
-    "Best Neuro Physician in Multan",
-    "Best Gynecologist in Peshawar",
-    "Best Urologist in Faisalabad",
-    "Best Dentist in Faisalabad",
-    "Best Dermatologist in Faisalabad",
-  ],
-};
 
 export default function () {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+ 
   const stats = [
     { icon: <BsFillCheckCircleFill color="#5AAC45" />, text: "25k+ lawyers" },
     { icon: <BsFillCheckCircleFill color="#5AAC45" />, text: "40k+ client" },
@@ -105,7 +67,7 @@ export default function () {
                 </StatItem>
               ))}
             </StatsSlider>
-            <div className="searchbar">
+            <div className="searchbar" onClick={() => setShowModal(true)}>
               <div className="city">
                 <span>Karachi</span>
                 <button className="detect-city-btn">
@@ -115,6 +77,8 @@ export default function () {
               <div className="search">Lawyers, Law firms</div>
               <button className="btn btn-secondary">Search</button>
             </div>
+              {/* Show Modal on Button Click */}
+      <SearchModal show={showModal} handleClose={() => setShowModal(false)} />
             <img src="/assets/img/hero-img.png" alt="hero image" />
           </div>
         </div>
