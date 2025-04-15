@@ -1,47 +1,29 @@
 import { BsFacebook, BsInstagram, BsTwitterX } from "react-icons/bs";
+import { FaApple, FaGooglePlay } from "react-icons/fa";
 
-export default function () {
+export default function Footer() {
   return (
     <footer id="footer" className="footer">
-      
-      <div className="footer-newsletter">
-        <div className="container">
-          <div className="row justify-content-center text-center">
-            <div className="col-lg-6">
-              <h4>Join Our Newsletter</h4>
-              <p>
-                Subscribe to our newsletter and receive the latest news about
-                our products and services!
-              </p>
-              <form
-                action="forms/newsletter.php"
-                method="post"
-                className="php-email-form"
-              >
-                <div className="newsletter-form">
-                  <input type="email" name="email" />
-                  <input type="submit" value="Subscribe" />
-                </div>
-                <div className="loading">Loading</div>
-                <div className="error-message"></div>
-                <div className="sent-message">
-                  Your subscription request has been sent. Thank you!
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="container footer-top">
         <div className="row gy-4">
           <div className="col-lg-4 col-md-6 footer-about">
             <a href="index.html" className="d-flex align-items-center">
-              <span className="sitename">{process.env.NEXT_PUBLIC_APP_NAME}</span>
+              <span className="sitename">
+                {process.env.NEXT_PUBLIC_APP_NAME}
+              </span>
             </a>
             <div className="footer-contact pt-3">
-              <p>A108 Adam Street</p>
-              <p>New York, NY 535022</p>
+              <p>
+                Book consultations with the best Lawyers and Legal Experts such
+                as Corporate Lawyers, Family Lawyers, Criminal Lawyers, Tax
+                Lawyers, etc. Access legal services like case filing, document
+                drafting, legal advice, etc. and Online Lawyer Consultations all
+                across Pakistan conveniently.
+              </p>
+              <div className="footer-contact pt-3">
+                <p>A108 Adam Street</p>
+                <p>New York, NY 535022</p>
+              </div>
               <p className="mt-3">
                 <strong>Phone:</strong> <span>+1 5589 55488 55</span>
               </p>
@@ -52,73 +34,209 @@ export default function () {
           </div>
 
           <div className="col-lg-2 col-md-3 footer-links">
-            <h4>Useful Links</h4>
+            <h4>Courts</h4>
             <ul>
               <li>
-                <i className="bi bi-chevron-right"></i> <a href="#">Home</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i> <a href="#">About us</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i> <a href="#">Services</a>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Supreme Court</a>
               </li>
               <li>
                 <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Terms of service</a>
+                <a href="#">Lahore High Court</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Sindh High Court</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Islamabad High Court</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Peshawar High Court</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Balochistan High Court</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Federal Shariat Court</a>
               </li>
             </ul>
           </div>
 
           <div className="col-lg-2 col-md-3 footer-links">
-            <h4>Our Services</h4>
+            <h4>Cause List</h4>
             <ul>
               <li>
-                <i className="bi bi-chevron-right"></i> <a href="#">Web Design</a>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Supreme Court</a>
               </li>
               <li>
                 <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Web Development</a>
+                <a href="#">Lahore High Court</a>
               </li>
               <li>
                 <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Product Management</a>
+                <a href="#">Sindh High Court</a>
               </li>
               <li>
-                <i className="bi bi-chevron-right"></i> <a href="#">Marketing</a>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Islamabad High Court</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Peshawar High Court</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Balochistan High Court</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Federal Shariat Court</a>
               </li>
             </ul>
           </div>
 
-          <div className="col-lg-4 col-md-12">
-            <h4>Follow Us</h4>
-            <p>
-              Cras fermentum odio eu feugiat lide par naso tierra videa magna
-              derita valies
-            </p>
-            <div className="social-links d-flex">
-              <a href="">
-                <BsTwitterX />
+          <div className="col-lg-2 col-md-3 footer-links">
+            <h4>District Judiciary</h4>
+            <ul>
+              <li>
+                <i className="bi bi-chevron-right"></i> <a href="#">Punjab</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i>{" "}
+                <a href="#">Balochistan</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i> <a href="#">Sindh</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i> <a href="#">KPK</a>
+              </li>
+              <li>
+                <i className="bi bi-chevron-right"></i> <a href="#">AJK</a>
+              </li>
+            </ul>
+            <div>
+              <p>Get the ezqanon App</p>
+              <a
+                href=""
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#e0dddc",
+                  color: "#444444",
+                  padding: "10px 15px",
+                  borderRadius: "5px",
+                  fontSize: "12px",
+                  marginBottom: "5px",
+                  fontWeight: "bold",
+                  border: "1px solid #000",
+                }}
+              >
+                <FaApple style={{ fontSize: "24px", marginRight: "10px" }} />
+                <span>
+                  Download on the <br />
+                  <strong style={{ fontSize: "18px" }}>App Store</strong>
+                </span>
               </a>
-              <a href="">
-                <BsFacebook />
-              </a>
-              <a href="">
-                <BsInstagram />
+              <a
+                href=""
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#e0dddc",
+                  color: "#444444",
+                  padding: "10px 15px",
+                  borderRadius: "5px",
+                  fontSize: "12px",
+                  fontWeight: "bold",
+                  border: "1px solid #000",
+                }}
+              >
+                <FaGooglePlay
+                  style={{ fontSize: "24px", marginRight: "10px" }}
+                />
+                <span>
+                  GET IT ON <br />
+                  <strong style={{ fontSize: "18px" }}>Google Play</strong>
+                </span>
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container copyright text-center mt-4">
-        <p>
-          &copy; <span>Copyright</span>{" "}
+      <div
+        className="container copyright mt-4"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          paddingTop: "20px",
+        }}
+      >
+        <p style={{ margin: 0 }}>
+          © <span>Copyright</span>{" "}
           <strong className="px-1 sitename">
             {process.env.NEXT_PUBLIC_APP_NAME}
           </strong>{" "}
           <span>All Rights Reserved</span>
         </p>
+        <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+          <h4 style={{ margin: 0, fontSize: "14px", fontWeight: "normal" }}>
+            Connect with us
+          </h4>
+          <div
+            className="social-links d-flex"
+            style={{ gap: "10px", marginTop: "0" }}
+          >
+            <a
+              href=""
+              style={{
+                fontSize: "18px",
+                padding: "8px",
+                borderRadius: "50%",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <BsTwitterX />
+            </a>
+            <a
+              href=""
+              style={{
+                fontSize: "18px",
+                padding: "8px",
+                borderRadius: "50%",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <BsFacebook />
+            </a>
+            <a
+              href=""
+              style={{
+                fontSize: "18px",
+                padding: "8px",
+                borderRadius: "50%",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <BsInstagram />
+            </a>
+          </div>
+        </div>
         <div className="credits"></div>
       </div>
     </footer>
