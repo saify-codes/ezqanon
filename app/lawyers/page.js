@@ -4,33 +4,36 @@ import styled from "styled-components";
 import Base from "@/layout/base";
 import Lawyer from "@/components/lawyer";
 import api from "@/services/api";
-import { useState } from "react";
-import { CgSearch } from "react-icons/cg";
-import { MdFilterListAlt } from "react-icons/md";
+import SearchModal from "@/components/searchModal";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 export default function Lawyers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter]           = useState({});
- 
+  let [isOpen, setIsOpen]             = useState(false);
+
+
   const { data, isLoading, isError, error, isFetching } = useQuery({
     queryKey: [currentPage, filter],
     queryFn: async () => {
       const queryParams = new URLSearchParams();
 
-      if (filter.min_price)  queryParams.append('min_price', filter.min_price);
-      if (filter.city)       queryParams.append('city', filter.city);
-      if (filter.speciality) queryParams.append('speciality', filter.speciality);
+      if (filter.min_price) queryParams.append("min_price", filter.min_price);
+      if (filter.city) queryParams.append("city", filter.city);
+      if (filter.speciality)
+        queryParams.append("speciality", filter.speciality);
 
-      const response = await api.get(`/lawyer?page=${currentPage}&${queryParams.toString()}`);
+      const response = await api.get(
+        `/lawyer?page=${currentPage}&${queryParams.toString()}`
+      );
       return response.data;
-
     },
     keepPreviousData: true,
   });
 
-  const lawyers    = data?.data       ?? [];
-  const totalPages = data?.last_page  ?? 1;
+  const lawyers = data?.data ?? [];
+  const totalPages = data?.last_page ?? 1;
 
   // Handle page change
   const handlePageChange = (page) => {
@@ -41,10 +44,10 @@ export default function Lawyers() {
 
   // Generate Pagination Links Dynamically
   const generatePaginationLinks = () => {
-    const range     = 1; // Number of pages shown before and after the current page
+    const range = 1; // Number of pages shown before and after the current page
     const pageLinks = [];
-    let start       = Math.max(1, currentPage - range);
-    let end         = Math.min(totalPages, currentPage + range);
+    let start = Math.max(1, currentPage - range);
+    let end = Math.min(totalPages, currentPage + range);
 
     // Show the middle range
     for (let i = start; i <= end; i++) {
@@ -60,13 +63,21 @@ export default function Lawyers() {
     return pageLinks;
   };
 
-
-
   return (
     <Base>
-
+      <SearchModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
       <section className="lawyers section">
         <Wrapper className="container">
+          <div className="row">
+            <div className="col">
+              <div class="input-group" onClick={()=>setIsOpen(true)}>
+                <input className="form-control" placeholder="search lawyers..."/>
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="button">Search</button>
+                </div>
+              </div>
+            </div>
+          </div>
           {/* Spinner when data is loading or refetching */}
           {(isLoading || isFetching) && <Spinner />}
 
@@ -151,4 +162,3 @@ const PaginationWrapper = styled.nav`
     cursor: pointer;
   }
 `;
-
