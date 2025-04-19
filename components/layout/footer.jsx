@@ -1,13 +1,12 @@
 import { BsFacebook, BsInstagram, BsTwitterX } from "react-icons/bs";
-import { FaApple, FaGooglePlay } from "react-icons/fa";
 
 export default function Footer() {
   return (
     <footer id="footer" className="footer">
       <div className="container footer-top">
-        <div className="row gy-4">
-          <div className="col-lg-4 col-md-6 footer-about">
-            <a href="index.html" className="d-flex align-items-center">
+        <div className="row gy-4 justify-content-between">
+          <div className="col-lg-4 col-md-6 footer-about d-flex flex-column justify-content-between">
+            <a href="index.html" className="d-flex align-items-center mb-3">
               <span className="sitename">
                 {process.env.NEXT_PUBLIC_APP_NAME}
               </span>
@@ -36,6 +35,7 @@ export default function Footer() {
           <div className="col-lg-2 col-md-3 footer-links">
             <h4>Courts</h4>
             <ul>
+              {/* same list items as before */}
               <li>
                 <i className="bi bi-chevron-right"></i>{" "}
                 <a href="#">Supreme Court</a>
@@ -70,6 +70,7 @@ export default function Footer() {
           <div className="col-lg-2 col-md-3 footer-links">
             <h4>Cause List</h4>
             <ul>
+              {/* same list items */}
               <li>
                 <i className="bi bi-chevron-right"></i>{" "}
                 <a href="#">Supreme Court</a>
@@ -104,6 +105,7 @@ export default function Footer() {
           <div className="col-lg-2 col-md-3 footer-links">
             <h4>District Judiciary</h4>
             <ul>
+              {/* same list items */}
               <li>
                 <i className="bi bi-chevron-right"></i> <a href="#">Punjab</a>
               </li>
@@ -121,56 +123,9 @@ export default function Footer() {
                 <i className="bi bi-chevron-right"></i> <a href="#">AJK</a>
               </li>
             </ul>
-            <div>
-              <p>Get the ezqanon App</p>
-              <a
-                href=""
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#e0dddc",
-                  color: "#444444",
-                  padding: "10px 15px",
-                  borderRadius: "5px",
-                  fontSize: "12px",
-                  marginBottom: "5px",
-                  fontWeight: "bold",
-                  border: "1px solid #000",
-                }}
-              >
-                <FaApple style={{ fontSize: "24px", marginRight: "10px" }} />
-                <span>
-                  Download on the <br />
-                  <strong style={{ fontSize: "18px" }}>App Store</strong>
-                </span>
-              </a>
-              <a
-                href=""
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#e0dddc",
-                  color: "#444444",
-                  padding: "10px 15px",
-                  borderRadius: "5px",
-                  fontSize: "12px",
-                  fontWeight: "bold",
-                  border: "1px solid #000",
-                }}
-              >
-                <FaGooglePlay
-                  style={{ fontSize: "24px", marginRight: "10px" }}
-                />
-                <span>
-                  GET IT ON <br />
-                  <strong style={{ fontSize: "18px" }}>Google Play</strong>
-                </span>
-              </a>
-            </div>
           </div>
         </div>
       </div>
-
       <div
         className="container copyright mt-4"
         style={{
@@ -181,6 +136,7 @@ export default function Footer() {
           paddingTop: "20px",
         }}
       >
+        {/* Left Side - Copyright */}
         <p style={{ margin: 0 }}>
           © <span>Copyright</span>{" "}
           <strong className="px-1 sitename">
@@ -188,54 +144,55 @@ export default function Footer() {
           </strong>{" "}
           <span>All Rights Reserved</span>
         </p>
-        <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-          <h4 style={{ margin: 0, fontSize: "14px", fontWeight: "normal" }}>
-            Connect with us
-          </h4>
-          <div
-            className="social-links d-flex"
-            style={{ gap: "10px", marginTop: "0" }}
+
+        {/* Right Side - Social Links */}
+        <div
+          className="social-links"
+          style={{
+            display: "flex",
+            gap: "10px",
+            marginLeft: "auto",
+          }}
+        >
+          <a
+            href=""
+            style={{
+              fontSize: "18px",
+              padding: "8px",
+              borderRadius: "50%",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            <a
-              href=""
-              style={{
-                fontSize: "18px",
-                padding: "8px",
-                borderRadius: "50%",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <BsTwitterX />
-            </a>
-            <a
-              href=""
-              style={{
-                fontSize: "18px",
-                padding: "8px",
-                borderRadius: "50%",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <BsFacebook />
-            </a>
-            <a
-              href=""
-              style={{
-                fontSize: "18px",
-                padding: "8px",
-                borderRadius: "50%",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <BsInstagram />
-            </a>
-          </div>
+            <BsTwitterX />
+          </a>
+          <a
+            href=""
+            style={{
+              fontSize: "18px",
+              padding: "8px",
+              borderRadius: "50%",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <BsFacebook />
+          </a>
+          <a
+            href=""
+            style={{
+              fontSize: "18px",
+              padding: "8px",
+              borderRadius: "50%",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <BsInstagram />
+          </a>
         </div>
         <div className="credits"></div>
       </div>
