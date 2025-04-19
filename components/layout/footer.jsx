@@ -36,34 +36,13 @@ export default function Footer() {
             <h4>Courts</h4>
             <ul>
               {/* same list items as before */}
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Supreme Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Lahore High Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Sindh High Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Islamabad High Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Peshawar High Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Balochistan High Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Federal Shariat Court</a>
-              </li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Supreme Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Lahore High Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Sindh High Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Islamabad High Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Peshawar High Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Balochistan High Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Federal Shariat Court</a></li>
             </ul>
           </div>
 
@@ -71,34 +50,13 @@ export default function Footer() {
             <h4>Cause List</h4>
             <ul>
               {/* same list items */}
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Supreme Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Lahore High Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Sindh High Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Islamabad High Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Peshawar High Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Balochistan High Court</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Federal Shariat Court</a>
-              </li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Supreme Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Lahore High Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Sindh High Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Islamabad High Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Peshawar High Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Balochistan High Court</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Federal Shariat Court</a></li>
             </ul>
           </div>
 
@@ -106,96 +64,88 @@ export default function Footer() {
             <h4>District Judiciary</h4>
             <ul>
               {/* same list items */}
-              <li>
-                <i className="bi bi-chevron-right"></i> <a href="#">Punjab</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i>{" "}
-                <a href="#">Balochistan</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i> <a href="#">Sindh</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i> <a href="#">KPK</a>
-              </li>
-              <li>
-                <i className="bi bi-chevron-right"></i> <a href="#">AJK</a>
-              </li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Punjab</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Balochistan</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">Sindh</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">KPK</a></li>
+              <li><i className="bi bi-chevron-right"></i> <a href="#">AJK</a></li>
             </ul>
           </div>
         </div>
       </div>
-      <div
-        className="container copyright mt-4"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          paddingTop: "20px",
-        }}
-      >
-        {/* Left Side - Copyright */}
-        <p style={{ margin: 0 }}>
-          © <span>Copyright</span>{" "}
-          <strong className="px-1 sitename">
-            {process.env.NEXT_PUBLIC_APP_NAME}
-          </strong>{" "}
-          <span>All Rights Reserved</span>
-        </p>
 
-        {/* Right Side - Social Links */}
-        <div
-          className="social-links"
-          style={{
-            display: "flex",
-            gap: "10px",
-            marginLeft: "auto",
-          }}
-        >
-          <a
-            href=""
-            style={{
-              fontSize: "18px",
-              padding: "8px",
-              borderRadius: "50%",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <BsTwitterX />
-          </a>
-          <a
-            href=""
-            style={{
-              fontSize: "18px",
-              padding: "8px",
-              borderRadius: "50%",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <BsFacebook />
-          </a>
-          <a
-            href=""
-            style={{
-              fontSize: "18px",
-              padding: "8px",
-              borderRadius: "50%",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <BsInstagram />
-          </a>
-        </div>
-        <div className="credits"></div>
-      </div>
+      <div
+  className="container copyright mt-4"
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap",
+    paddingTop: "20px",
+  }}
+>
+  {/* Left Side - Copyright */}
+  <p style={{ margin: 0 }}>
+    © <span>Copyright</span>{" "}
+    <strong className="px-1 sitename">
+      {process.env.NEXT_PUBLIC_APP_NAME}
+    </strong>{" "}
+    <span>All Rights Reserved</span>
+  </p>
+
+  {/* Right Side - Social Links */}
+  <div
+    className="social-links"
+    style={{
+      display: "flex",
+      gap: "10px",
+      marginLeft: "auto",
+    }}
+  >
+    <a
+      href=""
+      style={{
+        fontSize: "18px",
+        padding: "8px",
+        borderRadius: "50%",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <BsTwitterX />
+    </a>
+    <a
+      href=""
+      style={{
+        fontSize: "18px",
+        padding: "8px",
+        borderRadius: "50%",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <BsFacebook />
+    </a>
+    <a
+      href=""
+      style={{
+        fontSize: "18px",
+        padding: "8px",
+        borderRadius: "50%",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <BsInstagram />
+    </a>
+  </div>
+
+  <div className="credits"></div>
+</div>
+
     </footer>
   );
 }
