@@ -63,8 +63,8 @@ export default function AppointmentsPage() {
                       </a>
                     </td>
                     <td>
-                      {attachments?.map(({ original_name, file_path }) => (
-                        <a key={file_path} className="d-block" href={file_path} target="_blank">
+                      {attachments?.map(({ original_name, file }) => (
+                        <a key={file} className="d-block" href={file} target="_blank">
                           {original_name}
                         </a>
                       ))}

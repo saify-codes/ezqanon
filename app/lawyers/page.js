@@ -11,7 +11,7 @@ import { useState } from "react";
 export default function Lawyers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter]           = useState({});
-  let [isOpen, setIsOpen]             = useState(false);
+  const [isOpen, setIsOpen]           = useState(false);
 
 
   const { data, isLoading, isError, error, isFetching } = useQuery({
@@ -31,7 +31,6 @@ export default function Lawyers() {
     },
     keepPreviousData: true,
   });
-
   const lawyers = data?.data ?? [];
   const totalPages = data?.last_page ?? 1;
 
@@ -63,9 +62,13 @@ export default function Lawyers() {
     return pageLinks;
   };
 
+  const handleModalSearch = (filters)=>{
+    console.log(filters);
+  }
+
   return (
     <Base>
-      <SearchModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <SearchModal isOpen={isOpen} onSearch={handleModalSearch} onClose={() => setIsOpen(false)} />
       <section className="lawyers section">
         <Wrapper className="container">
           <div className="row">

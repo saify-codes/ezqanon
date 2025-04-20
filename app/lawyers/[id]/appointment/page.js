@@ -91,6 +91,25 @@ export default function AppointmentForm() {
             )}
           </div>
 
+          {/* Country Field */}
+          <div className="mb-3">
+            <label htmlFor="details" className="form-label">
+              Country <span className="text-danger">*</span>
+            </label>
+            <input
+              className={`form-control ${errors.country ? "is-invalid" : ""}`}
+              id="country"
+              rows="3"
+              placeholder="Enter country"
+              {...register("country", { required: true })}
+            />
+            {errors.country && (
+              <div className="invalid-feedback">
+                Please provide country name
+              </div>
+            )}
+          </div>
+
           {/* File Field (Optional) */}
           <div className="mb-3">
             <label htmlFor="files" className="form-label">

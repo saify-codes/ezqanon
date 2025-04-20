@@ -20,6 +20,7 @@ import BaseLayout from "@/layout/base";
 import Counter from "@/components/counter";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import SearchModal from "@/components/searchModal";
 
 
 const lawyersData = {
@@ -66,6 +67,8 @@ const lawyersData = {
 
 export default function () {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isOpen, setIsOpen]           = useState(false);
+
   const stats = [
     { icon: <BsFillCheckCircleFill color="#5AAC45" />, text: "25k+ lawyers" },
     { icon: <BsFillCheckCircleFill color="#5AAC45" />, text: "40k+ client" },
@@ -82,6 +85,8 @@ export default function () {
 
   return (
     <BaseLayout>
+
+      <SearchModal isOpen={isOpen} onClose={()=>setIsOpen(false)}/>
       {/* Hero section  */}
 
       <section id="hero">
@@ -105,7 +110,7 @@ export default function () {
                 </StatItem>
               ))}
             </StatsSlider>
-            <div className="searchbar">
+            <div className="searchbar" onClick={()=>setIsOpen(true)}>
               <div className="city">
                 <span>Karachi</span>
                 <button className="detect-city-btn">
