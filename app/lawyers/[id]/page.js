@@ -126,7 +126,7 @@ export default function () {
               tab === "reviews" ? "show active" : ""
             }`}
           >
-            working...
+            No data
           </div>
         </div>
       </div>
