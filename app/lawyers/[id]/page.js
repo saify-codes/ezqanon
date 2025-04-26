@@ -118,7 +118,7 @@ export default function () {
           <div
             className={`tab-pane fade ${tab === "about" ? "show active" : ""}`}
           >
-            {lawyer?.about || "No data to show"}
+            {lawyer?.description}
           </div>
 
           <div
