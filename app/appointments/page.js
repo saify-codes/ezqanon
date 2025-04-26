@@ -52,14 +52,14 @@ export default function AppointmentsPage() {
               </tr>
             ) : (
               appointments.map(
-                ({ lawyer, details, meeting_date, meeting_link, attachments }) => (
+                ({ lawyer, details, meeting_date, meeting_link_user, attachments }) => (
                   <tr key={meeting_date /* or some unique ID */}>
                     <td>{lawyer?.name}</td>
                     <td>{details}</td>
                     <td>{meeting_date}</td>
                     <td>
-                      <a className="link" href={meeting_link} target="_blank">
-                        google meet <LiaExternalLinkAltSolid />
+                      <a className="link" href={meeting_link_user} target="_blank">
+                        Meeting link <LiaExternalLinkAltSolid />
                       </a>
                     </td>
                     <td>
