@@ -842,7 +842,7 @@ export default function () {
               className="city rounded"
               style={{
                 backgroundImage:
-                  "url(https://norwesttours.com/wp-content/uploads/2020/11/khyber-gate.jpg)",
+                  "url(https://intentionaldetours.com/wp-content/uploads/2020/08/5.jpg)",
               }}
             >
               <div className="content">
