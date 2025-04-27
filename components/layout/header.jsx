@@ -6,41 +6,37 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import { useAuth } from "@/hooks/useAuth";
+import { BsWhatsapp } from "react-icons/bs";
 
 export default function Navbar() {
   const auth = useAuth();
   const path = usePathname();
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const navLinks = [
-    { label: "Home", href: "/", exact: true},
-    { label: "Lawyers", href: "/lawyers" },
-  ];
-
   // Toggle Mobile Menu
   const handleNavToggle = useCallback(() => {
     setIsNavOpen((prev) => !prev);
     document.body.classList.toggle("mobile-nav-active");
   }, []);
-  
+
   // Close Menu on Link Click
   const handleMenuItemClick = useCallback(() => {
     setIsNavOpen(false);
     document.body.classList.remove("mobile-nav-active");
   }, []);
-  
+
   const toggleScrolled = () => {
     const header = document.querySelector("#header");
     if (!header?.classList.contains("sticky-top")) return;
     document.body.classList.toggle("scrolled", window.scrollY > 100);
   };
- 
+
   // Handle Scroll Effects
   useEffect(() => {
     window.addEventListener("scroll", toggleScrolled);
 
     return () => {
-      window.removeEventListener("scroll", toggleScrolled)
+      window.removeEventListener("scroll", toggleScrolled);
       document.body.classList.remove("mobile-nav-active");
     };
   }, []);
@@ -56,28 +52,43 @@ export default function Navbar() {
         {/* Navigation */}
         <nav id="navmenu" className={`navmenu ${isNavOpen ? "open" : ""}`}>
           <ul>
-            {navLinks.map(({ label, href, exact }, index) => (
-              <li key={index}>
-                <Link
-                  href={href}
-                  onClick={handleMenuItemClick}
-                  className={
-                    exact
-                      ? path === href && "active"
-                      : path.startsWith(href) && "active"
-                  }
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
-
-            {/* Mobile Login Link */}
+            <li>
+              <Link
+                href="/"
+                onClick={handleMenuItemClick}
+                className={path === "/" ? "active" : ""}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/lawyers"
+                onClick={handleMenuItemClick}
+                className={path.startsWith("/lawyers") ? "active" : ""}
+              >
+                Lawyers
+              </Link>
+            </li>
+            <li className="d-xl-none">
+              <Link href="http://ez.thebotss.com/" target="_blank">
+                Join as lawyer
+              </Link>
+            </li>
             {!auth.user && (
               <li className="d-xl-none">
-                <Link href="/signin">Login</Link>
+                <Link href="/signin">Login / Signup</Link>
               </li>
             )}
+            <li className="d-xl-none">
+              <Link
+                target="_blank"
+                className="justify-content-start gap-2"
+                href="https://api.whatsapp.com/send?phone=+923360055664&text=Hello%20there!"
+              >
+                <BsWhatsapp /> 03360055664
+              </Link>
+            </li>
           </ul>
 
           {/* Mobile Navigation Toggle */}
@@ -90,12 +101,40 @@ export default function Navbar() {
           </button>
         </nav>
 
+        <Link
+          href="http://ez.thebotss.com/"
+          target="_blank"
+          className="btn-getstarted d-none d-xl-block me-2"
+        >
+          Join as lawyer
+        </Link>
+
         {auth.user ? (
-          <UserMenu />
+          <>
+            <Link
+              target="_blank"
+              href="https://api.whatsapp.com/send?phone=+923360055664&text=Hello%20there!"
+              className="btn-getstarted d-none d-xl-block"
+              style={{ background: "var(--primary)" }}
+            >
+              <BsWhatsapp color="#FFF" />
+            </Link>
+            <UserMenu />
+          </>
         ) : (
-          <Link href="/signin" className="btn-getstarted d-none d-xl-block">
-            Login
-          </Link>
+          <>
+            <Link href="/signin" className="btn-getstarted d-none d-xl-block me-2">
+              Login / Signup
+            </Link>
+            <Link
+              target="_blank"
+              href="https://api.whatsapp.com/send?phone=+923360055664&text=Hello%20there!"
+              className="btn-getstarted d-none d-xl-block"
+              style={{ background: "var(--primary)" }}
+            >
+              <BsWhatsapp color="#FFF" />
+            </Link>
+          </>
         )}
       </div>
     </header>

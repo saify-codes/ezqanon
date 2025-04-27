@@ -17,7 +17,7 @@ export default function () {
   };
 
   return (
-    <div className="position-relative ms-2 ms-xl-5">
+    <div className="position-relative">
       <Avatar
         src={user?.avatar} 
         alt="user photo"

@@ -505,6 +505,14 @@ export default function () {
                 />
               </div>
             </SwiperSlide>
+            <SwiperSlide>
+              <div className="partner-item text-center">
+                <img
+                  src="/assets/img/botss.png"
+                  alt="Partner 3"
+                />
+              </div>
+            </SwiperSlide>
           </Swiper>
         </div>
       </section>
