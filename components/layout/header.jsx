@@ -114,7 +114,7 @@ export default function Navbar() {
             <Link
               target="_blank"
               href="https://api.whatsapp.com/send?phone=+923360055664&text=Hello%20there!"
-              className="btn-getstarted d-none d-xl-block"
+              className="btn-getstarted d-none d-xl-block me-2"
               style={{ background: "var(--primary)" }}
             >
               <BsWhatsapp color="#FFF" />
