@@ -236,7 +236,7 @@ export default function () {
       {/* Featured Services Section */}
 
       {/* Consultant */}
-      <section id="consultancy" className="consultancy section">
+      {/* <section id="consultancy" className="consultancy section">
         <div className="container">
           <div className="d-flex align-items-center justify-content-between">
             <h4>Consult Best Lawyers online</h4>
@@ -402,7 +402,7 @@ export default function () {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* Consultant */}
 
       {/* Partners */}
