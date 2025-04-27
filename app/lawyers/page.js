@@ -119,14 +119,12 @@ export default function Lawyers() {
                   <a className="page-link">Previous</a>
                 </li>
 
+                {/* Pages */}
                 {generatePaginationLinks().map((page, index) => (
                   <li
                     key={index}
-                    className={`page-item ${currentPage === page ? "active" : ""}
-                     ${page === "..." ? "disabled" : ""}`}
-                    onClick={() =>
-                      typeof page === "number" && handlePageChange(page)
-                    }
+                    className={`page-item ${currentPage === page ? "active" : ""} ${page === "..." ? "disabled" : ""}`}
+                    onClick={() =>typeof page === "number" && handlePageChange(page)}
                   >
                     <a className="page-link">{page}</a>
                   </li>
