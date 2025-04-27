@@ -70,6 +70,7 @@ export default function Lawyers() {
   const handleModalSearch = (filters)=>{
     setFilter(filters)
     setIsOpen(false)
+    window.history.replaceState({},'',`/lawyers?${new URLSearchParams(filters).toString()}`);
   }
 
   return (

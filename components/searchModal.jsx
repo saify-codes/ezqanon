@@ -7,7 +7,12 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { PiCrosshairFill } from "react-icons/pi";
 import "./searchModal.css";
 
-export default function SearchModal({ isOpen, onClose, onSearch, initialFilters = {} }) {
+export default function SearchModal({
+  isOpen,
+  onClose,
+  onSearch,
+  initialFilters = {},
+}) {
   const [filters, setFilter] = useState(initialFilters);
 
   // geolocation detection
@@ -30,8 +35,7 @@ export default function SearchModal({ isOpen, onClose, onSearch, initialFilters 
   };
 
   const handleSearch = () => {
-
-    const {start_time, end_time} = filters
+    const { start_time, end_time } = filters;
     // if one time is set, the other must be set
     if ((start_time && !end_time) || (!start_time && end_time)) {
       alert("Please provide both a start and end time.");
@@ -42,20 +46,16 @@ export default function SearchModal({ isOpen, onClose, onSearch, initialFilters 
       alert("Invalid date range");
       return;
     }
-    onSearch(filters);
+
+    onSearch(
+      Object.fromEntries(
+        Object.entries(filters).filter(([, v]) => v != null && v !== "")
+      )
+    );
   };
 
-  useEffect(()=>{
-    console.log(filters);
-  }, [filters])
-
   return (
-    <Dialog
-      open={isOpen}
-      onClose={onClose}
-      as="div"
-      className="search-modal"
-    >
+    <Dialog open={isOpen} onClose={onClose} as="div" className="search-modal">
       <DialogPanel as="div" className="modal-body">
         <div className="search-bar">
           <div className="search">
@@ -116,10 +116,7 @@ export default function SearchModal({ isOpen, onClose, onSearch, initialFilters 
               <option value="lahore">Lahore</option>
               <option value="islamabad">Islamabad</option>
             </select>
-            <button
-              type="button"
-              onClick={handleDetectLocation}
-            >
+            <button type="button" onClick={handleDetectLocation}>
               <PiCrosshairFill /> Detect
             </button>
           </div>
