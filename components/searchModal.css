@@ -29,7 +29,8 @@
   border: none;
 }
 
-.search-modal .search-bar {
+.search-modal .search-bar
+{
   background: #fff;
   padding: 1rem;
   border-radius: 5px;
@@ -66,6 +67,26 @@
   padding: 0 1rem;
   gap: 0.5rem;
 }
+
+.search-modal .search-bar .experience input,
+.search-modal .search-bar .specialization input,
+.search-modal .search-bar .availability input,
+.search-modal .search-bar .price-range input
+{
+  border: 1px solid #eee;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  outline: none;
+}
+
+.search-modal .search-bar .price-range,
+.search-modal .search-bar .availability
+{
+  display: flex;
+  gap: 1rem;
+}
+
 
 /* animation */
 .search-modal[data-closed] .modal-body{

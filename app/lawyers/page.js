@@ -7,32 +7,37 @@ import api from "@/services/api";
 import SearchModal from "@/components/searchModal";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function Lawyers() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [filter, setFilter]           = useState({});
-  const [isOpen, setIsOpen]           = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [filter, setFilter]           = useState(Object.fromEntries(useSearchParams().entries()));
+  const [isOpen, setIsOpen]           = useState(false);
 
   const { data, isLoading, isError, error, isFetching } = useQuery({
     queryKey: [currentPage, filter],
     queryFn: async () => {
       const queryParams = new URLSearchParams();
 
-      if (filter.min_price) queryParams.append("min_price", filter.min_price);
-      if (filter.city) queryParams.append("city", filter.city);
-      if (filter.speciality)
-        queryParams.append("speciality", filter.speciality);
+      if (filter.name)            queryParams.append("name", filter.name);
+      if (filter.city)            queryParams.append("city", filter.city);
+      if (filter.location)        queryParams.append("location", filter.location);
+      if (filter.start_time)      queryParams.append("start_time", filter.start_time);
+      if (filter.end_time)        queryParams.append("end_time", filter.end_time);
+      if (filter.min_price)       queryParams.append("min_price", filter.min_price);
+      if (filter.max_price)       queryParams.append("max_price", filter.max_price);
+      if (filter.experience)      queryParams.append("experience", filter.experience);
+      if (filter.specialization)  queryParams.append("specialization", filter.specialization);
 
-      const response = await api.get(
-        `/lawyer?page=${currentPage}&${queryParams.toString()}`
-      );
+      const response = await api.get(`/lawyer?page=${currentPage}&${queryParams.toString()}`);
       return response.data;
     },
     keepPreviousData: true,
   });
   const lawyers = data?.data ?? [];
   const totalPages = data?.last_page ?? 1;
+
 
   // Handle page change
   const handlePageChange = (page) => {
@@ -63,12 +68,18 @@ export default function Lawyers() {
   };
 
   const handleModalSearch = (filters)=>{
-    console.log(filters);
+    setFilter(filters)
+    setIsOpen(false)
   }
 
   return (
     <Base>
-      <SearchModal isOpen={isOpen} onSearch={handleModalSearch} onClose={() => setIsOpen(false)} />
+      <SearchModal 
+        isOpen={isOpen} 
+        onSearch={handleModalSearch} 
+        onClose={() => setIsOpen(false)} 
+        initialFilters={filter} 
+      />
       <section className="lawyers section">
         <Wrapper className="container">
           <div className="row">

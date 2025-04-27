@@ -1,16 +1,8 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaQuoteLeft, FaQuoteRight, FaRegCirclePlay } from "react-icons/fa6";
-import { LiaCheckDoubleSolid } from "react-icons/lia";
-import { AiOutlineMail } from "react-icons/ai";
-import { GiInjustice } from "react-icons/gi";
-import { MdOutlinePhone } from "react-icons/md";
 import {
-  BsBoundingBoxCircles,
-  BsCalendar2Week,
-  BsActivity,
   BsFillCheckCircleFill,
   BsCrosshair,
   BsStar,
@@ -21,6 +13,7 @@ import Counter from "@/components/counter";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import SearchModal from "@/components/searchModal";
+import { useRouter } from "next/navigation";
 
 
 const lawyersData = {
@@ -75,6 +68,14 @@ export default function () {
     { icon: <BsFillCheckCircleFill color="#5AAC45" />, text: "30k+ reviews" },
   ];
 
+  const router = useRouter()
+
+  const handleSearch = (filters) => {
+    // build query-string
+    const qs = new URLSearchParams(filters).toString();
+    router.push(`/lawyers?${qs}`);
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveIndex((current) => (current + 1) % stats.length);
@@ -86,7 +87,8 @@ export default function () {
   return (
     <BaseLayout>
 
-      <SearchModal isOpen={isOpen} onClose={()=>setIsOpen(false)}/>
+      <SearchModal isOpen={isOpen} onSearch={handleSearch} onClose={()=>setIsOpen(false)}/>
+
       {/* Hero section  */}
 
       <section id="hero">
