@@ -151,7 +151,6 @@ export default function () {
           style={{
             display: "flex",
             gap: "10px",
-            marginLeft: "auto",
           }}
         >
           <a
@@ -194,8 +193,6 @@ export default function () {
             <BsInstagram />
           </a>
         </div>
-
-        <div className="credits"></div>
       </div>
     </footer>
   );

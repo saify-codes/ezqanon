@@ -674,6 +674,13 @@ h6 {
   font-size: 13px;
 }
 
+@media screen and (max-width: 576px){
+  .footer .copyright{
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -890,7 +897,7 @@ section:not(.Toastify),
 
 .hero .searchbar .search{
  padding: 0 1rem;
- color: #C3AC5C;
+ color: #5F687B;
 }
 
 .hero .searchbar .city{
@@ -899,7 +906,7 @@ section:not(.Toastify),
   justify-content: space-between;
   padding: 0 0.5rem;
   border-right: 2px solid #f3f2f7;
-  color: #C3AC5C;
+  color: #5F687B;
 }
 .hero .searchbar .detect-city-btn{
   background: #f3f2f7;
