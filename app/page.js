@@ -657,19 +657,16 @@ export default function () {
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
-                    Proin iaculis purus consequat sem cure digni ssim donec
-                    porttitora entum suscipit rhoncus. Accusantium quam,
-                    ultricies eget id, aliquam eget nibh et. Maecen aliquam,
-                    risus at semper.
+                  EzQanoon made it so easy to find a reliable lawyer for my business needs. Fast, professional, and trustworthy service!
                   </span>
                   <FaQuoteRight className="quote-icon-right" />
                 </p>
                 <img
-                  src="/assets/img/testimonials/testimonials-1.jpg"
+                  src="/assets/img/review/review-img1.jpg"
                   className="testimonial-img"
                   alt=""
                 />
-                <h3>Saul Goodman</h3>
+                <h3>Ahmed Raza, Lahore</h3>
                 <h4>Ceo &amp; Founder</h4>
                 <div className="stars">
                   {[...Array(5)].map((_, i) =>
@@ -687,18 +684,17 @@ export default function () {
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
-                    Export tempor illum tamen malis malis eram quae irure esse
-                    labore quem cillum quid malis quorum velit fore eram velit
-                    sunt aliqua noster fugiat irure amet legam anim culpa.
+                  Managing my property dispute in Pakistan from the UK was stress-free with EzQanoon.
+                  Their online lawyer system is brilliant!
                   </span>
                   <FaQuoteRight className="quote-icon-right" />
                 </p>
                 <img
-                  src="/assets/img/testimonials/testimonials-2.jpg"
+                  src="/assets/img/review/review-img2.jpg"
                   className="testimonial-img"
                   alt=""
                 />
-                <h3>Sara Wilsson</h3>
+                <h3>Sarah Aslam, London, UK</h3>
                 <h4>Designer</h4>
                 <div className="stars">
                   {[...Array(5)].map((_, i) =>
@@ -716,18 +712,16 @@ export default function () {
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
-                    Enim nisi quem export duis labore cillum quae magna enim
-                    sint quorum nulla quem veniam duis minim tempor labore quem
-                    eram duis noster aute amet eram fore quis sint minim.
+                  I subscribed to EzQanoon's legal database - it saved me hours of research time. Highly recommended for anyone needing quick legal support!
                   </span>
                   <FaQuoteRight className="quote-icon-right" />
                 </p>
                 <img
-                  src="/assets/img/testimonials/testimonials-3.jpg"
+                  src="/assets/img/review/review-img3.jpg"
                   className="testimonial-img"
                   alt=""
                 />
-                <h3>Jena Karlis</h3>
+                <h3>Advocate Fatima Khan,Karachi</h3>
                 <h4>Store Owner</h4>
                 <div className="stars">
                   {[...Array(5)].map((_, i) =>
@@ -745,18 +739,16 @@ export default function () {
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
-                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa
-                    multos export minim fugiat dolor enim duis veniam ipsum anim
-                    magna sunt elit fore quem dolore labore illum veniam.
+                  I needed legal advice for inheritance issues in Pakistan. EzQanoon's platform connected me with an expert in just a few hours!
                   </span>
                   <FaQuoteRight className="quote-icon-right" />
                 </p>
                 <img
-                  src="/assets/img/testimonials/testimonials-4.jpg"
+                  src="/assets/img/review/review-img4.jpg"
                   className="testimonial-img"
                   alt=""
                 />
-                <h3>Matt Brandon</h3>
+                <h3>Hassan Javed, Toronto, Canada</h3>
                 <h4>Freelancer</h4>
                 <div className="stars">
                   {[...Array(5)].map((_, i) =>
