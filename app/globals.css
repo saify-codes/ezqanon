@@ -868,6 +868,8 @@ section:not(.Toastify),
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  isolation: isolate;
+  overflow: hidden;
 }
 
 .hero h1{
@@ -913,6 +915,7 @@ section:not(.Toastify),
   bottom: 0;
   right: 10%;
   height: 100%;
+  z-index: -1;
 }
 @media (max-width: 786px) {
   .hero .searchbar{
@@ -924,9 +927,27 @@ section:not(.Toastify),
     display: none;
   }
 
-  .hero img{
-    display: none;
+  .hero h1{
+    font-size: 1.5rem;
   }
+
+}
+
+@media (max-width: 576px) {
+
+  .hero .search{
+    font-size: 0.75rem;
+  }
+  .hero .btn{
+    font-size: 0.75rem;
+  }
+  .hero h1{
+    font-size: 1rem;
+  }
+  .hero img{
+    right: 0;
+  }
+  
 }
 
 @keyframes fade {

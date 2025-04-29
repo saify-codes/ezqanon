@@ -876,7 +876,7 @@ const StatItem = styled.div`
   border-radius: 0.5rem;
   background: rgba(255, 158, 21, 0.2);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   padding: 0.5rem;
   opacity: 0;
   width: max-content;
