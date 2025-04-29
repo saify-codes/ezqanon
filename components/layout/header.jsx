@@ -47,7 +47,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="logo d-flex align-items-center gap-2 me-auto">
           <img src="/assets/img/logo.png" alt="" width="50" />
-          <h4 className="fw-bold m-0">EzQanoon</h4>
+          <h4 className="fw-bold m-0">{process.env.NEXT_PUBLIC_APP_NAME}</h4>
         </Link>
 
         {/* Navigation */}

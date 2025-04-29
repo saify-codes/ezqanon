@@ -695,7 +695,7 @@ export default function () {
                   alt=""
                 />
                 <h3>Sarah Aslam, London, UK</h3>
-                <h4>Designer</h4>
+                <h4>Advocate</h4>
                 <div className="stars">
                   {[...Array(5)].map((_, i) =>
                     i < 4 ? (
@@ -754,35 +754,6 @@ export default function () {
                   {[...Array(5)].map((_, i) =>
                     i < 5 ? (
                       <BsStarFill key={i} color="#FFD700" fill="#FFD700" />
-                    ) : (
-                      <BsStar key={i} color="#FFD700" />
-                    )
-                  )}
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="testimonial-item">
-                <p>
-                  <FaQuoteLeft className="quote-icon-left" />
-                  <span>
-                    Quis quorum aliqua sint quem legam fore sunt eram irure
-                    aliqua veniam tempor noster veniam sunt culpa nulla illum
-                    cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                  </span>
-                  <FaQuoteRight className="quote-icon-right" />
-                </p>
-                <img
-                  src="/assets/img/testimonials/testimonials-5.jpg"
-                  className="testimonial-img"
-                  alt=""
-                />
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-                <div className="stars">
-                  {[...Array(5)].map((_, i) =>
-                    i < 5 ? (
-                      <BsStarFill key={i} color="#FFD700" />
                     ) : (
                       <BsStar key={i} color="#FFD700" />
                     )

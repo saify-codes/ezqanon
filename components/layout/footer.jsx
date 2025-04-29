@@ -32,6 +32,9 @@ export default function () {
               <p className="mt-3">
                 <strong>Phone:</strong> <span>+1 (703) 628-0001</span>
               </p>
+              <p className="mt-3">
+                <strong>Phone:</strong> <span>+923360055664</span>
+              </p>
             
             </div>
           </div>
