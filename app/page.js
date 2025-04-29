@@ -773,7 +773,7 @@ export default function () {
                   <FaQuoteRight className="quote-icon-right" />
                 </p>
                 <img
-                  src="/assets/img/review/review-img5.jpg"
+                  src="/assets/img/testimonials/testimonials-5.jpg"
                   className="testimonial-img"
                   alt=""
                 />
