@@ -684,8 +684,7 @@ export default function () {
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
-                  Managing my property dispute in Pakistan from the UK was stress-free with EzQanoon.
-                  Their online lawyer system is brilliant!
+                  I subscribed to EzQanoon's legal database - it saved me hours of research time. Highly recommended for anyone needing quick legal support!
                   </span>
                   <FaQuoteRight className="quote-icon-right" />
                 </p>
@@ -694,7 +693,7 @@ export default function () {
                   className="testimonial-img"
                   alt=""
                 />
-                <h3>Sarah Aslam, London, UK</h3>
+                <h3>Sarah Aslam, Karachi</h3>
                 <h4>Advocate</h4>
                 <div className="stars">
                   {[...Array(5)].map((_, i) =>
@@ -712,7 +711,8 @@ export default function () {
                 <p>
                   <FaQuoteLeft className="quote-icon-left" />
                   <span>
-                  I subscribed to EzQanoon's legal database - it saved me hours of research time. Highly recommended for anyone needing quick legal support!
+                  Managing my property dispute in Pakistan from the UK was stress-free with EzQanoon.
+                  Their online lawyer system is brilliant!
                   </span>
                   <FaQuoteRight className="quote-icon-right" />
                 </p>
@@ -721,7 +721,7 @@ export default function () {
                   className="testimonial-img"
                   alt=""
                 />
-                <h3>Advocate Fatima Khan,Karachi</h3>
+                <h3>Fatima Khan, London, UK</h3>
                 <h4>Store Owner</h4>
                 <div className="stars">
                   {[...Array(5)].map((_, i) =>
