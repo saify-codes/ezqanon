@@ -176,7 +176,7 @@ export default function () {
       <section id="featured-services" className="featured-services section">
         <div className="container">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-3 mb-3">
               <div class="card border-0 shadow">
                 <div className="card-image" style={{ background: "#F3F3FF" }}>
                   <img src="/assets/img/lawyer-img.png" alt="lawyer image" />
@@ -190,7 +190,7 @@ export default function () {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3 mb-3">
               <div class="card border-0 shadow">
                 <div className="card-image" style={{ background: "#FFF1DD" }}>
                   <img src="/assets/img/lawyer-img.png" alt="lawyer image" />
@@ -204,7 +204,7 @@ export default function () {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3 mb-3">
               <div class="card border-0 shadow">
                 <div className="card-image" style={{ background: "#F2F8F0" }}>
                   <img src="/assets/img/lawyer-img.png" alt="lawyer image" />
@@ -218,7 +218,7 @@ export default function () {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3 mb-3">
               <div class="card border-0 shadow">
                 <div className="card-image" style={{ background: "#FFF9F7" }}>
                   <img src="/assets/img/lawyer-img.png" alt="lawyer image" />
