@@ -443,54 +443,54 @@ export default function () {
               },
             }}
           >
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <div className="partner-item text-center">
                 <img
                   src="https://nastp.gov.pk/assets_main/v1_img/kharian/logo.png"
                   alt="Partner 1"
                 />
               </div>
-            </SwiperSlide>
-            <SwiperSlide>
+            </SwiperSlide> */}
+            {/* <SwiperSlide>
               <div className="partner-item text-center">
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jubilee_Insurance_Pakistan_logo.svg"
                   alt="Partner 2"
                 />
               </div>
-            </SwiperSlide>
-            <SwiperSlide>
+            </SwiperSlide> */}
+            {/* <SwiperSlide>
               <div className="partner-item text-center">
                 <img
                   src="https://crystalpng.com/wp-content/uploads/2024/12/new-Jazzcash-logo.png"
                   alt="Partner 3"
                 />
               </div>
-            </SwiperSlide>
-            <SwiperSlide>
+            </SwiperSlide> */}
+            {/* <SwiperSlide>
               <div className="partner-item text-center">
                 <img
                   src="https://cdn.brandfetch.io/zameen.com/fallback/lettermark/theme/dark/h/256/w/256/icon?c=1bfwsmEH20zzEfSNTed"
                   alt="Partner 3"
                 />
               </div>
-            </SwiperSlide>
-            <SwiperSlide>
+            </SwiperSlide> */}
+            {/* <SwiperSlide>
               <div className="partner-item text-center">
                 <img
                   src="https://res.cloudinary.com/hlsr7ls49/image/upload/v1617186918/bdhsfq68kje8nfkjzohh.png"
                   alt="Partner 3"
                 />
               </div>
-            </SwiperSlide>
-            <SwiperSlide>
+            </SwiperSlide> */}
+            {/* <SwiperSlide>
               <div className="partner-item text-center">
                 <img
                   src="https://d1t78adged64l7.cloudfront.net/images/companies/1722248287_bM7yZgnLDT.webp?v=1741338802949"
                   alt="Partner 3"
                 />
               </div>
-            </SwiperSlide>
+            </SwiperSlide> */}
             <SwiperSlide>
               <div className="partner-item text-center">
                 <img

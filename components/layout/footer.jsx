@@ -21,19 +21,16 @@ export default function () {
               </p>
               <div className="footer-contact pt-3">
               <p>
-                <strong>Address:</strong> <span> 32 Street 1, Sector 2,
-                <p> Airport Employees CHS, Rawalpindi, Pakistan</p></span>
+                <strong>Address:</strong> 32 Street 1, Sector 2,<br/> Airport Employees CHS, Rawalpindi, Pakistan
               </p>
               <p>
-                <strong>Address:</strong> <span> 1751, Pinnacle Drive, Suite 600,
-                <p>Mclean VA 22102,USA</p></span>
+                <strong>Address:</strong> 1751, Pinnacle Drive, Suite 600, <br/>Mclean VA 22102,USA
               </p>
               </div>
               <p className="mt-3">
-                <strong>Phone:</strong> <span>+1 (703) 628-0001</span>
-              </p>
-              <p className="mt-3">
-                <strong>Phone:</strong> <span>+923360055664</span>
+                <strong>Phone:</strong> +1 (703) 628-0001
+                <br/>
+                <strong>Phone:</strong> +923360055664
               </p>
             
             </div>
