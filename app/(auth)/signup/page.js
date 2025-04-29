@@ -122,10 +122,10 @@ export default function SignUp() {
   }
 
   const onSubmit = async (data) => {
-    if (!state.isOtpVerified) {
-      alert('Please verify your phone number first')
-      return
-    }
+    // if (!state.isOtpVerified) {
+    //   alert('Please verify your phone number first')
+    //   return
+    // }
 
     try {
       await withLoader(
@@ -207,7 +207,7 @@ export default function SignUp() {
                   </div>
                 )}
               />
-              <button 
+              {/* <button 
                 ref={refs.sendOtp}
                 type="button"
                 className="btn btn-sm btn-primary"
@@ -215,7 +215,7 @@ export default function SignUp() {
                 onClick={() => handleOtpOperation('send', refs.sendOtp)}
               >
                 send otp
-              </button>
+              </button> */}
             </div>
             
             {state.responseMessage.message && (
@@ -224,7 +224,7 @@ export default function SignUp() {
               </div>
             )}
 
-            {state.showOtpField && !state.isOtpVerified && (
+            {/* {state.showOtpField && !state.isOtpVerified && (
               <div className="mt-3">
                 <div className="d-flex gap-2">
                   <input
@@ -245,7 +245,7 @@ export default function SignUp() {
                   </button>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           {renderFormField("Password", "password", "password", "enter password")}
