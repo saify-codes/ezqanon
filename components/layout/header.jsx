@@ -47,6 +47,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="logo d-flex align-items-center me-auto">
           <img src="/assets/img/logo.png" alt="" width="50" />
+          <h2>EzQanoon</h2>
         </Link>
 
         {/* Navigation */}
@@ -54,20 +55,48 @@ export default function Navbar() {
           <ul>
             <li>
               <Link
-                href="/"
-                onClick={handleMenuItemClick}
-                className={path === "/" ? "active" : ""}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
                 href="/lawyers"
                 onClick={handleMenuItemClick}
                 className={path.startsWith("/lawyers") ? "active" : ""}
               >
-                Lawyers
+                
+                View Lawyers
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/comingsoon"
+                onClick={handleMenuItemClick}
+                className={path === "/comingsoon" ? "active" : ""}
+              >
+                Overseas pakistan
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/comingsoon"
+                onClick={handleMenuItemClick}
+                className={path === "/comingsoon" ? "active" : ""}
+              >
+                Legal GPT
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/comingsoon"
+                onClick={handleMenuItemClick}
+                className={path === "/comingsoon" ? "active" : ""}
+              >
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/comingsoon"
+                onClick={handleMenuItemClick}
+                className={path === "/comingsoon" ? "active" : ""}
+              >
+                About
               </Link>
             </li>
             <li className="d-xl-none">
