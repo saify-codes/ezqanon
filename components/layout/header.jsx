@@ -43,7 +43,7 @@ export default function Navbar() {
 
   return (
     <header id="header" className="header d-flex align-items-center sticky-top">
-      <div className="container-fluid container-xl d-flex align-items-center">
+      <div className="container-fluid container-xl d-flex align-items-center gap-2">
         {/* Logo */}
         <Link href="/" className="logo d-flex align-items-center gap-2 me-auto">
           <img src="/assets/img/logo.png" alt="" width="50" />
@@ -133,7 +133,7 @@ export default function Navbar() {
         <Link
           href="http://ez.thebotss.com/"
           target="_blank"
-          className="btn-getstarted d-none d-xl-block me-2"
+          className="btn-getstarted d-none d-xl-block"
         >
           Join as lawyer
         </Link>
@@ -143,7 +143,7 @@ export default function Navbar() {
             <Link
               target="_blank"
               href="https://api.whatsapp.com/send?phone=+923360055664&text=Hello%20there!"
-              className="btn-getstarted d-none d-xl-block me-2"
+              className="btn-getstarted d-none d-xl-block"
               style={{ background: "var(--primary)" }}
             >
               <BsWhatsapp color="#FFF" />
@@ -152,7 +152,7 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <Link href="/signin" className="btn-getstarted d-none d-xl-block me-2">
+            <Link href="/signin" className="btn-getstarted d-none d-xl-block">
               Login / Signup
             </Link>
             <Link
