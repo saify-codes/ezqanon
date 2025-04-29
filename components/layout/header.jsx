@@ -65,6 +65,16 @@ export default function Navbar() {
             </li>
             <li>
               <Link
+                href="/lawyers"
+                onClick={handleMenuItemClick}
+                className={path.startsWith("/lawyers") ? "active" : ""}
+              >
+                
+                View Law Firm
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/comingsoon"
                 onClick={handleMenuItemClick}
                 className={path === "/comingsoon" ? "active" : ""}
@@ -106,7 +116,7 @@ export default function Navbar() {
             </li>
             {!auth.user && (
               <li className="d-xl-none">
-                <Link href="/signin">Login / Signup</Link>
+                <Link href="/signin">Login</Link>
               </li>
             )}
             <li className="d-xl-none">
@@ -153,7 +163,7 @@ export default function Navbar() {
         ) : (
           <>
             <Link href="/signin" className="btn-getstarted d-none d-xl-block">
-              Login / Signup
+              Login
             </Link>
             <Link
               target="_blank"
