@@ -99,7 +99,7 @@ export default function () {
             <h1>
               Find and Book the
               <br />
-              <span style={{ color: "var(--secondary)" }}>
+              <span style={{ color: "#C3AC5C" }}>
                 Best Lawyers
               </span>{" "}
               for Your case
@@ -179,7 +179,7 @@ export default function () {
             <div className="col-md-3">
               <div class="card border-0 shadow">
                 <div className="card-image" style={{ background: "#F3F3FF" }}>
-                  <img src="https://oladoc.com/dist/images/online-now-home-2x_highly-compressed.webp" />
+                  <img src="/assets/img/lawyer-img.png" alt="lawyer image" />
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">Consult Online now</h5>
@@ -193,7 +193,7 @@ export default function () {
             <div className="col-md-3">
               <div class="card border-0 shadow">
                 <div className="card-image" style={{ background: "#FFF1DD" }}>
-                  <img src="https://oladoc.com/dist/images/online-now-home-2x_highly-compressed.webp" />
+                  <img src="/assets/img/lawyer-img.png" alt="lawyer image" />
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">Personal Appointment </h5>
@@ -207,7 +207,7 @@ export default function () {
             <div className="col-md-3">
               <div class="card border-0 shadow">
                 <div className="card-image" style={{ background: "#F2F8F0" }}>
-                  <img src="https://oladoc.com/dist/images/online-now-home-2x_highly-compressed.webp" />
+                  <img src="/assets/img/lawyer-img.png" alt="lawyer image" />
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">Overseas Pakistanis</h5>
@@ -221,7 +221,7 @@ export default function () {
             <div className="col-md-3">
               <div class="card border-0 shadow">
                 <div className="card-image" style={{ background: "#FFF9F7" }}>
-                  <img src="https://oladoc.com/dist/images/online-now-home-2x_highly-compressed.webp" />
+                  <img src="/assets/img/lawyer-img.png" alt="lawyer image" />
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">Submit Enquiry</h5>
