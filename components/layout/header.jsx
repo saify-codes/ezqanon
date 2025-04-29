@@ -45,9 +45,9 @@ export default function Navbar() {
     <header id="header" className="header d-flex align-items-center sticky-top">
       <div className="container-fluid container-xl d-flex align-items-center">
         {/* Logo */}
-        <Link href="/" className="logo d-flex align-items-center me-auto">
+        <Link href="/" className="logo d-flex align-items-center gap-2 me-auto">
           <img src="/assets/img/logo.png" alt="" width="50" />
-          <h2>EzQanoon</h2>
+          <h4 className="fw-bold m-0">EzQanoon</h4>
         </Link>
 
         {/* Navigation */}
