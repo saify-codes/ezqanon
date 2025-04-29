@@ -888,7 +888,7 @@ section:not(.Toastify),
 
 .hero .searchbar .search{
  padding: 0 1rem;
- color: #8B8B8B;
+ color: #C3AC5C;
 }
 
 .hero .searchbar .city{
@@ -897,7 +897,7 @@ section:not(.Toastify),
   justify-content: space-between;
   padding: 0 0.5rem;
   border-right: 2px solid #f3f2f7;
-  color: #8B8B8B;
+  color: #C3AC5C;
 }
 .hero .searchbar .detect-city-btn{
   background: #f3f2f7;

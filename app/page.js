@@ -121,7 +121,7 @@ export default function () {
                   <BsCrosshair /> Detect
                 </button>
               </div>
-              <div className="search" style={{color: '#C3AC5C'}}>Lawyers, Law firms, case type</div>
+              <div className="search">Lawyers, Law firms, case type</div>
               <button className="btn btn-secondary">Search</button>
             </div>
             <img src="/assets/img/hero-img.png" alt="hero image" />
