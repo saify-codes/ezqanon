@@ -43,7 +43,7 @@ export default function Navbar() {
 
   return (
     <header id="header" className="header d-flex align-items-center sticky-top">
-      <div className="container-fluid container-xl d-flex align-items-center gap-2">
+      <div className="container-fluid d-flex align-items-center gap-2 px-xl-5">
         {/* Logo */}
         <Link href="/" className="logo d-flex align-items-center gap-2 me-auto">
           <img src="/assets/img/logo.png" alt="" width="50" />
