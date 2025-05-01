@@ -129,7 +129,7 @@ export default function SignUp() {
 
     try {
       await withLoader(
-        () => auth.signup({ ...data, phone: `+${data.phone}`, country_code: state.countryCode }), 
+        () => auth.signup({ ...data, country_code: state.countryCode }), 
         isLoading => setState(prev => ({ ...prev, isLoading }))
       )
       flashMessage("success", `Verification link sent to ${data.email}`)
@@ -195,8 +195,8 @@ export default function SignUp() {
                       onChange={(phone, country) => {
                         setState(prev => ({
                           ...prev,
-                          countryCode: country.dialCode,
-                          isValidPhone: phone.length >= 10
+                          countryCode: country.countryCode,
+                          isValidPhone: phone.length >= 10,
                         }))
                         onChange(phone)
                       }}
