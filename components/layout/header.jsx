@@ -110,7 +110,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="d-xl-none">
-              <Link href="http://ez.thebotss.com/" target="_blank">
+              <Link href="https://app.ezqanoon.com/" target="_blank">
                 Join as lawyer
               </Link>
             </li>
