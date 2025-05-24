@@ -14,13 +14,9 @@ export default function AppointmentsPage() {
 
   const fetchAppointments = async () => {
     try {
-      const { data } = await withLoader(
-        () => api.get("/appointment"),
-        setIsLoading
-      );
+      const { data } = await withLoader(() => api.get("/appointment"),setIsLoading);
       setAppointments(data.data);
     } catch (error) {
-      console.error(error);
       toast.error("Something went wrong");
     }
   };

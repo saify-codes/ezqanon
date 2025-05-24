@@ -28,8 +28,8 @@ export default function useAuthFetch() {
             flashMessage("error","Session expired please sign in again.");
             signout(); // Clear auth state
             router.push("/signin"); // Redirect to login page
-            return
           }
+
         }
         return Promise.reject(error);
       }
