@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { BsSearch, BsX } from "react-icons/bs";
+import React, { useState } from "react";
+import { Dialog, DialogPanel } from "@headlessui/react";
+import { BsSearch,  } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { PiCrosshairFill } from "react-icons/pi";
 import "./searchModal.css";
@@ -11,8 +11,20 @@ export default function SearchModal({
   isOpen,
   onClose,
   onSearch,
-  initialFilters = {},
+  initialFilters,
 }) {
+
+  if(!initialFilters || Object.keys(initialFilters).length === 0){
+    initialFilters = {
+      name: '',
+      experience: '',
+      specialization: '',
+      city: '',
+      min_price: '',
+      max_price: '',
+    }
+  }
+
   const [filters, setFilter] = useState(initialFilters);
 
   // geolocation detection
@@ -47,11 +59,7 @@ export default function SearchModal({
       return;
     }
 
-    onSearch(
-      Object.fromEntries(
-        Object.entries(filters).filter(([, v]) => v != null && v !== "")
-      )
-    );
+    onSearch(filters);
   };
 
   return (

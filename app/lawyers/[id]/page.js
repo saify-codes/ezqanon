@@ -11,14 +11,14 @@ import { toast } from "react-toastify";
 import { flashMessage } from "@/utils";
 
 export default function () {
-  const { id } = useParams();
-  const auth = useAuth();
-  const router = useRouter();
+  const { id }              = useParams();
+  const auth                = useAuth();
+  const router              = useRouter();
   const [lawyer, setLawyer] = useState();
-  const [reviews, setReviews] = useState();
-  const [tab, setTab] = useState("about");
+  const [tab, setTab]       = useState("about");
+  // const [reviews, setReviews] = useState();
 
-  const book = () => {
+  const createAppointment = () => {
     if (!auth.authenticated()) {
       flashMessage("error", "Please login to continue");
       router.push(`/signin?redirect=/lawyers/${id}/appointment`);
@@ -32,24 +32,22 @@ export default function () {
       const { data } = await api.get(`/lawyer/${id}`);
       setLawyer(data.data);
     } catch (error) {
-      console.log(erro);
       toast.error("something went wrong");
     }
   };
 
-  const fetchReviews = async () => {
-    try {
-      const { data } = await api.get(`/lawyer/${id}/reviews`);
-      setReviews(data.data);
-    } catch (error) {
-      console.log(errro);
-      toast.error("something went wrong");
-    }
-  };
+  // const fetchReviews = async () => {
+  //   try {
+  //     const { data } = await api.get(`/lawyer/${id}/reviews`);
+  //     setReviews(data.data);
+  //   } catch (error) {
+  //     toast.error("something went wrong");
+  //   }
+  // };
 
   useEffect(() => {
     fetchLawyer();
-    fetchReviews();
+    // fetchReviews();
   }, []);
 
   return (
@@ -62,12 +60,12 @@ export default function () {
           <Content>
             <Title>{lawyer?.name}</Title>
             <div className="text-secondary">
-              {lawyer?.specialization} |{" "}
+              Fee: {" "}
               <strong style={{ color: "var(--primary)" }}>
                 Rs.{lawyer?.price}
               </strong>
             </div>
-            <Rating className="justify-content-center justify-content-md-start">
+            {/* <Rating className="justify-content-center justify-content-md-start">
               {Array(5)
                 .fill()
                 .map((_, index) =>
@@ -77,20 +75,28 @@ export default function () {
                     <BsStar key={index} />
                   )
                 )}
-            </Rating>
+            </Rating> */}
             <div className="d-flex flex-wrap gap-1">
+
+              {/* Experience */}
               <Badge>{lawyer?.experience} years experience</Badge>
-              <Badge>
-                <BsCalendar2 /> {lawyer?.availability_from} -{" "}
-                {lawyer?.availability_to}
-              </Badge>
+              {/* <Badge>
+                <BsCalendar2 /> {lawyer?.availability_from} - {lawyer?.availability_to}
+              </Badge> */}
+
+              {/* Location */}
               <Badge>
                 <BsPinMap /> {lawyer?.location}
+
+              {/* Specializations */}
               </Badge>
+              {
+                lawyer?.specialization?.map(specialization => <Badge>{specialization}</Badge>)
+              }
             </div>
           </Content>
           <Action>
-            <ButtonPrimary onClick={book}>Book Appointment</ButtonPrimary>
+            <ButtonPrimary onClick={createAppointment}>Book Appointment</ButtonPrimary>
           </Action>
         </Card>
 
@@ -104,14 +110,14 @@ export default function () {
               About
             </button>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <button
               className={`nav-link ${tab === "reviews" ? "active" : ""}`}
               onClick={() => setTab("reviews")}
             >
               Reviews
             </button>
-          </li>
+          </li> */}
         </ul>
 
         <div className="tab-content p-3">
@@ -121,13 +127,13 @@ export default function () {
             {lawyer?.description}
           </div>
 
-          <div
+          {/* <div
             className={`tab-pane fade ${
               tab === "reviews" ? "show active" : ""
             }`}
           >
             No data
-          </div>
+          </div> */}
         </div>
       </div>
     </Base>

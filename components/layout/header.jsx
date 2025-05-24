@@ -65,9 +65,9 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href="/lawyers"
+                href="/firms"
                 onClick={handleMenuItemClick}
-                className={path.startsWith("/lawyers") ? "active" : ""}
+                className={path.startsWith("/firms") ? "active" : ""}
               >
                 
                 View Law Firm

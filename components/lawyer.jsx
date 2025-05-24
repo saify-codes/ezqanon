@@ -2,12 +2,7 @@ import styled from "styled-components";
 import { useAuth } from "@/hooks/useAuth";
 import { flashMessage } from "@/utils";
 import { useRouter } from "next/navigation";
-import {
-  BsCalendar2,
-  BsPinMap,
-  BsStar,
-  BsStarFill,
-} from "react-icons/bs";
+import { BsPinMap } from "react-icons/bs";
 import { useCallback } from "react";
 
 export default function LawyerCard({ lawyer, className }) {
@@ -34,10 +29,9 @@ export default function LawyerCard({ lawyer, className }) {
       </Avatar>
       <Content>
         <Title>{lawyer.name}</Title>
-        <div className="text-secondary">
-          {lawyer.specialization} | <strong style={{color: 'var(--primary)'}}>Rs.{lawyer.price}</strong>
+        <div className="text-secondary">Fee: <strong style={{color: 'var(--primary)'}}>Rs.{lawyer.price}</strong>
         </div>
-        <Rating className="justify-content-center justify-content-md-start">
+        {/* <Rating className="justify-content-center justify-content-md-start">
           {Array(5)
             .fill()
             .map((_, index) =>
@@ -47,16 +41,13 @@ export default function LawyerCard({ lawyer, className }) {
                 <BsStar key={index} />
               )
             )}
-        </Rating>
+        </Rating> */}
         <div className="d-flex flex-wrap gap-1">
           <Badge>{lawyer.experience} years experience</Badge>
-          <Badge>
-            <BsCalendar2 /> {lawyer.availability_from} -{" "}
-            {lawyer.availability_to}
-          </Badge>
-          <Badge>
-            <BsPinMap /> {lawyer.location}
-          </Badge>
+          <Badge><BsPinMap /> {lawyer.location}</Badge>
+          {
+            lawyer.specialization?.map(specialization => <Badge>{specialization}</Badge>)
+          }
         </div>
       </Content>
       <Action>
