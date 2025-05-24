@@ -42,12 +42,14 @@ export default function AppointmentForm() {
       formData.append("country", data.country);
 
       if (data.attachment?.length) {
-        Array.from(data.attachment).forEach((file) =>
-          formData.append("attachment[]", file)
-        );
+        Array.from(data.attachment).forEach((file) => formData.append("attachment[]", file));
       }
 
-      await withLoader(() => api.post("/appointment", formData), setIsLoading);
+      await withLoader(() => api.post("/appointment", formData ,{
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }), setIsLoading);
 
       reset();
       router.replace("/success");
