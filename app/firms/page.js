@@ -2,15 +2,15 @@
 
 import styled from "styled-components";
 import Base from "@/layout/base";
-import Lawyer from "@/components/lawyer";
+import Firm from "@/components/firm";
 import api from "@/services/api";
 import SearchModal from "@/components/searchModal";
 import Pagination from "@/components/paination";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function Lawyers() {
+export default function Firms() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter]           = useState(Object.fromEntries(useSearchParams().entries()));
@@ -31,8 +31,8 @@ export default function Lawyers() {
       if (filter.experience)      queryParams.append("experience", filter.experience);
       if (filter.specialization)  queryParams.append("specialization", filter.specialization);
 
-      const response = await api.get(`/lawyer?page=${currentPage}&${queryParams.toString()}`);
-      return response.data;
+      const response = await api.get(`/firm?page=${currentPage}&${queryParams.toString()}`);
+      return response.data ?? {};
     },
     keepPreviousData: true,
   });
@@ -49,25 +49,25 @@ export default function Lawyers() {
                             ).toString();
 
     // Update the URL without reloading the page
-    window.history.replaceState({}, '', `/lawyers?${queryString}`);
+    window.history.replaceState({}, '', `/firms?${queryString}`);
 
   }
 
   return (
     <Base>
       <SearchModal 
-        searchPlaceholder={"search lawyers"}
+        searchPlaceholder={"search firms"}
         isOpen        = {isOpen} 
         onSearch      = {handleModalSearch} 
         onClose       = {() => setIsOpen(false)} 
         initialFilters= {filter} 
       />
-      <section className="lawyers section">
+      <section className="firms section">
         <div className="container d-flex flex-column gap-4">
           <div className="row">
             <div className="col">
               <div className="d-flex gap-2" onClick={()=>setIsOpen(true)}>
-                <input className="form-control" placeholder="search lawyers..." defaultValue={filter.name ?? ''}/>
+                <input className="form-control" placeholder="search firms..." defaultValue={filter.name ?? ''}/>
                 <button className="btn btn-primary" type="button">Search</button>
               </div>
             </div>
@@ -77,13 +77,13 @@ export default function Lawyers() {
           {(isLoading || isFetching) && <Spinner />}
 
           {/* If sonthing went wrong show message */}
-          {isError && <p className="text-danger">{error.message ?? "Failed to fetch lawyers."}</p>}
+          {isError && <p className="text-danger">{error.message ?? "Failed to fetch firms."}</p>}
 
-          {/* If no lawyers found (not loading and not error) */}
-          {!isLoading && data?.lawyers?.length === 0 && <p>No lawyers found</p>}
+          {/* If no firms found (not loading and not error) */}
+          {!isLoading && data?.firms?.length === 0 && <p>No firms found</p>}
 
           {/* Lawyers List */}
-          {data?.lawyers?.map((lawyer) => <Lawyer key={lawyer.id} lawyer={lawyer} />)}
+          {data?.firms?.map((firm) => <Firm key={firm.id} firm={firm} />)}
 
         </div>
 

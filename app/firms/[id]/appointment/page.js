@@ -25,7 +25,7 @@ export default function AppointmentForm() {
   
   const fetchAvailability = async () => {
     try {
-      const res = await api.get(`lawyer/${id}/availability`);
+      const res = await api.get(`firm/${id}/availability`);
       setAvailability(res.data.data);
     } catch {
       toast.error("Failed to fetch availability");
@@ -37,7 +37,7 @@ export default function AppointmentForm() {
       const formData = new FormData();
 
       formData.append("date_time", `${data.date} ${data.time}`);
-      formData.append("lawyer_id", id);
+      formData.append("firm_id", id);
       formData.append("details", data.details);
       formData.append("country", data.country);
 
@@ -45,7 +45,7 @@ export default function AppointmentForm() {
         Array.from(data.attachment).forEach((file) => formData.append("attachment[]", file));
       }
 
-      await withLoader(() => api.post("/appointment/lawyer", formData ,{
+      await withLoader(() => api.post("/appointment/firm", formData ,{
         headers: {
           "Content-Type": "multipart/form-data",
         },

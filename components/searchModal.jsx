@@ -8,6 +8,7 @@ import { PiCrosshairFill } from "react-icons/pi";
 import "./searchModal.css";
 
 export default function SearchModal({
+  searchPlaceholder,
   isOpen,
   onClose,
   onSearch,
@@ -72,7 +73,7 @@ export default function SearchModal({
             </div>
             <input
               type="search"
-              placeholder="search lawyers"
+              placeholder={searchPlaceholder ?? 'search...'}
               value={filters.name}
               onChange={({ target }) =>
                 setFilter((prev) => ({ ...prev, name: target.value }))
