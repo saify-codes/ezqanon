@@ -4,7 +4,6 @@
   z-index: 999;
   margin: auto;
   background: #0007;
-  translate: 0 0;
 }
 
 .search-modal .modal-body {
@@ -18,7 +17,6 @@
   flex-direction: column;
   gap: 1rem;
   max-width: 720px;
-  transition: 0.5s 0.3s ease-out;
 }
 
 .search-modal .modal-body #close-modal-btn {
@@ -88,8 +86,8 @@
 }
 
 
-/* animation */
-.search-modal[data-closed] .modal-body{
-  opacity: 0;
-  translate: 0 25px;
-}
+.modal-fade-slide          { transition: opacity .5s ease-out, transform .5s ease-out,background-color .5s ease-out; }
+.modal-fade-slide-from     { opacity: 0; transform: translateY(1.5rem); }
+.modal-fade-slide-to       { opacity: 1; transform: translateY(0); }
+.modal-fade-slide-leaveFrom { opacity: 1; transform: translateY(0); }
+.modal-fade-slide-leaveTo   { opacity: 0; transform: translateY(1.5rem); }

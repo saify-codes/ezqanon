@@ -84,9 +84,9 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href="/comingsoon"
+                href="/legal-gpt"
                 onClick={handleMenuItemClick}
-                className={path === "/comingsoon" ? "active" : ""}
+                className={path === "/legal-gpt" ? "active" : ""}
               >
                 Legal GPT
               </Link>
@@ -141,7 +141,7 @@ export default function Navbar() {
         </nav>
 
         <Link
-          href="http://ez.thebotss.com/"
+          href="http://app.ezqanoon.com/"
           target="_blank"
           className="btn-getstarted d-none d-xl-block"
         >
